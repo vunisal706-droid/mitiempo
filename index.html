@@ -138,6 +138,23 @@ h1 span{color:var(--color-primary)}
 .ok-b{width:100%;margin-top:16px;background:var(--color-primary);color:#fff;box-shadow:0 4px 0 var(--color-primary-dark)}
 .more{margin-top:10px}
 .more summary{cursor:pointer;font-weight:800;color:var(--color-text-muted);padding:8px 4px;min-height:44px}
+.avi{grid-column:1/-1;border-radius:20px;padding:16px;border:3px solid;animation:avi 1.6s ease-in-out infinite}
+.avi.l1{background:#fef9c3;border-color:#eab308;color:#713f12;--g:rgba(234,179,8,.45)}
+.avi.l2{background:#ffedd5;border-color:#f97316;color:#7c2d12;--g:rgba(249,115,22,.5)}
+.avi.l3{background:#fee2e2;border-color:#dc2626;color:#7f1d1d;--g:rgba(220,38,38,.55)}
+@keyframes avi{0%,100%{box-shadow:0 0 0 0 var(--g)}50%{box-shadow:0 0 0 8px transparent}}
+.avi-h{display:flex;gap:12px;align-items:center}
+.avi-i{font-size:2.4rem;line-height:1}
+.avi-t{font-size:1.35rem;font-weight:900;text-transform:uppercase;letter-spacing:.5px}
+.avi-s{font-weight:800;font-size:.9rem}
+.avi ul{list-style:none;margin:10px 0 0;display:grid;gap:6px}
+.avi li{background:rgba(255,255,255,.7);border-radius:12px;padding:8px 10px;font-weight:700;font-size:.9rem;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.lvdot{width:12px;height:12px;border-radius:50%;flex:0 0 12px}
+.lvdot.l1{background:#eab308}.lvdot.l2{background:#f97316}.lvdot.l3{background:#dc2626}
+.ofi{background:#0f172a;color:#fff;border-radius:999px;padding:2px 8px;font-size:.72rem;font-weight:900;margin-right:4px}
+.avi details{width:100%;font-size:.82rem;font-weight:600}
+.avi summary{cursor:pointer;font-weight:800;opacity:.85}
+.avi-n{font-size:.75rem;font-weight:700;margin-top:8px;opacity:.8}
 .blk{border-radius:18px;padding:12px;margin-top:14px}
 .blk-t{font-weight:900;font-size:.82rem;text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .blk-t::after{content:'';flex:1;height:2px;border-radius:2px;background:currentColor;opacity:.2}
@@ -214,7 +231,7 @@ function savePlaces(){ try{ localStorage.setItem('mt-places', JSON.stringify(PLA
 let PLACES = loadPlaces();
 const byId = id => PLACES.find(p=>p.id===id);
 const TZ = 'Europe/Madrid';
-const VERSION = 'v12';
+const VERSION = 'v15';
 const DAYS = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
 const cache = {};
 let current = localStorage.getItem('mt-place') || PLACES[0].id;
@@ -246,7 +263,7 @@ async function load(p, force){
   if (cache[p.id] && !force && Date.now() - cache[p.id].t < 10*60*1000) return cache[p.id];
   const fUrl = `https://api.open-meteo.com/v1/forecast?latitude=${p.lat}&longitude=${p.lon}`+
     `&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,wind_speed_10m,wind_direction_10m,is_day,precipitation`+
-    `&hourly=temperature_2m,apparent_temperature,weather_code,precipitation_probability,precipitation,is_day,wind_speed_10m,relative_humidity_2m,uv_index`+
+    `&hourly=temperature_2m,apparent_temperature,weather_code,precipitation_probability,precipitation,is_day,wind_speed_10m,relative_humidity_2m,uv_index,wind_gusts_10m,snowfall`+
     `&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,precipitation_sum,wind_speed_10m_max`+
     `&timezone=${encodeURIComponent(TZ)}&forecast_days=3&past_days=1`;
   const nc = `&_=${Date.now()}`, opt = {cache:'no-store'};
@@ -400,6 +417,20 @@ function wearAt(f){
   return {k:'fresca', t:'Ropa fresca'};
 }
 
+// Franjas del día con lluvia prevista (localidad de trabajo)
+function rainRanges(w, date, thr){
+  const H=w.hourly, hrs=[];
+  for(let h=0;h<24;h++){ const i=H.time.indexOf(`${date}T${pad(h)}:00`); if(i<0) continue;
+    const pr=H.precipitation_probability[i]??0, mm=H.precipitation[i]??0;
+    if(pr>=thr || mm>=0.2) hrs.push({h,pr,mm}); }
+  const g=[]; hrs.forEach(x=>{ const last=g[g.length-1]; if(last && x.h===last.to+1){ last.to=x.h; last.pr=Math.max(last.pr,x.pr); last.mm+=x.mm; } else g.push({from:x.h,to:x.h,pr:x.pr,mm:x.mm}); });
+  return g;
+}
+function rangesText(g){
+  const t=g.map(r=>`${r.from===r.to?`a las ${pad(r.from)}:00`:`de ${pad(r.from)}:00 a ${pad(r.to+1)}:00`} (${r.pr}%${r.mm>=1?`, ${Math.round(r.mm)} mm`:''})`);
+  return t.length>1 ? t.slice(0,-1).join(', ')+' y '+t[t.length-1] : t[0];
+}
+
 // Recoge las horas del trayecto: salida en Maracena (1 h) y jornada en Santa Fe
 function windowData(mar, sf, date, cfg){
   const hS = parseInt(cfg.salida), hV = Math.max(parseInt(cfg.vuelta), hS+1);
@@ -412,7 +443,8 @@ function windowData(mar, sf, date, cfg){
   for (let h = hS+1; h <= hV; h++){ const r = take(sf, h); if (h===parseInt(cfg.recreo)) rec = r; if (h===hV) vue = r; }
   if (!rows.length) return null;
   const mx = k => Math.max(...rows.map(r=>r[k])), mn = k => Math.min(...rows.map(r=>r[k]));
-  return {sal, rec, vue, hS, hV, minFeel:mn('feel'), maxFeel:mx('feel'), minT:mn('temp'), maxT:mx('temp'), prob:mx('prob'), uv:mx('uv'),
+  const rainG = rainRanges(sf, date, 40), drizzleG = rainRanges(sf, date, 30);
+  return {sal, rec, vue, hS, hV, rainG, drizzleG, minFeel:mn('feel'), maxFeel:mx('feel'), minT:mn('temp'), maxT:mx('temp'), prob:mx('prob'), uv:mx('uv'),
     rain:rows.reduce((a,r)=>a+r.rain,0), wind:mx('wind'), storm:rows.some(r=>r.code>=95), snow:rows.some(r=>r.code>=71&&r.code<=77||r.code===85||r.code===86)};
 }
 
@@ -453,7 +485,8 @@ function recommend(x, y){
   if (x.storm) al.push(['rain','⛈️ Posibles tormentas.']);
   if (x.snow) al.push(['cold','❄️ Posible nieve o aguanieve.']);
   if (x.wind >= 30) al.push(['info',`💨 Viento fuerte (hasta ${Math.round(x.wind)} km/h).`]);
-  if (wet) al.push(['rain',`🌧️ Lluvia probable (${x.prob}%).`]);
+  if (wet) al.push(['rain', x.rainG.length ? `🌧️ Lluvia probable ${rangesText(x.rainG)}.` : `🌧️ Lluvia probable (${x.prob}%).`]);
+  else if (maybe && x.drizzleG.length) al.push(['rain',`🌦️ Puede chispear ${rangesText(x.drizzleG)}.`]);
 
   // Cómo irás en cada momento
   const moments = [['Al salir', x.sal], ['Recreo', x.rec], ['Vuelta', x.vue]].filter(m=>m[1])
@@ -626,6 +659,90 @@ function coche(mar, today){
   return {c:'ok', v:'🚗 Buen momento', s:'Sin lluvia en 3 días'};
 }
 
+
+// ===== Avisos (calculados por la app con umbrales parecidos a los de AEMET; no oficiales) =====
+const AV = {
+  calor:  {e:'🌡️', n:'calor',  u:[38,41,44]},   // máxima °C
+  frio:   {e:'🥶', n:'frío',   u:[-4,-8,-12]},  // mínima °C (menor o igual)
+  lluvia: {e:'🌧️', n:'lluvia', u:[15,30,60]},   // mm en 1 hora
+  lluvia12:{e:'🌧️', n:'lluvia', u:[40,80,120]}, // mm en 12 horas
+  viento: {e:'💨', n:'viento', u:[70,90,120]},  // rachas km/h
+  nieve:  {e:'❄️', n:'nieve',  u:[2,5,20]}      // cm en el día
+};
+const NIV = ['','Amarillo','Naranja','Rojo'];
+function lvlUp(v,u){ return v>=u[2]?3:v>=u[1]?2:v>=u[0]?1:0; }
+function lvlDown(v,u){ return v<=u[2]?3:v<=u[1]?2:v<=u[0]?1:0; }
+function placeAlerts(p, w){
+  const out=[], today=w.current.time.slice(0,10), d=w.daily, H=w.hourly;
+  for (let k=0;k<3;k++){
+    const date=addDays(today,k), di=d.time.indexOf(date); if(di<0) continue;
+    const dn = k===0?'Hoy':k===1?'Mañana':DAYS[new Date(date+'T12:00').getDay()];
+    const hs=H.time.map((t,i)=>t.startsWith(date)?i:-1).filter(i=>i>=0);
+    const push=(key,lvl,txt)=>{ if(lvl) out.push({lvl,key,day:k,dn,place:p.name,txt}); };
+    const tmax=d.temperature_2m_max[di], tmin=d.temperature_2m_min[di];
+    push('calor', lvlUp(tmax,AV.calor.u), `hasta ${Math.round(tmax)}°`);
+    push('frio', lvlDown(tmin,AV.frio.u), `mínima de ${Math.round(tmin)}°`);
+    const r1=Math.max(0,...hs.map(i=>H.precipitation[i]??0));
+    let r12=0; hs.forEach((i,j)=>{ let sum=0; for(let q=i;q<i+12&&q<H.time.length;q++) sum+=H.precipitation[q]??0; r12=Math.max(r12,sum); });
+    const l1=lvlUp(r1,AV.lluvia.u), l12=lvlUp(r12,AV.lluvia12.u);
+    if (l1||l12) push('lluvia', Math.max(l1,l12), l1>=l12 ? `${Math.round(r1)} mm en una hora` : `${Math.round(r12)} mm en 12 horas`);
+    const g=Math.max(0,...hs.map(i=>H.wind_gusts_10m?.[i]??0));
+    push('viento', lvlUp(g,AV.viento.u), `rachas de ${Math.round(g)} km/h`);
+    const sn=hs.reduce((a,i)=>a+(H.snowfall?.[i]??0),0);
+    push('nieve', lvlUp(sn,AV.nieve.u), `${Math.round(sn)} cm`);
+  }
+  return out;
+}
+
+// ===== Avisos oficiales de AEMET (avisos.json generado por GitHub Actions) =====
+function inPoly(lat, lon, poly){ let ins=false;
+  for(let i=0,j=poly.length-1;i<poly.length;j=i++){ const [yi,xi]=poly[i],[yj,xj]=poly[j];
+    if(((yi>lat)!==(yj>lat)) && (lon < (xj-xi)*(lat-yi)/(yj-yi)+xi)) ins=!ins; } return ins; }
+function fenIcon(f){ f=f.toLowerCase();
+  return f.includes('máx')||f.includes('max')?'🌡️':f.includes('mín')||f.includes('min')?'🥶':f.includes('torment')?'⛈️':
+    f.includes('lluv')||f.includes('precip')?'🌧️':f.includes('nieve')||f.includes('nev')?'❄️':f.includes('vient')?'💨':
+    f.includes('coster')?'🌊':f.includes('niebla')?'🌫️':f.includes('polvo')?'🟤':'⚠️'; }
+function dayLabel(iso){ if(!iso) return ''; const d=new Date(iso), t=new Date(); t.setHours(0,0,0,0);
+  const k=Math.round((new Date(d).setHours(0,0,0,0)-t)/86400000);
+  const hh=d.toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'});
+  return (k<=0?'Hoy':k===1?'Mañana':DAYS[d.getDay()])+' desde las '+hh; }
+async function officialAlerts(){
+  try{
+    const j=await fetch('avisos.json?_='+Date.now(),{cache:'no-store'}).then(r=>{if(!r.ok)throw 0;return r.json()});
+    const now=Date.now(), out=[];
+    (j.avisos||[]).forEach(a=>{
+      if(a.fin && new Date(a.fin).getTime()<now) return;
+      const hit=PLACES.filter(p=>a.poligonos.some(pg=>inPoly(p.lat,p.lon,pg)));
+      if(hit.length) out.push({...a, places:hit.map(p=>p.name)});
+    });
+    return out;
+  }catch(e){ return null; }
+}
+
+async function alertsTile(force){
+  const off = await officialAlerts();
+  if (off && off.length){
+    const top=Math.max(...off.map(a=>a.nivel));
+    const rows=off.sort((a,b)=>b.nivel-a.nivel||String(a.inicio).localeCompare(String(b.inicio))).slice(0,6).map(a=>
+      `<li><span class="lvdot l${a.nivel}"></span><b>${fenIcon(a.fenomeno)} ${NIV[a.nivel]} por ${esc(a.fenomeno.toLowerCase())}</b> · ${dayLabel(a.inicio)} · ${esc(a.places.join(', '))}
+       <details><summary>${esc(a.zona)}</summary>${esc(a.texto||a.titulo)}</details></li>`).join('');
+    return `<div class="avi l${top}" role="alert">
+      <div class="avi-h"><span class="avi-i" aria-hidden="true">⚠️</span><div><div class="avi-t">Aviso ${NIV[top].toLowerCase()}</div>
+      <div class="avi-s"><span class="ofi">AEMET · oficial</span> ${off.length===1?'1 aviso activo':off.length+' avisos activos'}</div></div></div>
+      <ul>${rows}</ul><div class="avi-n">Fuente: AEMET. Toca la zona para ver el detalle.</div></div>`;
+  }
+  const res = await Promise.allSettled(PLACES.map(p=>load(p, force).then(x=>placeAlerts(p, x.w))));
+  const all = res.filter(r=>r.status==='fulfilled').flatMap(r=>r.value)
+    .sort((a,b)=>b.lvl-a.lvl || a.day-b.day);
+  if (!all.length) return `<div class="mini ok"><div class="mt">Avisos · 3 días</div><div class="mv">✅ Sin avisos</div><div class="ms">${off ? 'Sin avisos oficiales de AEMET ni previstos.' : 'Ni lluvia fuerte, ni viento, ni calor o frío extremos.'}</div></div>`;
+  const top = all[0].lvl;
+  const rows = all.slice(0,6).map(a=>`<li><span class="lvdot l${a.lvl}"></span><b>${AV[a.key].e} ${NIV[a.lvl]} por ${AV[a.key].n}</b> · ${a.dn} · ${esc(a.place)}: ${a.txt}</li>`).join('');
+  return `<div class="avi l${top}" role="alert">
+    <div class="avi-h"><span class="avi-i" aria-hidden="true">⚠️</span><div><div class="avi-t">Aviso ${NIV[top].toLowerCase()}</div>
+    <div class="avi-s">${all.length===1?'1 aviso':all.length+' avisos'} en los próximos 3 días</div></div></div>
+    <ul>${rows}</ul><div class="avi-n">${off ? 'AEMET no tiene avisos oficiales para tus localidades. Estos los calcula la app como previsión.' : 'Calculado por la app con umbrales parecidos a los de AEMET.'}</div></div>`;
+}
+
 async function showMinis(force){
   const box=document.getElementById('minis');
   try{
@@ -637,7 +754,8 @@ async function showMinis(force){
     const r=recreo(sf.w, dRec, rH); if(r) tiles.push(['Recreo '+(dRec===today?'hoy':'mañana')+' · '+cfg.recreo, r]);
     const t=tender(mar.w, dTen); if(t) tiles.push(['Tender '+(dTen===today?'hoy':'mañana'), t]);
     const c=coche(mar.w, today); if(c) tiles.push(['Lavar el coche', c]);
-    box.innerHTML = tiles.map(([title,x])=>`<div class="mini ${x.c}"><div class="mt">${title}</div><div class="mv">${x.v}</div><div class="ms">${x.s}</div>${x.uv||''}</div>`).join('');
+    const av = await alertsTile(force);
+    box.innerHTML = av + tiles.map(([title,x])=>`<div class="mini ${x.c}"><div class="mt">${title}</div><div class="mv">${x.v}</div><div class="ms">${x.s}</div>${x.uv||''}</div>`).join('');
   }catch(e){ box.innerHTML=''; }
 }
 
