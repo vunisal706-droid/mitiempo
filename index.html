@@ -154,6 +154,17 @@ h1 span{color:var(--color-primary)}
 .ofi{background:#0f172a;color:#fff;border-radius:999px;padding:2px 8px;font-size:.72rem;font-weight:900;margin-right:4px}
 .avi details{width:100%;font-size:.82rem;font-weight:600}
 .avi summary{cursor:pointer;font-weight:800;opacity:.85}
+.cancel{grid-column:1/-1}
+.cancel.rainy{border-color:#38bdf8;background:#f0f9ff;animation:avi 1.6s ease-in-out infinite;--g:rgba(56,189,248,.5)}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.cg{display:flex;gap:8px;align-items:center;background:#fff;border-radius:14px;padding:8px;border:2px solid #e2e8f0}
+.cg.wet{border-color:#38bdf8}
+.cg svg{flex:0 0 56px;width:56px;height:56px}
+.cgl{font-weight:800;font-size:.8rem;color:var(--color-text-muted)}
+.cgt{font-weight:900;font-size:1.4rem;line-height:1.1}
+.cgs{font-weight:800;font-size:.8rem}
+.cg.wet .cgs{color:#0369a1}
+@media (max-width:420px){.cg{flex-direction:column;text-align:center}}
 .avi-n{font-size:.75rem;font-weight:700;margin-top:8px;opacity:.8}
 .blk{border-radius:18px;padding:12px;margin-top:14px}
 .blk-t{font-weight:900;font-size:.82rem;text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
@@ -231,7 +242,7 @@ function savePlaces(){ try{ localStorage.setItem('mt-places', JSON.stringify(PLA
 let PLACES = loadPlaces();
 const byId = id => PLACES.find(p=>p.id===id);
 const TZ = 'Europe/Madrid';
-const VERSION = 'v15';
+const VERSION = 'v16';
 const DAYS = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
 const cache = {};
 let current = localStorage.getItem('mt-place') || PLACES[0].id;
@@ -265,7 +276,7 @@ async function load(p, force){
     `&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,wind_speed_10m,wind_direction_10m,is_day,precipitation`+
     `&hourly=temperature_2m,apparent_temperature,weather_code,precipitation_probability,precipitation,is_day,wind_speed_10m,relative_humidity_2m,uv_index,wind_gusts_10m,snowfall`+
     `&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,precipitation_sum,wind_speed_10m_max`+
-    `&timezone=${encodeURIComponent(TZ)}&forecast_days=3&past_days=1`;
+    `&timezone=${encodeURIComponent(TZ)}&forecast_days=4&past_days=1`;
   const nc = `&_=${Date.now()}`, opt = {cache:'no-store'};
   const reqs = [fetch(fUrl+nc, opt).then(r=>{if(!r.ok)throw 0;return r.json()})];
   if (p.sea){
@@ -385,7 +396,7 @@ function html(p, w, m){
 function getCfg(){ let c={}; try{c=JSON.parse(localStorage.getItem('mt-cfg')||'{}')}catch(e){};
   const casa = byId(c.casa) ? c.casa : (byId('maracena') ? 'maracena' : PLACES[0].id);
   const trabajo = byId(c.trabajo) ? c.trabajo : (byId('santafe') ? 'santafe' : PLACES[0].id);
-  return {salida:c.salida||'08:00', vuelta:c.vuelta||'15:00', recreo:c.recreo||'12:00', casa, trabajo}; }
+  return {salida:c.salida||'08:00', vuelta:c.vuelta||'15:00', recreo:c.recreo||'12:00', entrada:c.entrada||'09:00', salCole:c.salCole||'13:50', casa, trabajo}; }
 function setCfg(c){ try{localStorage.setItem('mt-cfg',JSON.stringify(c))}catch(e){} }
 const pad = n => String(n).padStart(2,'0');
 function addDays(ds, n){ const d=new Date(ds+'T12:00'); d.setDate(d.getDate()+n); return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`; }
@@ -505,6 +516,8 @@ async function showAdvice(force){
     const x = windowData(mar.w, sf.w, date, cfg), y = windowData(mar.w, sf.w, addDays(date,-1), cfg);
     if (!x) throw 0;
     const r = recommend(x, y);
+    const cn = cancelas(sf.w, date, cfg);
+    if (cn && (cn.ent.wet||cn.sal.wet)) r.al.unshift(['rain', `🚪 Cancelas: ${[cn.ent.wet?`ábrelas a las ${cn.ent.t} para la entrada`:'',cn.sal.wet?`ábrelas a las ${cn.sal.t} para la salida`:''].filter(Boolean).join(' y ')}, que llueve.`]);
     box.innerHTML = `<div class="top"><div><h2>${after ? 'Para mañana' : 'Hoy'} me pongo…</h2>
         <div class="sub">${casa.name} ${cfg.salida} → ${trab.name} hasta las ${cfg.vuelta}</div></div>
         <button class="gear" id="gear" aria-label="Ajustes">⚙️</button></div>
@@ -743,6 +756,49 @@ async function alertsTile(force){
     <ul>${rows}</ul><div class="avi-n">${off ? 'AEMET no tiene avisos oficiales para tus localidades. Estos los calcula la app como previsión.' : 'Calculado por la app con umbrales parecidos a los de AEMET.'}</div></div>`;
 }
 
+// ===== Cancelas del cole (entrada y salida con lluvia) =====
+const toMin = t => { const [h,m]=t.split(':').map(Number); return h*60+(m||0); };
+const fmt = m => `${pad(Math.floor(m/60))}:${pad(m%60)}`;
+function gateSvg(open, dir){
+  const bars = open
+    ? `<path d="M12 18 L22 22 L22 50 L12 52 Z" fill="none" stroke="#475569" stroke-width="2.5"/><path d="M15 20 V51 M18 21 V51" stroke="#475569" stroke-width="2"/>
+       <path d="M52 18 L42 22 L42 50 L52 52 Z" fill="none" stroke="#475569" stroke-width="2.5"/><path d="M49 20 V51 M46 21 V51" stroke="#475569" stroke-width="2"/>
+       <g fill="#38bdf8"><path d="M30 6 q-2 4 0 5 q2-1 0-5Z"/><path d="M38 10 q-2 4 0 5 q2-1 0-5Z"/><path d="M26 13 q-2 4 0 5 q2-1 0-5Z"/></g>`
+    : `<rect x="12" y="18" width="40" height="34" fill="none" stroke="#475569" stroke-width="2.5"/>
+       <path d="M18 18 V52 M24 18 V52 M30 18 V52 M34 18 V52 M40 18 V52 M46 18 V52" stroke="#475569" stroke-width="2"/>
+       <path d="M12 26 H52 M12 44 H52" stroke="#475569" stroke-width="2"/><circle cx="32" cy="35" r="2.5" fill="#f59e0b"/>`;
+  const arrow = dir==='in'
+    ? `<circle cx="52" cy="54" r="9" fill="#22c55e"/><path d="M47 54 H57 M53 50 L57 54 L53 58" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/>`
+    : `<circle cx="52" cy="54" r="9" fill="#f97316"/><path d="M57 54 H47 M51 50 L47 54 L51 58" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/>`;
+  return `<svg viewBox="0 0 64 64" width="64" height="64" aria-hidden="true"><rect x="5" y="12" width="7" height="46" rx="2" fill="#94a3b8"/><rect x="52" y="12" width="7" height="46" rx="2" fill="#94a3b8"/><path d="M4 12 h9 l-4.5 -5Z M51 12 h9 l-4.5 -5Z" fill="#64748b"/>${bars}${arrow}</svg>`;
+}
+function wetAround(w, date, min){
+  let pr=0, mm=0;
+  [min-15, min+15].forEach(m=>{ const i=w.hourly.time.indexOf(`${date}T${pad(Math.floor(m/60))}:00`);
+    if(i>=0){ pr=Math.max(pr, w.hourly.precipitation_probability[i]??0); mm=Math.max(mm, w.hourly.precipitation[i]??0); } });
+  return {wet: pr>=40 || mm>=0.2, pr};
+}
+function cancelasDay(w, cfg){
+  const now=w.current.time, today=now.slice(0,10), nowMin=toMin(now.slice(11,16));
+  let date=today; if (nowMin > toMin(cfg.salCole)+10) date=addDays(today,1);
+  for (let k=0;k<4;k++){ const d=new Date(date+'T12:00').getDay(); if(d!==0&&d!==6) break; date=addDays(date,1); }
+  return date;
+}
+function cancelas(w, date, cfg){
+  if (w.hourly.time.indexOf(`${date}T12:00`)<0) return null;
+  const e=toMin(cfg.entrada), s=toMin(cfg.salCole);
+  const we=wetAround(w,date,e), ws=wetAround(w,date,s);
+  return {date, ent:{...we, t:fmt(we.wet?e-5:e)}, sal:{...ws, t:fmt(s)}};
+}
+function cancelasHtml(c, today){
+  const dn = c.date===today?'hoy':c.date===addDays(today,1)?'mañana':DAYS[new Date(c.date+'T12:00').getDay()].toLowerCase();
+  const side=(lbl,x,dir)=>`<div class="cg ${x.wet?'wet':''}">${gateSvg(x.wet,dir)}<div><div class="cgl">${lbl}</div><div class="cgt">${x.t}</div>
+    <div class="cgs">${x.wet?`🌧️ Abre las cancelas (${x.pr}%)`:'Sin lluvia · normal'}</div></div></div>`;
+  const any=c.ent.wet||c.sal.wet;
+  return `<div class="mini cancel ${any?'rainy':'ok'}" ${any?'role="alert"':''}><div class="mt">Cancelas del cole · ${dn}</div>
+    <div class="cgrid">${side('Entrada',c.ent,'in')}${side('Salida',c.sal,'out')}</div></div>`;
+}
+
 async function showMinis(force){
   const box=document.getElementById('minis');
   try{
@@ -755,7 +811,8 @@ async function showMinis(force){
     const t=tender(mar.w, dTen); if(t) tiles.push(['Tender '+(dTen===today?'hoy':'mañana'), t]);
     const c=coche(mar.w, today); if(c) tiles.push(['Lavar el coche', c]);
     const av = await alertsTile(force);
-    box.innerHTML = av + tiles.map(([title,x])=>`<div class="mini ${x.c}"><div class="mt">${title}</div><div class="mv">${x.v}</div><div class="ms">${x.s}</div>${x.uv||''}</div>`).join('');
+    const cn = cancelas(sf.w, cancelasDay(sf.w, cfg), cfg);
+    box.innerHTML = av + (cn ? cancelasHtml(cn, today) : '') + tiles.map(([title,x])=>`<div class="mini ${x.c}"><div class="mt">${title}</div><div class="mv">${x.v}</div><div class="ms">${x.s}</div>${x.uv||''}</div>`).join('');
   }catch(e){ box.innerHTML=''; }
 }
 
@@ -831,6 +888,8 @@ function openSettings(){
       <label class="lab" for="sal">Hora de salida<input type="time" id="sal" step="3600" value="${cfg.salida}"></label>
       <label class="lab" for="vue">Hora de vuelta<input type="time" id="vue" step="3600" value="${cfg.vuelta}"></label>
       <label class="lab" for="rec">Recreo<input type="time" id="rec" step="1800" value="${cfg.recreo}"></label>
+      <label class="lab" for="ent">Abro cancelas (entrada)<input type="time" id="ent" step="300" value="${cfg.entrada}"></label>
+      <label class="lab" for="scl">Abro cancelas (salida)<input type="time" id="scl" step="300" value="${cfg.salCole}"></label>
     </div>
     <button class="btn ok-b" id="dlgOk">Guardar</button></div>`;
   dlg.classList.add('open');
@@ -862,7 +921,7 @@ function openSettings(){
   document.getElementById('dlgX').onclick=closeSettings;
   document.getElementById('dlgOk').onclick=()=>{
     setCfg({salida:document.getElementById('sal').value||'08:00', vuelta:document.getElementById('vue').value||'15:00',
-      recreo:document.getElementById('rec').value||'12:00', casa:document.getElementById('sCasa').value, trabajo:document.getElementById('sTrab').value});
+      recreo:document.getElementById('rec').value||'12:00', entrada:document.getElementById('ent').value||'09:00', salCole:document.getElementById('scl').value||'13:50', casa:document.getElementById('sCasa').value, trabajo:document.getElementById('sTrab').value});
     closeSettings();
   };
 }
