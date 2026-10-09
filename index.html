@@ -84,6 +84,12 @@ h1 span{color:var(--color-primary)}
 .advice .top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
 .advice h2{font-size:1.15rem;font-weight:900}
 .advice .sub{color:var(--color-text-muted);font-weight:700;font-size:.85rem}
+.tools{display:flex;gap:8px;align-items:center;flex:0 0 auto}
+.trip-b{border:2px solid #7dd3fc;background:linear-gradient(135deg,#e0f2fe,#ede9fe);color:var(--color-primary-dark);font:inherit;font-weight:900;font-size:.95rem;
+  border-radius:14px;min-height:44px;padding:4px 12px;cursor:pointer;line-height:1.1;text-align:center;max-width:130px;box-shadow:0 3px 0 #bae6fd}
+.trip-b small{display:block;font-size:.72rem;font-weight:800;opacity:.8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.trip-b.on{background:var(--color-primary);color:#fff;border-color:var(--color-primary-dark);box-shadow:0 3px 0 var(--color-primary-dark)}
+.trip-b:focus-visible{outline:3px solid var(--color-primary);outline-offset:3px}
 .gear{border:0;background:var(--color-primary-light);border-radius:12px;min-width:44px;min-height:44px;font-size:1.2rem;cursor:pointer}
 .wear{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0 10px}
 .item{border-radius:16px;padding:12px 6px;text-align:center;background:var(--color-primary-light)}
@@ -209,6 +215,28 @@ h1 span{color:var(--color-primary)}
 .tabs{display:flex!important;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:4px}
 .tabs .tab{flex:0 0 auto;min-width:104px;scroll-snap-align:start}
 .tab-add{color:var(--color-primary-dark)!important;border:2px dashed #7dd3fc!important}
+/* Modo viaje */
+.tsum{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+.tday{background:#fff;border-radius:18px;padding:14px;margin-top:10px;border:2px solid #e0f2fe}
+.tday.est{border-style:dashed}
+.tdh{display:flex;align-items:center;gap:10px}
+.tdh .ti{font-size:2.2rem;line-height:1}
+.tdh .tn{font-weight:900;font-size:1.05rem}
+.tdh .tt{margin-left:auto;font-weight:900;font-size:1.2rem;text-align:right}
+.tdh .tt em{font-style:normal;color:var(--color-text-muted);font-weight:700}
+.tmeta{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.tbest{display:grid;gap:6px;margin-top:8px}
+.tb{border-radius:12px;padding:8px 10px;font-weight:800;font-size:.9rem}
+.tb.go{background:var(--ok-bg);color:#14532d}.tb.in{background:#ede9fe;color:#4c1d95}.tb.meh{background:var(--warn-bg);color:#78350f}
+.tday .bbars{height:64px;margin-top:10px}
+.pack{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:6px}
+.pk{display:flex;align-items:center;gap:10px;background:#fff;border-radius:12px;padding:8px 12px;min-height:48px;font-weight:800;cursor:pointer}
+.pk input{width:22px;height:22px;accent-color:var(--ok);flex:0 0 22px}
+.pk .q{margin-left:auto;background:var(--color-primary-light);color:var(--color-primary-dark);border-radius:999px;padding:2px 9px;font-size:.85rem}
+.pk.done{opacity:.5}.pk.done span:first-of-type{text-decoration:line-through}
+.pk small{display:block;font-weight:700;color:var(--color-text-muted);font-size:.75rem}
+.tsel{display:inline-block;margin-top:8px;background:var(--ok-bg);color:#14532d;border-radius:999px;padding:8px 14px;font-weight:900}
+@media (max-width:420px){.tsum{grid-template-columns:repeat(2,1fr)}}
 .foot{text-align:center;font-size:.8rem;color:var(--color-text-muted);font-weight:600;margin-top:10px}
 .foot a{color:inherit}
 .sk{height:120px;border-radius:22px;background:linear-gradient(90deg,rgba(255,255,255,.5),rgba(255,255,255,.9),rgba(255,255,255,.5));background-size:200% 100%;animation:sk 1.2s infinite;margin-bottom:14px}
@@ -242,11 +270,11 @@ function savePlaces(){ try{ localStorage.setItem('mt-places', JSON.stringify(PLA
 let PLACES = loadPlaces();
 const byId = id => PLACES.find(p=>p.id===id);
 const TZ = 'Europe/Madrid';
-const VERSION = 'v16';
+const VERSION = 'v18';
 const DAYS = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
 const cache = {};
 let current = localStorage.getItem('mt-place') || PLACES[0].id;
-if (current!=='radar' && !byId(current)) current = PLACES[0].id;
+if (current!=='radar' && current!=='viaje' && !byId(current)) current = PLACES[0].id;
 
 function wmo(c, night){
   const m = {0:['Despejado',night?'🌙':'☀️'],1:['Casi despejado',night?'🌙':'🌤️'],2:['Intervalos nubosos',night?'☁️':'⛅'],3:['Nublado','☁️'],
@@ -296,6 +324,7 @@ function renderTabs(){
   t.innerHTML = TABS.map(p=>`<button class="tab" role="tab" aria-selected="${p.id===current}" data-id="${p.id}">${p.sea?'🌊 ':''}${p.name}<small>${p.sub||''}</small></button>`).join('')
     + `<button class="tab tab-add" id="addTab" aria-label="Gestionar localidades">＋<small>Lugares</small></button>`;
   document.getElementById('addTab').onclick = openSettings;
+  paintTripBtn();
   t.querySelectorAll('.tab[data-id]').forEach(b=>b.onclick=()=>{current=b.dataset.id;try{localStorage.setItem('mt-place',current)}catch(e){};renderTabs();show()});
 }
 
@@ -312,6 +341,7 @@ setInterval(paintFoot, 30000);
 async function show(force){
   stopRadar();
   if (current === 'radar') return showRadar();
+  if (current === 'viaje') return showTrip(force);
   const p = PLACES.find(x=>x.id===current);
   const main = document.getElementById('main');
   const btn = document.getElementById('refresh');
@@ -520,7 +550,7 @@ async function showAdvice(force){
     if (cn && (cn.ent.wet||cn.sal.wet)) r.al.unshift(['rain', `🚪 Cancelas: ${[cn.ent.wet?`ábrelas a las ${cn.ent.t} para la entrada`:'',cn.sal.wet?`ábrelas a las ${cn.sal.t} para la salida`:''].filter(Boolean).join(' y ')}, que llueve.`]);
     box.innerHTML = `<div class="top"><div><h2>${after ? 'Para mañana' : 'Hoy'} me pongo…</h2>
         <div class="sub">${casa.name} ${cfg.salida} → ${trab.name} hasta las ${cfg.vuelta}</div></div>
-        <button class="gear" id="gear" aria-label="Ajustes">⚙️</button></div>
+        <div class="tools"><button class="trip-b" id="tripBtn"></button><button class="gear" id="gear" aria-label="Ajustes">⚙️</button></div></div>
       <div class="blk day-blk"><div class="blk-t">Mi recomendación para el día</div>
       <div class="wear">${r.items.map(i=>`<div class="item ${i.off?'off':''}"><div class="e">${svg(i.k)}</div><b>${i.t}</b></div>`).join('')}</div>
       ${r.acc.length ? `<div class="chips">${r.acc.map(a=>`<span class="chip">${a}</span>`).join('')}</div>` : ''}</div>
@@ -529,8 +559,10 @@ async function showAdvice(force){
       <div class="alerts">${r.al.length ? r.al.map(a=>`<div class="al ${a[0]}">${a[1]}</div>`).join('') : '<div class="al info">👍 Día normal, sin sorpresas.</div>'}</div>
 `;
     document.getElementById('gear').onclick = openSettings;
+    paintTripBtn();
   }catch(e){
-    box.innerHTML = '<div class="err">⚠️ No se ha podido calcular la recomendación. Pulsa «Actualizar».</div>';
+    box.innerHTML = '<div class="top"><div class="err" style="flex:1">⚠️ No se ha podido calcular la recomendación. Pulsa «Actualizar».</div><div class="tools"><button class="trip-b" id="tripBtn"></button></div></div>';
+    paintTripBtn();
   }
 }
 
@@ -854,6 +886,266 @@ async function showRadar(){
 }
 
 
+// ===== Modo viaje =====
+function paintTripBtn(){
+  const b=document.getElementById('tripBtn'); if(!b) return;
+  const tr=getTrip(), on=current==='viaje';
+  b.className='trip-b'+(on?' on':'');
+  b.setAttribute('aria-pressed', on);
+  b.innerHTML=`✈️ Viaje<small>${tr ? esc(tr.name) : 'Planifica'}</small>`;
+  b.onclick=()=>{ current='viaje'; try{localStorage.setItem('mt-place',current)}catch(e){}; renderTabs(); show();
+    document.getElementById('main').scrollIntoView({behavior:'smooth', block:'start'}); };
+}
+// Previsión real hasta 16 días; más allá, estimación con el tiempo que hizo esas fechas el año pasado
+function getTrip(){ try{ const t=JSON.parse(localStorage.getItem('mt-trip')); return t&&t.lat!=null ? t : null; }catch(e){ return null; } }
+function setTrip(t){ try{ t ? localStorage.setItem('mt-trip', JSON.stringify(t)) : localStorage.removeItem('mt-trip'); }catch(e){} }
+function getChk(){ try{ return JSON.parse(localStorage.getItem('mt-trip-chk')||'{}'); }catch(e){ return {}; } }
+function setChk(c){ try{ localStorage.setItem('mt-trip-chk', JSON.stringify(c)); }catch(e){} }
+const tripCache = {};
+let tripEdit = false, tripDraft = null;
+function todayStr(){ const d=new Date(); return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`; }
+const SHIFT = 364; // 52 semanas: mismas fechas aprox. del año pasado
+function fmtDay(ds){ const d=new Date(ds+'T12:00'); return `${DAYS[d.getDay()]} ${d.getDate()} ${MESES[d.getMonth()].slice(0,3)}`; }
+
+function normTrip(j, est){
+  const D=j.daily, H=j.hourly, out=[];
+  const mv = s => est ? addDays(s.slice(0,10), SHIFT)+s.slice(10) : s;
+  D.time.forEach((dt,i)=>{
+    const date=mv(dt), hours=[];
+    H.time.forEach((ht,k)=>{ if(!ht.startsWith(dt)) return; const h=parseInt(ht.slice(11,13)), mm=H.precipitation[k]??0;
+      hours.push({h, temp:H.temperature_2m[k], feel:H.apparent_temperature[k], code:H.weather_code[k], mm,
+        prob: est ? (mm>=0.5?70:mm>=0.1?40:0) : (H.precipitation_probability?.[k]??0),
+        wind:H.wind_speed_10m[k]??0, uv: est ? null : (H.uv_index?.[k]??0), day: H.is_day ? !!H.is_day[k] : (h>=8&&h<=20)}); });
+    const rain=D.precipitation_sum[i]??0;
+    out.push({date, est, code:D.weather_code[i], tmax:D.temperature_2m_max[i], tmin:D.temperature_2m_min[i],
+      fmax:D.apparent_temperature_max?.[i] ?? D.temperature_2m_max[i], fmin:D.apparent_temperature_min?.[i] ?? D.temperature_2m_min[i],
+      rain, prob: est ? (rain>=1?70:rain>=0.2?40:5) : (D.precipitation_probability_max?.[i]??0),
+      wind:D.wind_speed_10m_max[i]??0, uv: est ? null : (D.uv_index_max?.[i]??0),
+      sunrise: D.sunrise?.[i] ? D.sunrise[i].slice(11,16) : null, sunset: D.sunset?.[i] ? D.sunset[i].slice(11,16) : null, hours});
+  });
+  return out;
+}
+
+async function loadTrip(t, force){
+  const today=todayStr(), start = t.start<today ? today : t.start, end=addDays(t.start, t.days-1), lastF=addDays(today,15);
+  const key=`${t.lat},${t.lon},${start},${end}`;
+  if (!force && tripCache[key] && Date.now()-tripCache[key].t < 30*60*1000) return tripCache[key].days;
+  const H='temperature_2m,apparent_temperature,weather_code,precipitation,is_day,wind_speed_10m';
+  const D='weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_sum,wind_speed_10m_max,sunrise,sunset';
+  const get = u => fetch(u+`&_=${Date.now()}`,{cache:'no-store'}).then(r=>{if(!r.ok)throw 0;return r.json()});
+  const reqs=[];
+  const fe = end<lastF ? end : lastF;
+  if (start<=fe) reqs.push(get(`https://api.open-meteo.com/v1/forecast?latitude=${t.lat}&longitude=${t.lon}&hourly=${H},precipitation_probability,uv_index&daily=${D},precipitation_probability_max,uv_index_max&timezone=auto&start_date=${start}&end_date=${fe}`).then(j=>normTrip(j,false)));
+  const es = start>lastF ? start : addDays(lastF,1);
+  if (es<=end) reqs.push(get(`https://archive-api.open-meteo.com/v1/archive?latitude=${t.lat}&longitude=${t.lon}&hourly=${H}&daily=${D}&timezone=auto&start_date=${addDays(es,-SHIFT)}&end_date=${addDays(end,-SHIFT)}`).then(j=>normTrip(j,true)));
+  const days=(await Promise.all(reqs)).flat().sort((a,b)=>a.date.localeCompare(b.date));
+  tripCache[key]={days, t:Date.now()};
+  return days;
+}
+
+// Puntuación de una hora para pasear / monumentos al aire libre (ideal ~21° de sensación)
+function walkScore(x){
+  let p = Math.abs(x.feel-21)*3.2 + Math.max(0,x.feel-27)*4 + Math.max(0,10-x.feel)*2;
+  p += x.prob*0.55 + Math.min(40, x.mm*25);
+  p += Math.max(0, x.wind-18)*1.4;
+  p += Math.max(0, (x.uv??0)-6)*4;
+  return Math.max(0, Math.min(100, Math.round(100-p)));
+}
+function blocks(day){
+  const hs = day.hours.filter(x=>x.h>=8 && x.h<=21 && (x.day || x.h<=20)).map(x=>({...x, s:walkScore(x)}));
+  if (hs.length<3) return {hs, best:null, worst:null};
+  let b=0, w=0; const sum=k=>hs[k].s+hs[k+1].s+hs[k+2].s;
+  for (let k=0;k<hs.length-2;k++){ if (sum(k)>sum(b)) b=k; if (sum(k)<sum(w)) w=k; }
+  const mk=k=>{ const g=hs.slice(k,k+3); return {from:g[0].h, to:g[2].h+1, s:Math.round(sum(k)/3),
+    feel:Math.round(g.reduce((a,x)=>a+x.feel,0)/3), prob:Math.max(...g.map(x=>x.prob)), wind:Math.max(...g.map(x=>x.wind)), uv:Math.max(...g.map(x=>x.uv??0))}; };
+  const best=mk(b), worst=mk(w);
+  // Solo merece la pena el plan "a cubierto" si el peor tramo es claramente malo y no se solapa con el mejor
+  return {hs, best, worst: (worst.s<55 && (worst.to<=best.from || worst.from>=best.to)) ? worst : null};
+}
+function whyBad(x){
+  if (x.prob>=40) return `lluvia ${x.prob}%`;
+  if (x.feel>=28) return `${x.feel}°, mucho calor`;
+  if (x.feel<=8) return `${x.feel}°, mucho frío`;
+  if (x.wind>=30) return `viento ${Math.round(x.wind)} km/h`;
+  if (x.uv>=8) return 'sol muy fuerte';
+  return `${x.feel}°`;
+}
+
+// Lista de la maleta
+function packList(days){
+  const n=days.length, it=[], CAP=8;
+  const add=(e,t,q,why)=>it.push({e,t,q:Math.min(q,CAP),why: q>CAP ? (why?why+' · ':'')+'Pon una lavadora a mitad' : why});
+  const dayFeel=days.map(d=>{ const dh=d.hours.filter(x=>x.h>=9&&x.h<=20); return {
+    max: dh.length?Math.max(...dh.map(x=>x.feel)):d.fmax, min: (()=>{ const ev=d.hours.filter(x=>x.h>=8&&x.h<=23); return ev.length?Math.min(...ev.map(x=>x.feel)):d.fmin; })() }; });
+  const cnt={fresca:0,corta:0,fina:0,abrigada:0};
+  dayFeel.forEach(f=>{ cnt[f.max>=27?'fresca':f.max>=21?'corta':f.max>=15?'fina':'abrigada']++; });
+  const shortT=cnt.fresca+cnt.corta, longT=cnt.fina+cnt.abrigada;
+  if (shortT) add('👕','Camisetas de manga corta', shortT+(n>=4?1:0), cnt.fresca?'Algún día de calor':'');
+  if (cnt.fina) add('👔','Manga larga fina', cnt.fina, '');
+  if (cnt.abrigada) add('🧶','Manga larga abrigada / jersey', cnt.abrigada, '');
+  // Pantalones
+  const hotDays=dayFeel.filter(f=>f.max>=26).length;
+  if (hotDays) add('🩳','Pantalón corto / falda', Math.max(1,Math.ceil(hotDays/2)), '');
+  if (n-hotDays>0) add('👖','Pantalón largo', Math.max(1,Math.ceil((n-hotDays)/3)), '');
+  add('🧦','Ropa interior y calcetines', n+1, 'Uno de repuesto');
+  add('😴','Pijama', 1, '');
+  // Capa de abrigo según el momento más frío (mañana temprano o noche)
+  const minF=Math.min(...dayFeel.map(f=>f.min)), maxF=Math.max(...dayFeel.map(f=>f.max));
+  if (minF<3) add('🧥','Abrigo gordo', 1, `Hasta ${Math.round(minF)}° de sensación`);
+  else if (minF<7) add('🧥','Chaquetón', 1, `Hasta ${Math.round(minF)}° de sensación`);
+  else if (minF<12) add('🧥','Chaqueta', 1, `Mañanas y noches a ${Math.round(minF)}°`);
+  else if (minF<17) add('🧥','Sudadera o rebeca', 1, 'Para la noche');
+  if (minF<12 && maxF>=21) add('🔄','Ropa para ir en capas', 1, `De ${Math.round(minF)}° a ${Math.round(maxF)}° en el mismo día`);
+  // Lluvia
+  const wet=days.filter(d=>d.prob>=50||d.rain>=1), heavy=days.some(d=>d.rain>=10);
+  if (wet.length) add('☂️','Paraguas plegable', 1, `${wet.length===1?'1 día':wet.length+' días'} con lluvia probable`);
+  else if (days.some(d=>d.prob>=30)) add('☂️','Paraguas pequeño (por si acaso)', 1, 'Algún chubasco posible');
+  if (wet.length>=2 || heavy) add('🧥','Chubasquero', 1, heavy?'Algún día de lluvia fuerte':'Varios días de lluvia');
+  // Calzado
+  add('👟','Calzado cómodo para caminar', 1, 'Ya usado, nada de estrenar');
+  if (wet.length>=2 || heavy) add('🥾','Calzado que aguante el agua', 1, '');
+  if (maxF>=27) add('🩴','Sandalias', 1, '');
+  // Complementos
+  const uvMax=Math.max(0,...days.map(d=>d.uv??0)), m=new Date(days[0].date+'T12:00').getMonth();
+  const sunny = uvMax>=6 || (days.some(d=>d.uv==null) && m>=4 && m<=8) || maxF>=27;
+  if (sunny) { add('🕶️','Gafas de sol',1,''); add('🧴','Crema solar',1, uvMax?`UV hasta ${Math.round(uvMax)}`:''); add('🧢','Gorra o sombrero',1,''); }
+  if (maxF>=28) add('💧','Botella de agua reutilizable',1,'');
+  if (maxF>=29) add('🩱','Bañador',1,'Por si hay piscina o playa');
+  if (minF<6) add('🧣','Bufanda',1,'');
+  if (minF<3) { add('🧤','Guantes',1,''); add('🧢','Gorro de lana',1,''); }
+  if (days.some(d=>d.wind>=40)) add('💨','Cortavientos',1,'Días de mucho viento');
+  return it;
+}
+
+function tripForm(t){
+  const today=todayStr(), d=tripDraft || (t?{...t}:{start:addDays(today,1), days:3});
+  tripDraft=d;
+  const opts=Array.from({length:14},(_,k)=>`<option value="${k+1}" ${k+1===+d.days?'selected':''}>${k+1} ${k?'días':'día'}</option>`).join('');
+  return `<section class="card"><h2>✈️ Modo viaje</h2>
+    <label class="lab" for="tq">¿A dónde vas?</label>
+    <div class="srch"><input id="tq" type="search" placeholder="Ej.: Roma, Oporto, Londres…" autocomplete="off"><button class="btn" id="tqb">Buscar</button></div>
+    <div id="tqr" class="qr" aria-live="polite"></div>
+    <div id="tsel">${d.name?`<span class="tsel">📍 ${esc(d.name)} <small>${esc(d.sub||'')}</small></span>`:''}</div>
+    <div class="grid2" style="margin-top:12px">
+      <label class="lab" for="tst">Salgo el<input type="date" id="tst" min="${today}" value="${d.start<today?today:d.start}"></label>
+      <label class="lab" for="tdays">Duración<select id="tdays">${opts}</select></label>
+    </div>
+    <p class="ms" style="margin-top:8px;font-weight:700;color:var(--color-text-muted);font-size:.82rem">Hasta 16 días vista es previsión real. Más allá, se estima con el tiempo que hizo esas fechas el año pasado.</p>
+    <button class="btn ok-b" id="tgo">Ver el informe del viaje</button>
+    ${t?'<button class="btn" id="tcancel" style="width:100%;margin-top:10px">Cancelar</button>':''}</section>`;
+}
+function bindTripForm(){
+  const search=async()=>{
+    const q=document.getElementById('tq').value.trim(), out=document.getElementById('tqr'), qb=document.getElementById('tqb');
+    if(q.length<2){ out.innerHTML='<p class="ms">Escribe al menos 2 letras.</p>'; return; }
+    qb.disabled=true; out.innerHTML='<p class="ms">Buscando…</p>';
+    try{
+      const r=await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(q)}&count=8&language=es&format=json`).then(r=>r.json());
+      const res=r.results||[];
+      out.innerHTML = res.length ? res.map((x,k)=>`<button class="qrow" data-k="${k}"><b>${esc(x.name)}</b> <small>${esc([x.admin1,x.country].filter(Boolean).join(' · '))}</small></button>`).join('') : '<p class="ms">No se ha encontrado ninguna ciudad.</p>';
+      out.querySelectorAll('.qrow').forEach(b=>b.onclick=()=>{ const x=res[+b.dataset.k];
+        Object.assign(tripDraft,{name:x.name, sub:[x.admin1,x.country].filter(Boolean).join(' · '), lat:+x.latitude.toFixed(4), lon:+x.longitude.toFixed(4)});
+        out.innerHTML=''; document.getElementById('tq').value='';
+        document.getElementById('tsel').innerHTML=`<span class="tsel">📍 ${esc(x.name)} <small>${esc(tripDraft.sub)}</small></span>`; });
+    }catch(e){ out.innerHTML='<p class="ms">⚠️ No se ha podido buscar. Comprueba la conexión.</p>'; }
+    finally{ qb.disabled=false; }
+  };
+  document.getElementById('tqb').onclick=search;
+  document.getElementById('tq').onkeydown=e=>{ if(e.key==='Enter') search(); };
+  document.getElementById('tst').onchange=e=>tripDraft.start=e.target.value;
+  document.getElementById('tdays').onchange=e=>tripDraft.days=+e.target.value;
+  document.getElementById('tgo').onclick=()=>{
+    tripDraft.start=document.getElementById('tst').value||todayStr(); tripDraft.days=+document.getElementById('tdays').value;
+    if(tripDraft.lat==null){ document.getElementById('tqr').innerHTML='<p class="ms">⚠️ Primero busca y elige la ciudad.</p>'; document.getElementById('tq').focus(); return; }
+    const old=getTrip(); if(!old || old.lat!==tripDraft.lat || old.start!==tripDraft.start || old.days!==tripDraft.days) setChk({});
+    setTrip({name:tripDraft.name, sub:tripDraft.sub, lat:tripDraft.lat, lon:tripDraft.lon, start:tripDraft.start, days:tripDraft.days});
+    tripEdit=false; tripDraft=null; renderTabs(); showTrip(); paintTripBtn();
+  };
+  const c=document.getElementById('tcancel'); if(c) c.onclick=()=>{ tripEdit=false; tripDraft=null; showTrip(); };
+}
+
+function tripDayHtml(d){
+  const [desc, ico]=wmo(d.code), {hs, best, worst}=blocks(d);
+  const col = x => x>=70 ? '#22c55e' : x>=45 ? '#f59e0b' : '#ef4444';
+  const top=wearAt(d.fmax), cold=d.fmin<15 ? wearAt(d.fmin) : null;
+  const rows=[];
+  if (best) rows.push(`<div class="tb ${best.s>=60?'go':'meh'}">🚶 Pasear y monumentos al aire libre: <b>${pad(best.from)}:00 a ${pad(best.to)}:00</b> · ${best.feel}°${best.s<60?` <small>(${whyBad(best)}; es lo mejor del día)</small>`:''}</div>`);
+  if (worst) rows.push(`<div class="tb in">🏛️ Museos, iglesias o sitios cubiertos: <b>${pad(worst.from)}:00 a ${pad(worst.to)}:00</b> · ${whyBad(worst)}</div>`);
+  if (best && best.s<45) rows.push(`<div class="tb meh">⚠️ Día flojo para estar fuera: deja para hoy las visitas a cubierto.</div>`);
+  const bars = hs.length ? `<div class="bbars" aria-label="Puntuación por horas para pasear">${hs.map(x=>`<div class="bb ${best&&x.h>=best.from&&x.h<best.to?'best':''}" title="${pad(x.h)}:00 · ${Math.round(x.feel)}° · ${x.s}/100"><div class="bf" style="height:${Math.max(8,x.s)}%;background:${col(x.s)}"></div><span>${x.h}</span></div>`).join('')}</div>` : '';
+  return `<div class="tday ${d.est?'est':''}">
+    <div class="tdh"><span class="ti" aria-hidden="true">${ico}</span><div><div class="tn">${fmtDay(d.date)}</div><div class="ms">${d.est?'Estimado · ':''}${desc}</div></div>
+      <div class="tt">${Math.round(d.tmax)}° <em>${Math.round(d.tmin)}°</em></div></div>
+    <div class="tmeta">
+      <span class="chip">💧 ${d.est?(d.rain>=0.2?Math.round(d.rain)+' mm':'Seco'):d.prob+'%'+(d.rain>=1?` · ${Math.round(d.rain)} mm`:'')}</span>
+      <span class="chip">💨 ${Math.round(d.wind)} km/h</span>
+      ${d.uv!=null?`<span class="chip">☀️ UV ${Math.round(d.uv)}</span>`:''}
+      ${d.sunrise?`<span class="chip">🌅 ${d.sunrise} · 🌇 ${d.sunset}</span>`:''}
+      <span class="chip">👕 ${top.t}${cold?` + ${cold.t.toLowerCase()} a primera hora/noche`:''}</span>
+    </div>
+    <div class="tbest">${rows.join('')}</div>${bars}</div>`;
+}
+
+function tripHtml(t, days){
+  const est=days.filter(d=>d.est).length, end=addDays(t.start,t.days-1);
+  const tmax=Math.max(...days.map(d=>d.tmax)), tmin=Math.min(...days.map(d=>d.tmin));
+  const wet=days.filter(d=>d.prob>=50||d.rain>=1).length, sun=days.filter(d=>d.code<=2).length;
+  const al=[];
+  const hot=days.filter(d=>d.tmax>=32), cold=days.filter(d=>d.tmin<=3), storm=days.filter(d=>d.code>=95), windy=days.filter(d=>d.wind>=40);
+  const lst=a=>a.map(d=>fmtDay(d.date).split(' ').slice(0,2).join(' ')).join(', ');
+  if (hot.length) al.push(['hot',`🥵 Calor fuerte: ${lst(hot)}. Visitas al aire libre temprano y por la tarde-noche.`]);
+  if (cold.length) al.push(['cold',`🥶 Frío intenso por la mañana: ${lst(cold)}.`]);
+  if (wet) al.push(['rain',`🌧️ Lluvia probable: ${lst(days.filter(d=>d.prob>=50||d.rain>=1))}. Ten pensados planes a cubierto.`]);
+  if (storm.length) al.push(['rain',`⛈️ Posibles tormentas: ${lst(storm)}.`]);
+  if (windy.length) al.push(['info',`💨 Mucho viento: ${lst(windy)}.`]);
+  const chk=getChk(), pack=packList(days);
+  const done=pack.filter((p,k)=>chk[k]).length;
+  return `<section class="card"><div class="top" style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start">
+      <div><h2 style="margin-bottom:4px">✈️ Viaje a ${esc(t.name)}</h2><div class="ms" style="font-weight:800">${esc(t.sub||'')} · ${fmtDay(t.start)} → ${fmtDay(end)} (${t.days} ${t.days>1?'días':'día'})</div></div>
+      <button class="gear" id="tedit" aria-label="Cambiar viaje">✏️</button></div>
+    <div class="tsum">
+      <div class="stat"><b>${Math.round(tmin)}° / ${Math.round(tmax)}°</b><span>Mín / máx</span></div>
+      <div class="stat"><b>${sun}</b><span>${sun===1?'Día de sol':'Días de sol'}</span></div>
+      <div class="stat"><b>${wet}</b><span>${wet===1?'Día de lluvia':'Días de lluvia'}</span></div>
+      <div class="stat"><b>${t.days}</b><span>Días</span></div>
+    </div>
+    ${est?`<div class="al info" style="margin-top:12px">📅 ${est===days.length?'Todo el viaje':`Los últimos ${est} días`} ${est===days.length?'está':'están'} fuera de la previsión (más de 16 días). Se muestra el tiempo que hizo esas fechas el año pasado como orientación. Vuelve a mirarlo unos días antes de salir.</div>`:''}
+    ${al.length?`<div class="alerts" style="margin-top:10px">${al.map(a=>`<div class="al ${a[0]}">${a[1]}</div>`).join('')}</div>`:'<div class="alerts" style="margin-top:10px"><div class="al info">👍 Sin sorpresas de tiempo para el viaje.</div></div>'}
+  </section>
+  <section class="card"><h2>🧳 Qué meter en la maleta <span style="float:right" id="pkc">${done}/${pack.length}</span></h2>
+    <div class="pack">${pack.map((p,k)=>`<label class="pk ${chk[k]?'done':''}"><input type="checkbox" data-pk="${k}" ${chk[k]?'checked':''}><span>${p.e} ${p.t}${p.why?`<small>${p.why}</small>`:''}</span>${p.q>1?`<span class="q">×${p.q}</span>`:''}</label>`).join('')}</div>
+  </section>
+  <section class="card"><h2>📅 Día a día · mejores horas</h2>
+    <p class="ms" style="font-weight:700;color:var(--color-text-muted);font-size:.85rem">Barras: verde = buena hora para estar en la calle (temperatura agradable, sin lluvia, poco viento ni sol fuerte). Horas locales del destino.</p>
+    ${days.map(tripDayHtml).join('')}
+  </section>`;
+}
+
+async function showTrip(force){
+  const main=document.getElementById('main'), t=getTrip();
+  document.getElementById('foot').innerHTML=`Datos: <a href="https://open-meteo.com" target="_blank" rel="noopener">Open-Meteo</a> · ${VERSION}`;
+  const today=todayStr();
+  if (!t || tripEdit || addDays(t.start,t.days-1)<today){
+    main.innerHTML = (t && !tripEdit && addDays(t.start,t.days-1)<today ? '<div class="al info" style="margin-bottom:12px">Tu último viaje ya pasó. Planifica el siguiente.</div>' : '') + tripForm(tripEdit?t:null);
+    bindTripForm(); return;
+  }
+  main.innerHTML='<div class="sk"></div><div class="sk"></div><div class="sk"></div>';
+  try{
+    const days=await loadTrip(t, force);
+    if (current!=='viaje' || tripEdit) return;
+    if (!days.length) throw 0;
+    main.innerHTML=tripHtml(t, days);
+    document.getElementById('tedit').onclick=()=>{ tripEdit=true; tripDraft={...t}; showTrip(); };
+    main.querySelectorAll('[data-pk]').forEach(c=>c.onchange=()=>{ const ch=getChk(); ch[c.dataset.pk]=c.checked; setChk(ch);
+      c.closest('.pk').classList.toggle('done', c.checked);
+      document.getElementById('pkc').textContent=`${Object.values(ch).filter(Boolean).length}/${main.querySelectorAll('[data-pk]').length}`; });
+  }catch(e){
+    main.innerHTML='<div class="err">⚠️ No se ha podido cargar el tiempo del viaje. Comprueba la conexión y pulsa «Actualizar».</div>'
+      + '<button class="btn" id="tedit2" style="width:100%;margin-top:10px">✏️ Cambiar viaje</button>';
+    document.getElementById('tedit2').onclick=()=>{ tripEdit=true; tripDraft={...t}; showTrip(); };
+  }
+}
+
 // ===== Ajustes: localidades y horario =====
 function esc(t){ return String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 async function findSea(lat, lon){
@@ -940,7 +1232,7 @@ document.getElementById('refresh').onclick = async () => {
 showMinis();
 showAdvice();
 renderTabs(); show();
-setInterval(()=>{ if(current!=='radar') show(true); showAdvice(); showMinis(); }, 15*60*1000);
+setInterval(()=>{ if(current!=='radar' && current!=='viaje') show(true); showAdvice(); showMinis(); }, 15*60*1000);
 if ('serviceWorker' in navigator){
   navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{});
   let reloaded=false; navigator.serviceWorker.addEventListener('controllerchange',()=>{ if(!reloaded){reloaded=true; location.reload();} });

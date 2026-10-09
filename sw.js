@@ -1,5 +1,5 @@
 // Red primero: siempre la última versión; caché solo si no hay conexión
-const CACHE='mitiempo-v16',ASSETS=['./','./index.html','./manifest.json','./icon.svg','./icon-192.png','./icon-512.png'];
+const CACHE='mitiempo-v18',ASSETS=['./','./index.html','./manifest.json','./icon.svg','./icon-192.png','./icon-512.png'];
 self.addEventListener('install',e=>{self.skipWaiting();
   e.waitUntil(caches.open(CACHE).then(c=>Promise.all(ASSETS.map(a=>fetch(a,{cache:'reload'}).then(r=>c.put(a,r)).catch(()=>{})))))});
 self.addEventListener('activate',e=>e.waitUntil(caches.keys()
