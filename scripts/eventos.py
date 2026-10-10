@@ -204,7 +204,8 @@ def coords(lugar):
         j = json.loads(get('https://geocoding-api.open-meteo.com/v1/search?' + urllib.parse.urlencode(
             {'name': lugar.replace('-', ' '), 'count': 10, 'language': 'es', 'countryCode': 'ES'})))
         for r in j.get('results') or []:
-            if 'granada' in norm(r.get('admin2', '')) and norm(r.get('name', '')).replace('-', ' ') == k:
+            dentro = 36.6 < r['latitude'] < 38.1 and -4.4 < r['longitude'] < -2.2   # provincia de Granada
+            if norm(r.get('name', '')).replace('-', ' ') == k and ('granada' in norm(r.get('admin2', '')) or dentro):
                 res = (round(r['latitude'], 4), round(r['longitude'], 4)); break
     except Exception:
         pass
