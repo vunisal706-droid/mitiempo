@@ -32,7 +32,7 @@ TIPOS = [
     ('fiesta',     r'fiesta|feria|romeria|verbena|carnaval|semana santa|navidad|cabalgata|zambomba|patronal'),
     ('teatro',     r'teatro|humor|danza|ballet|circo|magia|monologo|espectaculo|cine'),
     ('musica',     r'concierto|musica|music|festival|banda|orquesta|flamenco|jazz|coro|sinfonic|recital'),
-    ('ninos',      r'infantil|ninos|ninas|familia|hinchable|titeres|cuentacuentos'),
+    ('ninos',      r'infantil|\bninos\b|\bninas\b|\bfamilias?\b|hinchable|titeres|cuentacuentos'),
     ('naturaleza', r'bosque|ruta|sendero|senderismo|voluntariado|naturaleza|parque natural|observacion|ecosistema|aves|astronom|estrellas|setas'),
     ('mercado',    r'mercado|mercadillo|gastronom|degustacion|vino|tapa|artesania'),
     ('deporte',    r'carrera|maraton|trail|ciclis|deport|torneo'),
@@ -48,46 +48,125 @@ def tipo(t):
 # Lo que no es un plan para el finde (jornadas técnicas, cursos, convocatorias…)
 NO = re.compile(r'jornada tecnica|riesgo|amianto|formacion|curso|convocatoria|subvencion|webinar|seminario|prevencion|laboral|oposicion|licitacion', re.I)
 
-# ---------- 1) Patronato de Turismo de Granada (la página se pinta con JavaScript) ----------
-def turgranada():
+# ---------- 1) Patronato de Turismo de Granada ----------
+CATS = {'festival':'musica','musica':'musica','concierto':'musica','exposicion':'expo','evento':None,'para ninos':'ninos',
+        'infantil':'ninos','fiesta':'fiesta','fiestas':'fiesta','teatro':'teatro','deporte':'deporte','gastronomia':'mercado',
+        'feria':'fiesta','danza':'teatro','cine':'teatro','naturaleza':'naturaleza','congreso':None,'cultura':None}
+
+def slug_score(line, slug):
+    a = set(re.findall(r'[a-z0-9]{3,}', norm(line))); b = set(re.findall(r'[a-z0-9]{3,}', slug))
+    return len(a & b) / max(1, len(b))
+
+def tarjeta(href, text, img=''):
+    """Saca título, fechas, categoría y lugar del texto de una tarjeta, sin depender del orden."""
+    slug = norm(urllib.parse.unquote(href.rstrip('/').split('/')[-1])).replace('-', ' ')
+    lines = [l.strip() for l in re.split(r'[\n\r]+', text) if l.strip() and l.strip() not in ('poi-image', '[object Object]')]
+    di = next((i for i, l in enumerate(lines) if RANGO.search(l)), None)
+    if di is None:
+        return None
+    m = RANGO.search(lines[di])
+    try:
+        desde, hasta = fecha(*m.group(1, 2, 3)), fecha(*m.group(4, 5, 6))
+    except Exception:
+        return None
+    otras = [l for k, l in enumerate(lines) if k != di]
+    cat = next((l for l in otras if norm(l) in CATS), None)
+    resto = [l for l in otras if l != cat]
+    if not resto:
+        return None
+    titulo = max(resto, key=lambda l: (slug_score(l, slug), len(l)))
+    if slug_score(titulo, slug) < 0.3 and len(slug) > 3:
+        titulo = slug.capitalize()
+    lugar = next((l for l in resto if l != titulo and len(l) < 40), None)
+    return {'t': limpia(titulo, 110), 'desde': desde, 'hasta': hasta, 'lugar': lugar, 'slug': slug,
+            'cat': CATS.get(norm(cat)) if cat else None,
+            'img': img if img.startswith('http') and 'flags' not in img else '',
+            'generico': bool(re.match(r'agenda', norm(titulo))), 'fuente': 'turgranada'}
+
+def turgranada_html():
+    """Lectura directa del HTML (por si la página ya trae los eventos sin JavaScript)."""
+    h = get('https://www.turgranada.es/agenda/')
+    out = []
+    partes = re.split(r'(?=<a[^>]+href="[^"]*/eventos/)', h)
+    for p in partes[1:]:
+        href = re.search(r'href="([^"]+)"', p).group(1)
+        img = re.search(r'<img[^>]+src="([^"]+)"', p)
+        texto = re.sub(r'<(br|/p|/div|/h\d|/span|/a|/li)[^>]*>', '\n', p[:4000])
+        texto = html.unescape(re.sub(r'<[^>]+>', '', texto))
+        e = tarjeta(href, texto, img.group(1) if img else '')
+        if e: out.append(e)
+    return out
+
+JS_TARJETAS = r"""() => {
+  const rx = /\d{1,2}\s+[a-zA-Zé]{3,4}\.?\s+\d{4}\s+a\s+\d{1,2}\s+[a-zA-Zé]{3,4}\.?\s+\d{4}/g;
+  const seen = new Set(), out = [];
+  document.querySelectorAll('a[href*="/eventos/"]').forEach(a => {
+    let el = a, k = 0;
+    // sube hasta la tarjeta: el primer bloque que tenga UNA sola fecha
+    while (el && k < 8) { const n = ((el.innerText || '').match(rx) || []).length; if (n === 1) break; if (n > 1) { el = null; break; } el = el.parentElement; k++; }
+    if (!el) el = a;
+    if (seen.has(a.href)) return; seen.add(a.href);
+    const img = el.querySelector('img');
+    out.push({href: a.href, text: el.innerText || '', img: img ? (img.currentSrc || img.src) : ''});
+  });
+  return out;
+}"""
+
+def turgranada_js():
     from playwright.sync_api import sync_playwright
     out = []
     with sync_playwright() as p:
         b = p.chromium.launch()
-        pg = b.new_page(locale='es-ES')
+        pg = b.new_page(locale='es-ES', viewport={'width': 1300, 'height': 2400})
         pg.goto('https://www.turgranada.es/agenda/', wait_until='networkidle', timeout=90000)
-        for _ in range(6):  # por si carga más al hacer scroll
-            pg.mouse.wheel(0, 4000); pg.wait_for_timeout(800)
-        cards = pg.evaluate(r'''() => {
-          const rx = /\d{1,2}\s+[a-zA-Zé]{3,4}\.?\s+\d{4}\s+a\s+\d{1,2}\s+[a-zA-Zé]{3,4}\.?\s+\d{4}/;
-          const seen = new Set(), out = [];
-          document.querySelectorAll('a[href*="/eventos/"]').forEach(a => {
-            let el = a, k = 0;
-            while (el && k < 8 && !(rx.test(el.innerText || '') && (el.innerText || '').length < 700)) { el = el.parentElement; k++; }
-            if (!el || seen.has(el)) return; seen.add(el);
-            const img = el.querySelector('img');
-            out.push({href: a.href, text: el.innerText, img: img ? (img.currentSrc || img.src) : ''});
-          });
-          return out;
-        }''')
+        for _ in range(15):  # baja hasta el final y pulsa "ver más" si lo hay
+            pg.evaluate('window.scrollTo(0, document.body.scrollHeight)'); pg.wait_for_timeout(700)
+            mas = pg.locator('button, a').filter(has_text=re.compile(r'(ver|cargar|mostrar)\s+m[aá]s|siguiente', re.I))
+            if mas.count():
+                try:
+                    mas.first.click(timeout=2000); pg.wait_for_timeout(1500)
+                except Exception:
+                    pass
+        cards = pg.evaluate(JS_TARJETAS)
         b.close()
+    print(f'  enlaces a eventos en la página: {len(cards)}')
+    for c in cards[:3]:
+        print('  ejemplo:', c['text'].replace('\n', ' | ')[:160])
     for c in cards:
-        lines = [l.strip() for l in c['text'].split('\n') if l.strip() and l.strip() not in ('poi-image', '[object Object]')]
-        di = next((i for i, l in enumerate(lines) if RANGO.search(l)), None)
-        if di is None:
-            continue
-        m = RANGO.search(lines[di])
-        try:
-            desde, hasta = fecha(*m.group(1, 2, 3)), fecha(*m.group(4, 5, 6))
-        except Exception:
-            continue
-        titulo = ' '.join(lines[:di]).strip() or c['href'].rstrip('/').split('/')[-1].replace('-', ' ').capitalize()
-        resto = [l for l in lines[di+1:] if len(l) < 45]
-        lugar = resto[0] if resto else 'Granada'
-        out.append({'t': limpia(titulo, 110), 'desde': desde, 'hasta': hasta, 'lugar': lugar,
-                    'img': c['img'] if c['img'].startswith('http') and 'flags' not in c['img'] else '',
-                    'generico': bool(re.match(r'agenda', norm(titulo))), 'fuente': 'turgranada'})
+        e = tarjeta(c['href'], c['text'], c['img'])
+        if e: out.append(e)
     return out
+
+def turgranada():
+    todos = {}
+    for nombre, f in (('html', turgranada_html), ('js', turgranada_js)):
+        try:
+            r = f(); print(f'  turgranada ({nombre}): {len(r)}')
+            for e in r:
+                if e['slug'] not in todos or (not todos[e['slug']]['lugar'] and e['lugar']):
+                    todos[e['slug']] = e
+        except Exception as ex:
+            print(f'  turgranada ({nombre}): ERROR {ex}', file=sys.stderr)
+    out = list(todos.values())
+    for e in out:
+        e.pop('slug', None)
+        if not e['lugar']:
+            e['lugar'] = lugar_en_titulo(e['t'])
+    return out
+
+def lugar_en_titulo(t):
+    """Busca un municipio de Granada dentro del título (p. ej. «Fiestas de Castril 2026»)."""
+    pal = re.findall(r"[A-ZÁÉÍÓÚÑ][\wáéíóúñü]+", t.replace('-', ' '))
+    stop = {'Fiestas', 'Fiesta', 'Festival', 'Agenda', 'Exposición', 'Feria', 'Internacional', 'Cultural', 'Patronales',
+            'Música', 'Teatro', 'Humor', 'Octubre', 'Noviembre', 'Diciembre', 'Banda', 'Sinfónica', 'Ciudad', 'Encuentro',
+            'Jornadas', 'Europeas', 'Patrimonio', 'Centenario', 'Parque', 'Segundo', 'Los', 'Las', 'El', 'La'}
+    cand = [w for w in pal if w not in stop]
+    for n in (3, 2, 1):
+        for i in range(len(cand) - n + 1):
+            nombre = ' '.join(cand[i:i+n])
+            if coords(nombre):
+                return nombre
+    return 'Granada'
 
 # ---------- 2) Agenda de la Junta de Andalucía (datos abiertos) ----------
 def junta():
@@ -117,15 +196,15 @@ def junta():
 # ---------- Coordenadas de cada municipio (para calcular la distancia) ----------
 GEO = {}
 def coords(lugar):
-    k = norm(lugar)
+    k = norm(lugar).replace('-', ' ').strip()
     if k in GEO:
         return GEO[k]
     res = None
     try:
         j = json.loads(get('https://geocoding-api.open-meteo.com/v1/search?' + urllib.parse.urlencode(
-            {'name': lugar, 'count': 10, 'language': 'es', 'countryCode': 'ES'})))
+            {'name': lugar.replace('-', ' '), 'count': 10, 'language': 'es', 'countryCode': 'ES'})))
         for r in j.get('results') or []:
-            if norm(r.get('admin2', '')) == 'granada':
+            if 'granada' in norm(r.get('admin2', '')) and norm(r.get('name', '')).replace('-', ' ') == k:
                 res = (round(r['latitude'], 4), round(r['longitude'], 4)); break
     except Exception:
         pass
@@ -148,7 +227,7 @@ def main():
             continue
         vistos.add(clave)
         c = coords(e['lugar'])
-        e.update({'desde': e['desde'].isoformat(), 'hasta': e['hasta'].isoformat(), 'tipo': tipo(e['t'] + ' ' + e.get('desc', '')),
+        e.update({'desde': e['desde'].isoformat(), 'hasta': e['hasta'].isoformat(), 'tipo': e.pop('cat', None) or tipo(e['t'] + ' ' + e.get('desc', '')),
                   'lat': c[0] if c else None, 'lon': c[1] if c else None})
         final.append({k: v for k, v in e.items() if v not in ('', None, False) or k in ('lat', 'lon')})
     final.sort(key=lambda e: e['desde'])
