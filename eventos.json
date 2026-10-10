@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-10-10T19:27",
+ "actualizado": "2026-10-10T19:31",
  "eventos": [
   {
    "t": "IX HelpMePlease",
@@ -391,8 +391,8 @@
    "desc": "Bienvenidas y bienvenidos a esta jornada de sensibilización ambiental, enmarcada en el Programa de Sensibilización y Participación de la Red Natura 2000 , que se…",
    "fuente": "junta",
    "tipo": "naturaleza",
-   "lat": null,
-   "lon": null
+   "lat": 37.4367,
+   "lon": -2.7248
   },
   {
    "t": "Acción de voluntariado: 21º Día del Bosque en el Parque Natural Sierra de Baza",
