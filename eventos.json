@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-10-10T19:31",
+ "actualizado": "2026-10-10T19:35",
  "eventos": [
   {
    "t": "IX HelpMePlease",
@@ -331,8 +331,8 @@
    "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Cartel-definitivo-festival-.2e16d0ba.fill-275x202-c100.jpg",
    "fuente": "turgranada",
    "tipo": "teatro",
-   "lat": null,
-   "lon": null
+   "lat": 37.1887,
+   "lon": -3.7178
   },
   {
    "t": "50 años de dibujos. JL Martín",
@@ -353,8 +353,8 @@
    "img": "https://cdn.dipgra.es/my-media-files-bucket/images/833763966_1525081809666106_90.2e16d0ba.fill-275x202-c100.jpg",
    "fuente": "turgranada",
    "tipo": "fiesta",
-   "lat": null,
-   "lon": null
+   "lat": 37.276,
+   "lon": -3.2857
   },
   {
    "t": "VI Ciclo de Conferencias El valor de las fuentes, perspectivas de investigación. Archivos familiares y…",
