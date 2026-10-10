@@ -173,6 +173,32 @@ h1 span{color:var(--color-primary)}
 @media (max-width:420px){.cg{flex-direction:column;text-align:center}}
 .avi-n{font-size:.75rem;font-weight:700;margin-top:8px;opacity:.8}
 .blk{border-radius:18px;padding:12px;margin-top:14px}
+.wk-blk{background:#fdf4ff}.wk-blk .blk-t{color:#a21caf}
+.walk-blk{background:#f0fdf4}.walk-blk .blk-t{color:#15803d}
+.walk-h{display:flex;gap:12px;align-items:center}
+.walk-h .bigh{font-size:1.9rem;font-weight:900;line-height:1;color:#15803d}
+.walk-h .bigh small{display:block;font-size:.85rem;color:var(--color-text-muted)}
+.walk-blk .bbars{height:60px;margin-top:8px}
+.ideas{display:grid;gap:8px}
+.idea{display:flex;gap:10px;align-items:flex-start;background:#fff;border-radius:14px;padding:10px 12px}
+.idea .ie{font-size:1.8rem;line-height:1}
+.idea b{display:block;font-size:.98rem}
+.idea span{font-weight:700;font-size:.85rem;color:var(--color-text-muted)}
+.wkb{display:inline-block;background:#fae8ff;color:#86198f;border-radius:999px;padding:3px 10px;font-weight:900;font-size:.8rem;margin-left:6px;vertical-align:middle}
+.fc-note{border-radius:14px;padding:10px 12px;margin-top:10px;font-weight:800;font-size:.88rem;background:#f0f9ff;color:#075985;border:2px solid #bae6fd}
+.fc-note.far{background:#fef3c7;color:#78350f;border-color:#fcd34d}
+.trow{display:flex;gap:8px;margin-top:12px}.trow .btn{flex:1}
+.ev-blk{background:#fff7ed}.ev-blk .blk-t{color:#c2410c}
+.evs{display:grid;gap:8px}
+.ev{display:flex;gap:10px;background:#fff;border-radius:14px;padding:10px 12px;border-left:5px solid #fb923c}
+.ev .ie{font-size:1.8rem;line-height:1}
+.ev b{display:block;font-size:.98rem;line-height:1.25}
+.ev .em{display:flex;flex-wrap:wrap;gap:4px 10px;font-weight:800;font-size:.8rem;color:#9a3412;margin-top:3px}
+.ev .ed{font-weight:600;font-size:.84rem;color:var(--color-text-muted);margin-top:4px}
+.ev img{width:64px;height:64px;border-radius:10px;object-fit:cover;flex:0 0 64px;margin-left:auto}
+.news ul{list-style:none;display:grid;gap:8px;margin-top:6px}
+.news li{background:#f0f9ff;border-radius:12px;padding:10px 12px;font-weight:700;font-size:.92rem}
+.news .nv{font-weight:900;color:var(--color-text-muted);font-size:.8rem;margin-top:12px}
 .blk-t{font-weight:900;font-size:.82rem;text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .blk-t::after{content:'';flex:1;height:2px;border-radius:2px;background:currentColor;opacity:.2}
 .day-blk{background:#f0f9ff;border:2px solid #bae6fd}
@@ -270,11 +296,11 @@ function savePlaces(){ try{ localStorage.setItem('mt-places', JSON.stringify(PLA
 let PLACES = loadPlaces();
 const byId = id => PLACES.find(p=>p.id===id);
 const TZ = 'Europe/Madrid';
-const VERSION = 'v18';
+const VERSION = 'v20';
 const DAYS = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
 const cache = {};
 let current = localStorage.getItem('mt-place') || PLACES[0].id;
-if (current!=='radar' && current!=='viaje' && !byId(current)) current = PLACES[0].id;
+if (current==='viaje' || (current!=='radar' && !byId(current))) current = PLACES[0].id;
 
 function wmo(c, night){
   const m = {0:['Despejado',night?'🌙':'☀️'],1:['Casi despejado',night?'🌙':'🌤️'],2:['Intervalos nubosos',night?'☁️':'⛅'],3:['Nublado','☁️'],
@@ -303,7 +329,7 @@ async function load(p, force){
   const fUrl = `https://api.open-meteo.com/v1/forecast?latitude=${p.lat}&longitude=${p.lon}`+
     `&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,wind_speed_10m,wind_direction_10m,is_day,precipitation`+
     `&hourly=temperature_2m,apparent_temperature,weather_code,precipitation_probability,precipitation,is_day,wind_speed_10m,relative_humidity_2m,uv_index,wind_gusts_10m,snowfall`+
-    `&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,precipitation_sum,wind_speed_10m_max`+
+    `&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,precipitation_sum,wind_speed_10m_max,sunrise,sunset`+
     `&timezone=${encodeURIComponent(TZ)}&forecast_days=4&past_days=1`;
   const nc = `&_=${Date.now()}`, opt = {cache:'no-store'};
   const reqs = [fetch(fUrl+nc, opt).then(r=>{if(!r.ok)throw 0;return r.json()})];
@@ -515,12 +541,12 @@ function recommend(x, y){
   if (x.maxT >= 30) acc.push('💧 Agua');
 
   const al = [];
-  if (x.minT < 1) al.push(['cold','🥶 Día muy frío: helada al salir. Rasca el parabrisas con tiempo.']);
+  if (x.minT < 1) al.push(['cold', x.wk ? '🥶 Día muy frío: helada por la mañana.' : '🥶 Día muy frío: helada al salir. Rasca el parabrisas con tiempo.']);
   else if (x.minFeel < 3) al.push(['cold','🥶 Día bastante frío: abrígate bien.']);
-  else if (x.minFeel < 7) al.push(['cold','❄️ Mañana fría al salir de casa.']);
+  else if (x.minFeel < 7) al.push(['cold', x.wk ? '❄️ Mañana fría.' : '❄️ Mañana fría al salir de casa.']);
   if (x.maxT >= 36) al.push(['hot','🥵 Día de mucho calor: ropa muy fresca, agua y evita el sol al mediodía.']);
   else if (x.maxT >= 32) al.push(['hot','☀️ Día bastante caluroso: ropa fresca y agua.']);
-  if (capas) al.push(['info',`🔄 Día de capas: sales a ${Math.round(x.minFeel)}° y en el recreo habrá ${Math.round(midFeel)}°. Debajo, ${top.t.toLowerCase()}; la prenda de abrigo te la quitarás a media mañana.`]);
+  if (capas) al.push(['info',`🔄 Día de capas: ${x.wk?'por la mañana':'sales a'} ${Math.round(x.minFeel)}° y ${x.wk?'a mediodía':'en el recreo'} habrá ${Math.round(midFeel)}°. Debajo, ${top.t.toLowerCase()}; la prenda de abrigo te la quitarás a media mañana.`]);
   if (y && x.minFeel <= y.minFeel - 4) al.push(['cold',`📉 Bastante más frío que ayer (${Math.round(y.minFeel - x.minFeel)}° menos al salir).`]);
   if (y && x.maxFeel >= y.maxFeel + 4) al.push(['hot',`📈 Bastante más calor que ayer (${Math.round(x.maxFeel - y.maxFeel)}° más).`]);
   if (x.storm) al.push(['rain','⛈️ Posibles tormentas.']);
@@ -530,7 +556,8 @@ function recommend(x, y){
   else if (maybe && x.drizzleG.length) al.push(['rain',`🌦️ Puede chispear ${rangesText(x.drizzleG)}.`]);
 
   // Cómo irás en cada momento
-  const moments = [['Al salir', x.sal], ['Recreo', x.rec], ['Vuelta', x.vue]].filter(m=>m[1])
+  const N = x.wk ? ['Por la mañana','Mediodía','Tarde'] : ['Al salir','Recreo','Vuelta'];
+  const moments = [[N[0], x.sal], [N[1], x.rec], [N[2], x.vue]].filter(m=>m[1])
     .map(([n,r])=>({n:`${n} · ${pad(r.h)}:00`, f:Math.round(r.feel), w:wearAt(r.feel), wet:r.prob>=40||r.rain>=0.2, p:r.prob}));
   return {items:[top, outer, umb], acc, al, moments};
 }
@@ -541,8 +568,10 @@ async function showAdvice(force){
     const casa=byId(cfg.casa), trab=byId(cfg.trabajo);
     const [mar, sf] = await Promise.all([load(casa, force), load(trab, force)]);
     const nowS = sf.w.current.time, today = nowS.slice(0,10);
-    const after = parseInt(nowS.slice(11,13)) >= parseInt(cfg.vuelta);
+    const hr = parseInt(nowS.slice(11,13));
+    const after = isWk(today) ? hr >= 21 : hr >= parseInt(cfg.vuelta);
     const date = after ? addDays(today, 1) : today;
+    if (isWk(date)) return showWeekend(box, mar.w, casa, date, after);
     const x = windowData(mar.w, sf.w, date, cfg), y = windowData(mar.w, sf.w, addDays(date,-1), cfg);
     if (!x) throw 0;
     const r = recommend(x, y);
@@ -568,6 +597,181 @@ async function showAdvice(force){
 
 
 
+
+
+// ===== Fin de semana =====
+function isWk(ds){ const d=new Date(ds+'T12:00').getDay(); return d===0 || d===6; }
+function wkData(w, date){
+  const rows=[], H=w.hourly;
+  const take = h => { const i=H.time.indexOf(`${date}T${pad(h)}:00`); if(i<0) return null;
+    const r={h, feel:H.apparent_temperature[i], temp:H.temperature_2m[i], prob:H.precipitation_probability[i]??0, rain:H.precipitation[i]??0,
+      wind:H.wind_speed_10m[i]??0, uv:H.uv_index[i]??0, code:H.weather_code[i]}; rows.push(r); return r; };
+  let sal=null, rec=null, vue=null;
+  for (let h=10; h<=21; h++){ const r=take(h); if(h===10) sal=r; if(h===14) rec=r; if(h===20) vue=r; }
+  if (!rows.length) return null;
+  const mx=k=>Math.max(...rows.map(r=>r[k])), mn=k=>Math.min(...rows.map(r=>r[k]));
+  const g=rainRanges(w,date,40).filter(r=>r.to>=9&&r.from<=22), dg=rainRanges(w,date,30).filter(r=>r.to>=9&&r.from<=22);
+  return {wk:true, sal, rec, vue, rainG:g, drizzleG:dg, minFeel:mn('feel'), maxFeel:mx('feel'), minT:mn('temp'), maxT:mx('temp'), prob:mx('prob'), uv:mx('uv'),
+    rain:rows.reduce((a,r)=>a+r.rain,0), wind:mx('wind'), storm:rows.some(r=>r.code>=95), snow:rows.some(r=>r.code>=71&&r.code<=77||r.code===85||r.code===86)};
+}
+function sunOf(w, date){ const d=w.daily, i=d.time.indexOf(date); if(i<0||!d.sunset) return null;
+  return {rise:d.sunrise[i].slice(11,16), set:d.sunset[i].slice(11,16)}; }
+// Mejor rato de 2 horas para pasear o hacer deporte fuera
+function bestWalk(w, date, fromH){
+  const H=w.hourly, hs=[];
+  for (let h=Math.max(9,fromH); h<=22; h++){ const i=H.time.indexOf(`${date}T${pad(h)}:00`); if(i<0) continue;
+    const x={h, feel:H.apparent_temperature[i], prob:H.precipitation_probability[i]??0, mm:H.precipitation[i]??0, wind:H.wind_speed_10m[i]??0, uv:H.uv_index[i]??0};
+    if (!H.is_day[i] && x.feel<17) continue;
+    hs.push({...x, s:walkScore(x)}); }
+  if (hs.length<2) return null;
+  let b=0; for (let k=0;k<hs.length-1;k++) if (hs[k].s+hs[k+1].s > hs[b].s+hs[b+1].s) b=k;
+  const a=hs[b], c=hs[b+1];
+  return {hs, b, from:a.h, to:c.h+1, s:Math.round((a.s+c.s)/2), feel:Math.round((a.feel+c.feel)/2), x:a.s<=c.s?a:c};
+}
+function atardecer(w, date){
+  const sun=sunOf(w,date); if(!sun) return null;
+  const i=w.hourly.time.indexOf(`${date}T${sun.set.slice(0,2)}:00`); if(i<0) return null;
+  const c=w.hourly.weather_code[i], p=w.hourly.precipitation_probability[i]??0;
+  if (p>=50 || c>=51) return {c:'bad', v:`🌧️ ${sun.set}`, s:'Con lluvia, poco que ver'};
+  if (c===3 || c===45 || c===48) return {c:'warn', v:`☁️ ${sun.set}`, s:'Muy nublado'};
+  if (c===1 || c===2) return {c:'ok', v:`🌇 ${sun.set}`, s:'Algunas nubes: suele salir bonito'};
+  return {c:'ok', v:`🌅 ${sun.set}`, s:'Cielo despejado'};
+}
+
+// Ideas cerca de casa según el tiempo (Granada y alrededores)
+const IDEAS = [
+  {e:'🌅', t:'Atardecer en el Mirador de San Nicolás', d:'Paseo por el Albaicín y la Alhambra iluminada al caer el sol.', ok:c=>!c.rain && c.max>=8},
+  {e:'🌉', t:'Los Cahorros de Monachil', d:'Ruta con puentes colgantes entre paredes de roca. Unas 3 horas.', ok:c=>!c.rain && !c.wet && c.max>=12 && c.max<30},
+  {e:'🚲', t:'Bici o paseo largo por la Vega', d:'Caminos llanos entre choperas y cortijos, de Santa Fe a Chauchina o Fuente Vaqueros.', ok:c=>!c.rain && c.max>=12 && c.max<29},
+  {e:'🏞️', t:'Paseo por el embalse de Cubillas', d:'A un paso de Maracena: agua, pinos y llano para caminar.', ok:c=>!c.rain && c.max>=12 && c.max<31},
+  {e:'🏰', t:'Visita a la Alhambra', d:'Reserva antes las entradas. Los jardines del Generalife lucen mucho con sol.', ok:c=>!c.rain && c.max>=10 && c.max<31},
+  {e:'🌊', t:'Paseo por el Darro y la Carrera', d:'Del Paseo de los Tristes a Plaza Nueva, con parada para tapear.', ok:c=>!c.rain && c.max<32},
+  {e:'🌳', t:'Parque García Lorca y Huerta de San Vicente', d:'Sombra, rosales y un paseo tranquilo en la ciudad.', ok:c=>!c.rain && c.max>=14},
+  {e:'⛰️', t:'Sierra Nevada · Hoya de la Mora', d:'Vistas desde arriba; en invierno, nieve y trineo. Lleva abrigo.', ok:c=>!c.rain && !c.windy && (c.snowSeason || (c.max>=22 && c.max<34))},
+  {e:'🏖️', t:'Playa en Castell de Ferro', d:'Mira en su pestaña la mejor hora para bajar y el estado del mar.', ok:c=>!c.rain && c.max>=27 && c.m>=5 && c.m<=9},
+  {e:'🍽️', t:'Terraza al caer la tarde', d:'Cuando baja el calor, cena o tapas fuera.', ok:c=>!c.rain && c.max>=27},
+  {e:'🌄', t:'Ruta a primera hora', d:'Sal antes de las 10: luego aprieta el calor.', ok:c=>!c.rain && c.max>=30},
+  {e:'🔬', t:'Parque de las Ciencias', d:'Planetario, mariposario y exposiciones. Plan a cubierto para toda la mañana.', ok:c=>c.rain || c.max>=34 || c.max<9},
+  {e:'🎬', t:'Cine o teatro', d:'Plan a cubierto para la tarde.', ok:c=>c.rain || c.max<10},
+  {e:'🏛️', t:'Museo o exposición en Granada', d:'Centro Lorca, CajaGranada o el Palacio de Carlos V.', ok:c=>c.rain || c.max>=33 || c.max<10},
+  {e:'♨️', t:'Baños árabes', d:'Plan perfecto para un día de frío o lluvia. Reserva antes.', ok:c=>c.rain || c.max<12},
+  {e:'☕', t:'Chocolate con churros', d:'Desayuno largo sin prisa: hoy apetece.', ok:c=>c.max<13 || (c.rain && c.max<17)},
+  {e:'🎲', t:'Tarde de juegos, lectura o peli en casa', d:'El tiempo no acompaña: buen día para descansar.', ok:c=>c.rain},
+  {e:'☀️', t:'Paseo al sol del mediodía', d:'Hace frío pero luce el sol: sal a la hora de más calor.', ok:c=>!c.rain && c.max<14},
+  {e:'🍄', t:'Ruta de otoño por el río Dílar o Monachil', d:'Colores de otoño y río con agua.', ok:c=>!c.rain && !c.wet && c.m>=9 && c.m<=10 && c.max>=12},
+  {e:'🌸', t:'Paseo por el campo en primavera', d:'La Vega y la sierra están verdes y con flores.', ok:c=>!c.rain && c.m>=2 && c.m<=4 && c.max>=14}
+];
+function pickIdeas(x, date, wetBefore){
+  const m=new Date(date+'T12:00').getMonth();
+  const c={rain: x.prob>=50 || x.rain>=1, wet:wetBefore, max:x.maxFeel, m, windy:x.wind>=35, snowSeason: m>=11 || m<=3};
+  const ok=IDEAS.filter(i=>i.ok(c));
+  const seed=Math.floor(new Date(date+'T12:00')/864e5);
+  const out=[]; for (let k=0; k<ok.length && out.length<3; k++) out.push(ok[(seed+k*7)%ok.length]);
+  return [...new Set(out)];
+}
+
+function showWeekend(box, w, casa, date, tomorrow){
+  const x=wkData(w, date), y=wkData(w, addDays(date,-1));
+  if (!x) throw 0;
+  const r=recommend(x, y);
+  const dn=DAYS[new Date(date+'T12:00').getDay()], nowH=parseInt(w.current.time.slice(11,13));
+  const wk=bestWalk(w, date, tomorrow?9:nowH), sun=sunOf(w, date);
+  const dPrev=w.daily.time.indexOf(addDays(date,-1)), wetBefore = dPrev>=0 && (w.daily.precipitation_sum[dPrev]??0)>=3;
+  const ideas=pickIdeas(x, date, wetBefore);
+  const col = v => v>=70 ? '#22c55e' : v>=45 ? '#f59e0b' : '#ef4444';
+  const walk = wk ? `<div class="blk walk-blk"><div class="blk-t">🚶 Mejor rato para pasear o hacer deporte fuera</div>
+      <div class="walk-h"><div class="bigh">${pad(wk.from)}:00<small>a ${pad(wk.to)}:00</small></div>
+      <div><b>${wk.s>=70?'Muy buen rato':wk.s>=45?'Rato aceptable':'Hoy cuesta estar fuera'}</b><div class="ms">${wk.feel}°${wk.s<60?` · ${whyBad(wk.x)}`:''}${sun?` · 🌅 ${sun.rise} · 🌇 ${sun.set}`:''}</div></div></div>
+      <div class="bbars" aria-label="Puntuación por horas para pasear">${wk.hs.map((h,k)=>`<div class="bb ${k===wk.b||k===wk.b+1?'best':''}" title="${pad(h.h)}:00 · ${Math.round(h.feel)}°"><div class="bf" style="height:${Math.max(8,h.s)}%;background:${col(h.s)}"></div><span>${h.h}</span></div>`).join('')}</div></div>` : '';
+  box.innerHTML = `<div class="top"><div><h2>${tomorrow ? `Mañana ${dn.toLowerCase()}` : dn} me pongo…<span class="wkb">😎 Finde</span></h2>
+      <div class="sub">Sin cole · tiempo en ${esc(casa.name)}</div></div>
+      <div class="tools"><button class="trip-b" id="tripBtn"></button><button class="gear" id="gear" aria-label="Ajustes">⚙️</button></div></div>
+    <div class="blk day-blk"><div class="blk-t">Ropa para el día</div>
+      <div class="wear">${r.items.map(i=>`<div class="item ${i.off?'off':''}"><div class="e">${svg(i.k)}</div><b>${i.t.replace(' (solo al salir)',' (por la mañana)')}</b></div>`).join('')}</div>
+      ${r.acc.length ? `<div class="chips">${r.acc.map(a=>`<span class="chip">${a}</span>`).join('')}</div>` : ''}</div>
+    ${walk}
+    <div class="blk wk-blk"><div class="blk-t">💡 Ideas para ${tomorrow?'mañana':'hoy'}</div>
+      <div class="ideas">${ideas.map(i=>`<div class="idea"><span class="ie" aria-hidden="true">${i.e}</span><div><b>${i.t}</b><span>${i.d}</span></div></div>`).join('')}</div></div>
+    <div id="evBox"></div>
+    <div class="blk mom-blk"><div class="blk-t">Cómo irá el día</div>
+      <div class="moments">${r.moments.map(m=>`<div class="mom"><div class="mn">${m.n}</div><div class="mi">${svg(m.w.k,52)}${m.wet?`<span class="mu">${svg('paraguas',30)}</span>`:''}</div><div class="mf">${m.f}°</div><div class="mw">${m.w.t}${m.wet?`<br><span class="mp">Lluvia ${m.p}%</span>`:''}</div></div>`).join('')}</div></div>
+    <div class="alerts">${r.al.length ? r.al.map(a=>`<div class="al ${a[0]}">${a[1]}</div>`).join('') : '<div class="al info">👍 Finde sin sorpresas de tiempo.</div>'}</div>`;
+  document.getElementById('gear').onclick = openSettings;
+  paintTripBtn();
+  loadEventos().then(evs=>{ const b=document.getElementById('evBox'); if(b) b.innerHTML=eventosHtml(pickEventos(evs, date, x, casa), tomorrow); });
+}
+
+
+// ===== Planes y eventos (eventos.json, lo genera GitHub Actions cada día) =====
+let EVS = null, evsT = 0;
+async function loadEventos(){
+  if (EVS && Date.now()-evsT < 60*60*1000) return EVS;
+  try{ const j=await fetch('eventos.json?_='+Date.now(),{cache:'no-store'}).then(r=>{if(!r.ok)throw 0;return r.json()});
+    EVS=j.eventos||[]; evsT=Date.now(); }catch(e){ EVS=EVS||[]; }
+  return EVS;
+}
+const EV_T = {fiesta:['🎉',0], musica:['🎵',1], teatro:['🎭',1], expo:['🖼️',1], naturaleza:['🌲',0], ninos:['🎈',1], mercado:['🛍️',0], deporte:['🏃',0], cultura:['🏛️',1]};
+function kmTo(a, b){ const R=6371, r=x=>x*Math.PI/180, dLa=r(b.lat-a.lat), dLo=r(b.lon-a.lon);
+  return 2*R*Math.asin(Math.sqrt(Math.sin(dLa/2)**2+Math.cos(r(a.lat))*Math.cos(r(b.lat))*Math.sin(dLo/2)**2)); }
+function dLabel(ds){ const d=new Date(ds+'T12:00'); return `${d.getDate()} ${MESES[d.getMonth()].slice(0,3)}`; }
+function evWhen(e, sat, sun){
+  if (e.desde===e.hasta) return e.desde===sat ? 'Solo el sábado' : e.desde===sun ? 'Solo el domingo' : dLabel(e.desde);
+  if (e.desde>=sat && e.hasta<=sun) return 'Solo este finde';
+  if (e.hasta<=sun) return '¡Termina este finde!';
+  if (e.desde<=sat) return `Hasta el ${dLabel(e.hasta)}`;
+  return `Del ${dLabel(e.desde)} al ${dLabel(e.hasta)}`;
+}
+function pickEventos(evs, date, x, casa){
+  const d=new Date(date+'T12:00').getDay(), sat = d===6 ? date : addDays(date,-1), sun=addDays(sat,1), from = d===0 ? sun : sat;
+  const rain = x.prob>=50 || x.rain>=1, hot = x.maxFeel>=31;
+  const list = evs.filter(e=>e.desde<=sun && e.hasta>=from).map(e=>{
+    const km = e.lat!=null ? kmTo(casa, e) : 40, dur = (new Date(e.hasta)-new Date(e.desde))/864e5, [, indoor] = EV_T[e.tipo]||EV_T.cultura;
+    let sc = 100 - Math.min(60, km/2);
+    sc += dur<=4 ? 40 : dur<=15 ? 20 : 0;            // lo que solo pasa ahora, primero
+    if (e.desde>=addDays(sat,-2)) sc += 15;           // empieza este finde
+    if (e.generico) sc -= 35;                         // "Agenda de octubre de …"
+    if (rain) sc += indoor ? 20 : -45;
+    if (hot && e.tipo==='naturaleza') sc -= 20;
+    if (km>90) sc -= 30;
+    return {...e, km, sc, when:evWhen(e, sat, sun)};
+  }).sort((a,b)=>b.sc-a.sc);
+  // Variedad: como mucho 2 del mismo tipo
+  const out=[], n={};
+  for (const e of list){ if ((n[e.tipo]||0)>=2) continue; n[e.tipo]=(n[e.tipo]||0)+1; out.push(e); if (out.length>=5) break; }
+  return out;
+}
+function eventosHtml(list, tomorrow){
+  if (!list.length) return '';
+  return `<div class="blk ev-blk"><div class="blk-t">🎉 Planes ${tomorrow?'del finde':'este finde'} en Granada y provincia</div>
+    <div class="evs">${list.map(e=>`<div class="ev"><span class="ie" aria-hidden="true">${(EV_T[e.tipo]||EV_T.cultura)[0]}</span><div>
+      <b>${esc(e.t)}</b>
+      <div class="em"><span>📍 ${esc(e.lugar)}${e.km>=3?` · ${Math.round(e.km)} km`:''}</span><span>📅 ${e.when}</span>${e.hora?`<span>🕒 ${esc(e.hora)}</span>`:''}${e.precio?`<span>🎟️ ${esc(e.precio)}</span>`:''}</div>
+      ${e.desc?`<div class="ed">${esc(e.desc)}</div>`:''}</div>${e.img?`<img src="${esc(e.img)}" alt="" loading="lazy" onerror="this.remove()">`:''}</div>`).join('')}</div></div>`;
+}
+
+
+// ===== Novedades (se muestran una sola vez por dispositivo) =====
+const NEWS = [
+  {v:'v20', items:['🎉 Los fines de semana, planes y eventos de Granada y su provincia: fiestas, conciertos, exposiciones, teatro, rutas…, elegidos según el tiempo y lo cerca que estén.','🔔 Este aviso de novedades, que sale una sola vez después de cada actualización.']},
+  {v:'v19', items:['😎 Modo finde: sábados y domingos, sin recreo ni cancelas. Ropa del día, mejor rato para pasear e ideas de planes.','🌅 Casilla del atardecer: a qué hora se pone el sol y si saldrá bonito.','✈️ Viaje: avisa de hasta qué día hay previsión real y se borra solo al terminar.']}
+];
+function showNews(){
+  let seen=null; try{ seen=localStorage.getItem('mt-news'); }catch(e){}
+  if (seen===VERSION) return;
+  const n=v=>parseInt(String(v).slice(1))||0;
+  const list = NEWS.filter(x=>n(x.v)>n(seen||'v0') && n(x.v)<=n(VERSION)).slice(0,3);
+  const save=()=>{ try{ localStorage.setItem('mt-news', VERSION); }catch(e){} };
+  if (!list.length){ save(); return; }
+  const d=document.createElement('div'); d.className='dlg open'; d.id='newsDlg';
+  d.innerHTML=`<div class="dlg-box news" role="dialog" aria-modal="true" aria-labelledby="nwT">
+    <div class="top"><h2 id="nwT">✨ Novedades</h2><button class="gear" id="nwX" aria-label="Cerrar">✕</button></div>
+    ${list.map((x,k)=>`${list.length>1?`<div class="nv">Versión ${x.v.slice(1)}</div>`:''}<ul>${x.items.map(i=>`<li>${i}</li>`).join('')}</ul>`).join('')}
+    <button class="btn ok-b" id="nwOk">¡Entendido!</button></div>`;
+  document.body.appendChild(d);
+  const close=()=>{ save(); d.remove(); };
+  d.addEventListener('click',e=>{ if(e.target===d) close(); });
+  document.getElementById('nwX').onclick=close; document.getElementById('nwOk').onclick=close;
+}
 
 // ===== Fauna marina (calendario orientativo, litoral de Granada) =====
 const DOLPH = 'M2 34 Q6 31 10 31 Q18 22 34 23 Q48 24 55 31 Q60 28 64 29 Q62 33 64 37 Q60 37 55 35 Q44 42 28 41 Q14 40 8 36 Q4 36 2 34 Z';
@@ -843,7 +1047,11 @@ async function showMinis(force){
     const t=tender(mar.w, dTen); if(t) tiles.push(['Tender '+(dTen===today?'hoy':'mañana'), t]);
     const c=coche(mar.w, today); if(c) tiles.push(['Lavar el coche', c]);
     const av = await alertsTile(force);
-    const cn = cancelas(sf.w, cancelasDay(sf.w, cfg), cfg);
+    const wkNow = isWk(today), dCan = cancelasDay(sf.w, cfg);
+    // Fin de semana: sin cancelas (salvo el domingo por la tarde, que avisa del lunes) y con atardecer
+    const showCan = !wkNow || (new Date(today+'T12:00').getDay()===0 && hr>=17);
+    const cn = showCan ? cancelas(sf.w, dCan, cfg) : null;
+    if (wkNow){ const a=atardecer(mar.w, hr>=21?addDays(today,1):today); if(a) tiles.unshift(['Atardecer '+(hr>=21?'mañana':'hoy'), a]); }
     box.innerHTML = av + (cn ? cancelasHtml(cn, today) : '') + tiles.map(([title,x])=>`<div class="mini ${x.c}"><div class="mt">${title}</div><div class="mv">${x.v}</div><div class="ms">${x.s}</div>${x.uv||''}</div>`).join('');
   }catch(e){ box.innerHTML=''; }
 }
@@ -887,13 +1095,25 @@ async function showRadar(){
 
 
 // ===== Modo viaje =====
+function tripOver(t){ return addDays(t.start, t.days-1) < todayStr(); }
+function tripWhen(t){ const k=Math.round((new Date(t.start+'T12:00')-new Date(todayStr()+'T12:00'))/864e5);
+  return k<=0 ? 'De viaje' : k===1 ? 'Mañana' : `En ${k} días`; }
+function fcInfo(start, days){
+  const today=todayStr(), lastF=addDays(today,15), end=addDays(start,days-1);
+  const lim=`Se puede prever con datos reales hasta el <b>${fmtDay(lastF).toLowerCase()}</b> (16 días desde hoy).`;
+  if (end<=lastF) return {c:'', h:`📅 ${lim} Todo tu viaje entra en la previsión ✔️`};
+  if (start>lastF) return {c:'far', h:`📅 ${lim} Tu viaje queda más lejos: ahora verás una <b>estimación</b> con el tiempo del año pasado. Vuelve a mirarlo a partir del <b>${fmtDay(addDays(start,-15)).toLowerCase()}</b> para ver la previsión real.`};
+  const n=Math.round((new Date(lastF+'T12:00')-new Date(start+'T12:00'))/864e5)+1;
+  return {c:'far', h:`📅 ${lim} De tu viaje, ${n===1?'el primer día tiene':`los ${n} primeros días tienen`} previsión real; el resto es estimado. Revisa el informe unos días antes.`};
+}
 function paintTripBtn(){
   const b=document.getElementById('tripBtn'); if(!b) return;
-  const tr=getTrip(), on=current==='viaje';
+  let tr=getTrip(); if (tr && tripOver(tr)){ setTrip(null); setChk({}); tr=null; }
+  const on=current==='viaje';
   b.className='trip-b'+(on?' on':'');
   b.setAttribute('aria-pressed', on);
-  b.innerHTML=`✈️ Viaje<small>${tr ? esc(tr.name) : 'Planifica'}</small>`;
-  b.onclick=()=>{ current='viaje'; try{localStorage.setItem('mt-place',current)}catch(e){}; renderTabs(); show();
+  b.innerHTML=`✈️ Viaje<small>${tr ? esc(tr.name)+' · '+tripWhen(tr) : 'Planifica'}</small>`;
+  b.onclick=()=>{ current='viaje'; renderTabs(); show();
     document.getElementById('main').scrollIntoView({behavior:'smooth', block:'start'}); };
 }
 // Previsión real hasta 16 días; más allá, estimación con el tiempo que hizo esas fechas el año pasado
@@ -1030,7 +1250,7 @@ function tripForm(t){
       <label class="lab" for="tst">Salgo el<input type="date" id="tst" min="${today}" value="${d.start<today?today:d.start}"></label>
       <label class="lab" for="tdays">Duración<select id="tdays">${opts}</select></label>
     </div>
-    <p class="ms" style="margin-top:8px;font-weight:700;color:var(--color-text-muted);font-size:.82rem">Hasta 16 días vista es previsión real. Más allá, se estima con el tiempo que hizo esas fechas el año pasado.</p>
+    <div id="fcn"></div>
     <button class="btn ok-b" id="tgo">Ver el informe del viaje</button>
     ${t?'<button class="btn" id="tcancel" style="width:100%;margin-top:10px">Cancelar</button>':''}</section>`;
 }
@@ -1052,8 +1272,10 @@ function bindTripForm(){
   };
   document.getElementById('tqb').onclick=search;
   document.getElementById('tq').onkeydown=e=>{ if(e.key==='Enter') search(); };
-  document.getElementById('tst').onchange=e=>tripDraft.start=e.target.value;
-  document.getElementById('tdays').onchange=e=>tripDraft.days=+e.target.value;
+  const fcn=()=>{ const f=fcInfo(tripDraft.start<todayStr()?todayStr():tripDraft.start, +tripDraft.days); document.getElementById('fcn').innerHTML=`<div class="fc-note ${f.c}">${f.h}</div>`; };
+  document.getElementById('tst').onchange=e=>{ tripDraft.start=e.target.value||todayStr(); fcn(); };
+  document.getElementById('tdays').onchange=e=>{ tripDraft.days=+e.target.value; fcn(); };
+  fcn();
   document.getElementById('tgo').onclick=()=>{
     tripDraft.start=document.getElementById('tst').value||todayStr(); tripDraft.days=+document.getElementById('tdays').value;
     if(tripDraft.lat==null){ document.getElementById('tqr').innerHTML='<p class="ms">⚠️ Primero busca y elige la ciudad.</p>'; document.getElementById('tq').focus(); return; }
@@ -1109,7 +1331,8 @@ function tripHtml(t, days){
       <div class="stat"><b>${wet}</b><span>${wet===1?'Día de lluvia':'Días de lluvia'}</span></div>
       <div class="stat"><b>${t.days}</b><span>Días</span></div>
     </div>
-    ${est?`<div class="al info" style="margin-top:12px">📅 ${est===days.length?'Todo el viaje':`Los últimos ${est} días`} ${est===days.length?'está':'están'} fuera de la previsión (más de 16 días). Se muestra el tiempo que hizo esas fechas el año pasado como orientación. Vuelve a mirarlo unos días antes de salir.</div>`:''}
+    ${(()=>{ const f=fcInfo(t.start<todayStr()?todayStr():t.start, t.days - Math.max(0, Math.round((new Date(todayStr()+'T12:00')-new Date(t.start+'T12:00'))/864e5))); return `<div class="fc-note ${f.c}">${f.h}</div>`; })()}
+    <div class="trow"><button class="btn" id="tnew">➕ Nuevo viaje</button><button class="btn" id="tdel">🗑️ Quitar viaje</button></div>
     ${al.length?`<div class="alerts" style="margin-top:10px">${al.map(a=>`<div class="al ${a[0]}">${a[1]}</div>`).join('')}</div>`:'<div class="alerts" style="margin-top:10px"><div class="al info">👍 Sin sorpresas de tiempo para el viaje.</div></div>'}
   </section>
   <section class="card"><h2>🧳 Qué meter en la maleta <span style="float:right" id="pkc">${done}/${pack.length}</span></h2>
@@ -1125,8 +1348,9 @@ async function showTrip(force){
   const main=document.getElementById('main'), t=getTrip();
   document.getElementById('foot').innerHTML=`Datos: <a href="https://open-meteo.com" target="_blank" rel="noopener">Open-Meteo</a> · ${VERSION}`;
   const today=todayStr();
-  if (!t || tripEdit || addDays(t.start,t.days-1)<today){
-    main.innerHTML = (t && !tripEdit && addDays(t.start,t.days-1)<today ? '<div class="al info" style="margin-bottom:12px">Tu último viaje ya pasó. Planifica el siguiente.</div>' : '') + tripForm(tripEdit?t:null);
+  if (t && !tripEdit && tripOver(t)){ setTrip(null); setChk({}); paintTripBtn(); return showTrip(force); }
+  if (!t || tripEdit){
+    main.innerHTML = tripForm(tripEdit?t:null);
     bindTripForm(); return;
   }
   main.innerHTML='<div class="sk"></div><div class="sk"></div><div class="sk"></div>';
@@ -1136,6 +1360,8 @@ async function showTrip(force){
     if (!days.length) throw 0;
     main.innerHTML=tripHtml(t, days);
     document.getElementById('tedit').onclick=()=>{ tripEdit=true; tripDraft={...t}; showTrip(); };
+    document.getElementById('tnew').onclick=()=>{ tripEdit=true; tripDraft=null; main.innerHTML=tripForm(null); bindTripForm(); };
+    document.getElementById('tdel').onclick=()=>{ setTrip(null); setChk({}); paintTripBtn(); current=PLACES[0].id; try{localStorage.setItem('mt-place',current)}catch(e){}; renderTabs(); show(); };
     main.querySelectorAll('[data-pk]').forEach(c=>c.onchange=()=>{ const ch=getChk(); ch[c.dataset.pk]=c.checked; setChk(ch);
       c.closest('.pk').classList.toggle('done', c.checked);
       document.getElementById('pkc').textContent=`${Object.values(ch).filter(Boolean).length}/${main.querySelectorAll('[data-pk]').length}`; });
@@ -1231,6 +1457,7 @@ document.getElementById('refresh').onclick = async () => {
 };
 showMinis();
 showAdvice();
+showNews();
 renderTabs(); show();
 setInterval(()=>{ if(current!=='radar' && current!=='viaje') show(true); showAdvice(); showMinis(); }, 15*60*1000);
 if ('serviceWorker' in navigator){
