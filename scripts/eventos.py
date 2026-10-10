@@ -194,7 +194,8 @@ def junta():
     return out
 
 # ---------- Coordenadas de cada municipio (para calcular la distancia) ----------
-GEO = {}
+# Pueblos que el buscador no encuentra bien (Santa Fe de Granada no aparece; La Peza sale como «Lapeza»)
+GEO = {'santa fe': (37.1887, -3.7178), 'santa fe granada': (37.1887, -3.7178), 'la peza': (37.276, -3.2857)}
 def coords(lugar):
     k = norm(lugar).replace('-', ' ').strip()
     if k in GEO:
@@ -205,7 +206,7 @@ def coords(lugar):
             {'name': lugar.replace('-', ' '), 'count': 10, 'language': 'es', 'countryCode': 'ES'})))
         for r in j.get('results') or []:
             dentro = 36.6 < r['latitude'] < 38.1 and -4.4 < r['longitude'] < -2.2   # provincia de Granada
-            if norm(r.get('name', '')).replace('-', ' ') == k and ('granada' in norm(r.get('admin2', '')) or dentro):
+            if norm(r.get('name', '')).replace('-', ' ').replace(' ', '') == k.replace(' ', '') and ('granada' in norm(r.get('admin2', '')) or dentro):
                 res = (round(r['latitude'], 4), round(r['longitude'], 4)); break
     except Exception:
         pass
