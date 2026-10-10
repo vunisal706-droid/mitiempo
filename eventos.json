@@ -1,67 +1,356 @@
 {
- "actualizado": "2026-10-10T19:16",
+ "actualizado": "2026-10-10T19:27",
  "eventos": [
   {
-   "t": "Festival",
+   "t": "IX HelpMePlease",
    "desde": "2025-08-31",
    "hasta": "2026-11-20",
-   "lugar": "IX HelpMePlease",
+   "lugar": "Granada",
    "img": "https://cdn.dipgra.es/my-media-files-bucket/images/helpmeplease-ix-edicion-749x1.2e16d0ba.fill-275x202-c100.jpg",
    "fuente": "turgranada",
-   "tipo": "musica",
-   "lat": null,
-   "lon": null
+   "tipo": "cultura",
+   "lat": 37.1882,
+   "lon": -3.6067
   },
   {
-   "t": "Exposición",
+   "t": "La edad de la ilusión",
    "desde": "2026-02-18",
    "hasta": "2026-10-25",
-   "lugar": "La edad de la ilusión",
+   "lugar": "Granada",
    "img": "https://cdn.dipgra.es/my-media-files-bucket/images/2026-02-Expo-LaEdadDeLaIlusio.2e16d0ba.fill-275x202-c100.jpg",
    "fuente": "turgranada",
-   "tipo": "expo",
-   "lat": null,
-   "lon": null
+   "tipo": "cultura",
+   "lat": 37.1882,
+   "lon": -3.6067
   },
   {
-   "t": "Evento",
-   "desde": "2026-07-20",
-   "hasta": "2027-02-28",
-   "lugar": "V Centenario de Carlos V en la Alhambra",
-   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-09-0.2e16d0ba.fill-275x202-c100_ha3jRlE.png",
+   "t": "Exposición. Ríos (Cruzar el archivo Lorca)",
+   "desde": "2026-04-24",
+   "hasta": "2026-10-18",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/cSTEvbUhOgMFqMOExeunqUuMxuVsF.2e16d0ba.fill-275x202-c100.jpg",
+   "fuente": "turgranada",
+   "tipo": "expo",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
+   "t": "Kerygma",
+   "desde": "2026-05-08",
+   "hasta": "2026-11-27",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/CartelHorizontalKerygma.2e16d0ba.fill-275x202-c100.png",
    "fuente": "turgranada",
    "tipo": "cultura",
-   "lat": null,
-   "lon": null
+   "lat": 37.1882,
+   "lon": -3.6067
   },
   {
-   "t": "Para niños",
+   "t": "La casa de la ciencia. Patrimonio cultural árabe e islámico",
+   "desde": "2026-05-19",
+   "hasta": "2026-10-16",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-09-2.2e16d0ba.fill-275x202-c100_pz1Nu4p.png",
+   "fuente": "turgranada",
+   "tipo": "expo",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
+   "t": "Exposición. Ritmo y Resonancia – R&R",
+   "desde": "2026-05-22",
+   "hasta": "2027-05-15",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/eventoa-ritmo-resonancia.2e16d0ba.fill-275x202-c100.jpg",
+   "fuente": "turgranada",
+   "tipo": "expo",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
+   "t": "Lo Fresco",
+   "desde": "2026-06-10",
+   "hasta": "2026-10-16",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-09-2.2e16d0ba.fill-275x202-c100_FlKU9Mm.png",
+   "fuente": "turgranada",
+   "tipo": "cultura",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
+   "t": "V Centenario de Carlos V en la Alhambra",
+   "desde": "2026-07-20",
+   "hasta": "2027-02-28",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-09-0.2e16d0ba.fill-275x202-c100_ha3jRlE.png",
+   "fuente": "turgranada",
+   "tipo": "expo",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
+   "t": "Parque hinchable Funbox",
    "desde": "2026-09-04",
    "hasta": "2026-10-18",
-   "lugar": "Parque hinchable Funbox",
+   "lugar": "Granada",
    "img": "https://cdn.dipgra.es/my-media-files-bucket/images/funbox.2e16d0ba.fill-275x202-c100.png",
    "fuente": "turgranada",
    "tipo": "ninos",
-   "lat": null,
-   "lon": null
+   "lat": 37.1882,
+   "lon": -3.6067
   },
   {
-   "t": "Música",
+   "t": "Cuando la ausencia",
+   "desde": "2026-09-10",
+   "hasta": "2026-10-10",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/kronos.2e16d0ba.fill-275x202-c100.png",
+   "fuente": "turgranada",
+   "tipo": "cultura",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
+   "t": "Un lugar dentro de otro lugar - Pablo Castilla",
+   "desde": "2026-09-10",
+   "hasta": "2026-11-15",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-09-0.2e16d0ba.fill-275x202-c100_jPtas0B.png",
+   "fuente": "turgranada",
+   "tipo": "cultura",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
+   "t": "Carboneras: arte y vanguardia en la nueva Áqaba",
+   "desde": "2026-09-17",
+   "hasta": "2026-11-15",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-09-1.2e16d0ba.fill-275x202-c100.png",
+   "fuente": "turgranada",
+   "tipo": "expo",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
+   "t": "La sombra de Goya en el Museo Lázaro Galdiano",
+   "desde": "2026-09-18",
+   "hasta": "2027-01-31",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/unicaja.2e16d0ba.fill-275x202-c100.png",
+   "fuente": "turgranada",
+   "tipo": "expo",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
+   "t": "Los sentidos de Andalucía",
+   "desde": "2026-09-18",
+   "hasta": "2027-01-31",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-09-1.2e16d0ba.fill-275x202-c100_4erANPK.png",
+   "fuente": "turgranada",
+   "tipo": "cultura",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
+   "t": "Granada. Dos miradas, un siglo",
+   "desde": "2026-09-18",
+   "hasta": "2026-10-25",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-09-2.2e16d0ba.fill-275x202-c100_YDf9tK7.png",
+   "fuente": "turgranada",
+   "tipo": "cultura",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
+   "t": "Cuevas de Yungang. Feitan y las sombras de Buda: mil años de ecos del encuentro entre civilizaciones»",
+   "desde": "2026-09-21",
+   "hasta": "2026-11-30",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/centro_arte_rey_chico_3.2e16d0ba.fill-275x202-c100.jpg",
+   "fuente": "turgranada",
+   "tipo": "cultura",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
+   "t": "Como un silencio que cae",
+   "desde": "2026-09-22",
+   "hasta": "2027-01-26",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-09-2.2e16d0ba.fill-275x202-c100.png",
+   "fuente": "turgranada",
+   "tipo": "cultura",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
+   "t": "Testigos. Retratos de un mundo en transformación",
+   "desde": "2026-09-24",
+   "hasta": "2026-11-16",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/testigosnueva.2e16d0ba.fill-275x202-c100.png",
+   "fuente": "turgranada",
+   "tipo": "expo",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
+   "t": "Agenda octubre Salobreña 2026",
    "desde": "2026-10-01",
    "hasta": "2026-10-31",
-   "lugar": "Agenda octubre Salobreña 2026",
+   "lugar": "Salobreña",
    "img": "https://cdn.dipgra.es/my-media-files-bucket/images/agenda_salobrena.dcd759c7.fill-275x202-c100.jpg",
+   "generico": true,
+   "fuente": "turgranada",
+   "tipo": "cultura",
+   "lat": 36.7428,
+   "lon": -3.5872
+  },
+  {
+   "t": "Agenda Octubre Motril 2026",
+   "desde": "2026-10-01",
+   "hasta": "2026-10-31",
+   "lugar": "Motril",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Agenda_Motril.2e16d0ba.fill-275x202-c100.jpg",
+   "generico": true,
+   "fuente": "turgranada",
+   "tipo": "cultura",
+   "lat": 36.7507,
+   "lon": -3.5179
+  },
+  {
+   "t": "Festival Música Sacra Granada MUSAG",
+   "desde": "2026-10-01",
+   "hasta": "2026-10-23",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-09-3.2e16d0ba.fill-275x202-c100_YwAZ2wz.png",
    "fuente": "turgranada",
    "tipo": "musica",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
+   "t": "Jornadas Europeas de Patrimonio",
+   "desde": "2026-10-01",
+   "hasta": "2026-11-30",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/JORNADASPATRIMONIO26.2e16d0ba.fill-275x202-c100.jpg",
+   "fuente": "turgranada",
+   "tipo": "expo",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
+   "t": "Agenda cultural Almuñécar 2026",
+   "desde": "2026-10-01",
+   "hasta": "2026-10-31",
+   "lugar": "Almuñécar",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/agenda_almunecar.2e16d0ba.fill-275x202-c100.jpg",
+   "generico": true,
+   "fuente": "turgranada",
+   "tipo": "cultura",
+   "lat": 36.7325,
+   "lon": -3.6917
+  },
+  {
+   "t": "Fiestas Patronales Pórtugos 2026",
+   "desde": "2026-10-02",
+   "hasta": "2026-10-10",
+   "lugar": "Pórtugos",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-09-2.2e16d0ba.fill-275x202-c100_6kRm5pP.png",
+   "fuente": "turgranada",
+   "tipo": "fiesta",
+   "lat": 36.9419,
+   "lon": -3.3107
+  },
+  {
+   "t": "El arte de emocionar. Banda Sinfónica Ciudad de Guadix",
+   "desde": "2026-10-02",
+   "hasta": "2027-02-28",
+   "lugar": "Guadix",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/banda_gus.2e16d0ba.fill-275x202-c100.jpg",
+   "fuente": "turgranada",
+   "tipo": "musica",
+   "lat": 37.2993,
+   "lon": -3.1392
+  },
+  {
+   "t": "Fiestas de Castril 2026",
+   "desde": "2026-10-03",
+   "hasta": "2026-10-11",
+   "lugar": "Castril",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/castril2026.2e16d0ba.fill-275x202-c100.jpg",
+   "fuente": "turgranada",
+   "tipo": "fiesta",
+   "lat": 37.7958,
+   "lon": -2.78
+  },
+  {
+   "t": "V Centenario del nacimiento de Álvaro de Bazán y Guzmán",
+   "desde": "2026-10-03",
+   "hasta": "2026-10-12",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/AlvaroDeBazanRafaelTegeo1828.2e16d0ba.fill-275x202-c100.jpg",
+   "fuente": "turgranada",
+   "tipo": "expo",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
+   "t": "Segundo Encuentro de Músicas Populares Contemporáneas",
+   "desde": "2026-10-08",
+   "hasta": "2026-10-11",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-09-2.2e16d0ba.fill-275x202-c100_06tL4Ef.png",
+   "fuente": "turgranada",
+   "tipo": "musica",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
+   "t": "Música en los barrios",
+   "desde": "2026-10-08",
+   "hasta": "2027-06-22",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-09-2.2e16d0ba.fill-275x202-c100_wChknyP.png",
+   "fuente": "turgranada",
+   "tipo": "musica",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
+   "t": "Festival Internacional Teatro de Humor Santa-Fé",
+   "desde": "2026-10-08",
+   "hasta": "2026-10-28",
+   "lugar": "Santa Fe",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Cartel-definitivo-festival-.2e16d0ba.fill-275x202-c100.jpg",
+   "fuente": "turgranada",
+   "tipo": "teatro",
    "lat": null,
    "lon": null
   },
   {
-   "t": "Fiesta",
-   "desde": "2026-10-02",
-   "hasta": "2026-10-10",
-   "lugar": "Fiestas Patronales Pórtugos 2026",
-   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-09-2.2e16d0ba.fill-275x202-c100_6kRm5pP.png",
+   "t": "50 años de dibujos. JL Martín",
+   "desde": "2026-10-08",
+   "hasta": "2026-10-29",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-10-0.2e16d0ba.fill-275x202-c100_b5KZb2a.png",
+   "fuente": "turgranada",
+   "tipo": "expo",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
+   "t": "Fiestas de La Peza",
+   "desde": "2026-10-08",
+   "hasta": "2026-10-12",
+   "lugar": "La Peza",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/833763966_1525081809666106_90.2e16d0ba.fill-275x202-c100.jpg",
    "fuente": "turgranada",
    "tipo": "fiesta",
    "lat": null,
@@ -75,9 +364,9 @@
    "hora": "19:00 horas",
    "desc": "VI Ciclo de Conferencias El valor de las fuentes, perspectivas de investigación en los archivos “ARCHIVOS FAMILIARES Y EMPRESARIALES EN EL PATRIMONIO DOCUMENTAL ANDALUZ”…",
    "fuente": "junta",
-   "tipo": "ninos",
-   "lat": null,
-   "lon": null
+   "tipo": "expo",
+   "lat": 37.1882,
+   "lon": -3.6067
   },
   {
    "t": "Los vínculos que sostienen los ecosistemas",
@@ -89,8 +378,8 @@
    "desc": "Actividad de voluntariado para conocer las relaciones intrínsecas dentro de losecosistemas. Taller sobre aves migratorias y acción de voluntariado de colocación .de…",
    "fuente": "junta",
    "tipo": "naturaleza",
-   "lat": null,
-   "lon": null
+   "lat": 37.1601,
+   "lon": -3.072
   },
   {
    "t": "Jornada: \"Los bosques y el cambio climático\"",
@@ -115,8 +404,8 @@
    "desc": "Programa 21º Día del Bosque en el PN Sierra de Baza Domingo 18 de octubre de 2026. 10:30 H Cortijo de los Corvos La actividad incluye seguro, y picnic para las personas…",
    "fuente": "junta",
    "tipo": "naturaleza",
-   "lat": null,
-   "lon": null
+   "lat": 37.4907,
+   "lon": -2.7726
   },
   {
    "t": "Acción de voluntariado: IV Jornada de recuperación de setos y lindes en antiguos campos de cultivo de la…",
@@ -128,8 +417,8 @@
    "desc": "Programa 21º Día del Bosque en el PN Sierra de Baza Domingo 18 de octubre de 2026. 10:30 H Cortijo de los Corvos La actividad incluye seguro, y picnic para las personas…",
    "fuente": "junta",
    "tipo": "naturaleza",
-   "lat": null,
-   "lon": null
+   "lat": 37.4907,
+   "lon": -2.7726
   }
  ]
 }
