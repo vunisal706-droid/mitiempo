@@ -1,288 +1,109 @@
 {
- "actualizado": "2026-10-10T20:44",
+ "actualizado": "2026-10-10T19:16",
  "eventos": [
   {
-   "t": "La edad de la ilusión",
+   "t": "Festival",
+   "desde": "2025-08-31",
+   "hasta": "2026-11-20",
+   "lugar": "IX HelpMePlease",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/helpmeplease-ix-edicion-749x1.2e16d0ba.fill-275x202-c100.jpg",
+   "fuente": "turgranada",
+   "tipo": "musica",
+   "lat": null,
+   "lon": null
+  },
+  {
+   "t": "Exposición",
    "desde": "2026-02-18",
    "hasta": "2026-10-25",
-   "lugar": "Granada",
-   "fuente": "turgranada",
-   "tipo": "cultura",
-   "lat": 37.1773,
-   "lon": -3.5986
-  },
-  {
-   "t": "Exposición. Ríos (Cruzar el archivo Lorca)",
-   "desde": "2026-04-24",
-   "hasta": "2026-10-18",
-   "lugar": "Granada",
+   "lugar": "La edad de la ilusión",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/2026-02-Expo-LaEdadDeLaIlusio.2e16d0ba.fill-275x202-c100.jpg",
    "fuente": "turgranada",
    "tipo": "expo",
-   "lat": 37.1773,
-   "lon": -3.5986
+   "lat": null,
+   "lon": null
   },
   {
-   "t": "Kerygma",
-   "desde": "2026-05-08",
-   "hasta": "2026-11-27",
-   "lugar": "Granada",
-   "fuente": "turgranada",
-   "tipo": "cultura",
-   "lat": 37.1773,
-   "lon": -3.5986
-  },
-  {
-   "t": "La casa de la ciencia. Patrimonio cultural árabe e islámico",
-   "desde": "2026-05-19",
-   "hasta": "2026-10-16",
-   "lugar": "Granada",
-   "fuente": "turgranada",
-   "tipo": "expo",
-   "lat": 37.1773,
-   "lon": -3.5986
-  },
-  {
-   "t": "Exposición. Ritmo y Resonancia – R&R",
-   "desde": "2026-05-22",
-   "hasta": "2027-05-15",
-   "lugar": "Granada",
-   "fuente": "turgranada",
-   "tipo": "expo",
-   "lat": 37.1773,
-   "lon": -3.5986
-  },
-  {
-   "t": "V Centenario de Carlos V en la Alhambra",
+   "t": "Evento",
    "desde": "2026-07-20",
    "hasta": "2027-02-28",
-   "lugar": "Granada",
+   "lugar": "V Centenario de Carlos V en la Alhambra",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-09-0.2e16d0ba.fill-275x202-c100_ha3jRlE.png",
    "fuente": "turgranada",
-   "tipo": "expo",
-   "lat": 37.1773,
-   "lon": -3.5986
+   "tipo": "cultura",
+   "lat": null,
+   "lon": null
   },
   {
-   "t": "Parque hinchable Funbox",
+   "t": "Para niños",
    "desde": "2026-09-04",
    "hasta": "2026-10-18",
-   "lugar": "Granada",
+   "lugar": "Parque hinchable Funbox",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/funbox.2e16d0ba.fill-275x202-c100.png",
    "fuente": "turgranada",
    "tipo": "ninos",
-   "lat": 37.1773,
-   "lon": -3.5986
+   "lat": null,
+   "lon": null
   },
   {
-   "t": "Un lugar dentro de otro lugar - Pablo Castilla",
-   "desde": "2026-09-10",
-   "hasta": "2026-11-15",
-   "lugar": "Granada",
-   "fuente": "turgranada",
-   "tipo": "cultura",
-   "lat": 37.1773,
-   "lon": -3.5986
-  },
-  {
-   "t": "La sombra de Goya en el Museo Lázaro Galdiano",
-   "desde": "2026-09-18",
-   "hasta": "2027-01-31",
-   "lugar": "Granada",
-   "fuente": "turgranada",
-   "tipo": "expo",
-   "lat": 37.1773,
-   "lon": -3.5986
-  },
-  {
-   "t": "Los sentidos de Andalucía",
-   "desde": "2026-09-18",
-   "hasta": "2027-01-31",
-   "lugar": "Granada",
-   "fuente": "turgranada",
-   "tipo": "cultura",
-   "lat": 37.1773,
-   "lon": -3.5986
-  },
-  {
-   "t": "Granada. Dos miradas, un siglo",
-   "desde": "2026-09-18",
-   "hasta": "2026-10-25",
-   "lugar": "Granada",
-   "fuente": "turgranada",
-   "tipo": "cultura",
-   "lat": 37.1773,
-   "lon": -3.5986
-  },
-  {
-   "t": "Testigos. Retratos de un mundo en transformación",
-   "desde": "2026-09-24",
-   "hasta": "2026-11-16",
-   "lugar": "Granada",
-   "fuente": "turgranada",
-   "tipo": "expo",
-   "lat": 37.1773,
-   "lon": -3.5986
-  },
-  {
-   "t": "Agenda octubre Salobreña 2026",
+   "t": "Música",
    "desde": "2026-10-01",
    "hasta": "2026-10-31",
-   "lugar": "Salobreña",
-   "generico": true,
-   "fuente": "turgranada",
-   "tipo": "cultura",
-   "lat": 36.7463,
-   "lon": -3.5871
-  },
-  {
-   "t": "Agenda Octubre Motril 2026",
-   "desde": "2026-10-01",
-   "hasta": "2026-10-31",
-   "lugar": "Motril",
-   "generico": true,
-   "fuente": "turgranada",
-   "tipo": "cultura",
-   "lat": 36.7451,
-   "lon": -3.5179
-  },
-  {
-   "t": "Festival Música Sacra Granada MUSAG",
-   "desde": "2026-10-01",
-   "hasta": "2026-10-23",
-   "lugar": "Granada",
+   "lugar": "Agenda octubre Salobreña 2026",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/agenda_salobrena.dcd759c7.fill-275x202-c100.jpg",
    "fuente": "turgranada",
    "tipo": "musica",
-   "lat": 37.1773,
-   "lon": -3.5986
+   "lat": null,
+   "lon": null
   },
   {
-   "t": "Jornadas Europeas de Patrimonio",
-   "desde": "2026-10-01",
-   "hasta": "2026-11-30",
-   "lugar": "Granada",
-   "fuente": "turgranada",
-   "tipo": "expo",
-   "lat": 37.1773,
-   "lon": -3.5986
-  },
-  {
-   "t": "Agenda cultural Almuñécar 2026",
-   "desde": "2026-10-01",
-   "hasta": "2026-10-31",
-   "lugar": "Almuñécar",
-   "generico": true,
-   "fuente": "turgranada",
-   "tipo": "cultura",
-   "lat": 36.7339,
-   "lon": -3.6907
-  },
-  {
-   "t": "Fiestas Patronales Pórtugos 2026",
+   "t": "Fiesta",
    "desde": "2026-10-02",
    "hasta": "2026-10-10",
-   "lugar": "Pórtugos",
+   "lugar": "Fiestas Patronales Pórtugos 2026",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-09-2.2e16d0ba.fill-275x202-c100_6kRm5pP.png",
    "fuente": "turgranada",
    "tipo": "fiesta",
-   "lat": 36.9431,
-   "lon": -3.3099
+   "lat": null,
+   "lon": null
   },
   {
-   "t": "El arte de emocionar. Banda Sinfónica Ciudad de Guadix",
-   "desde": "2026-10-02",
-   "hasta": "2027-02-28",
-   "lugar": "Guadix",
-   "fuente": "turgranada",
-   "tipo": "musica",
-   "lat": 37.2994,
-   "lon": -3.1389
-  },
-  {
-   "t": "Fiestas de Castril 2026",
-   "desde": "2026-10-03",
-   "hasta": "2026-10-11",
-   "lugar": "Castril",
-   "fuente": "turgranada",
-   "tipo": "fiesta",
-   "lat": 37.7958,
-   "lon": -2.7804
-  },
-  {
-   "t": "V Centenario del nacimiento de Álvaro de Bazán y Guzmán",
-   "desde": "2026-10-03",
-   "hasta": "2026-10-12",
+   "t": "VI Ciclo de Conferencias El valor de las fuentes, perspectivas de investigación. Archivos familiares y…",
+   "desde": "2026-10-15",
+   "hasta": "2026-11-19",
    "lugar": "Granada",
-   "fuente": "turgranada",
-   "tipo": "expo",
-   "lat": 37.1773,
-   "lon": -3.5986
-  },
-  {
-   "t": "Segundo Encuentro de Músicas Populares Contemporáneas",
-   "desde": "2026-10-08",
-   "hasta": "2026-10-11",
-   "lugar": "Granada",
-   "fuente": "turgranada",
-   "tipo": "musica",
-   "lat": 37.1773,
-   "lon": -3.5986
-  },
-  {
-   "t": "Música en los barrios",
-   "desde": "2026-10-08",
-   "hasta": "2027-06-22",
-   "lugar": "Granada",
-   "fuente": "turgranada",
-   "tipo": "musica",
-   "lat": 37.1773,
-   "lon": -3.5986
-  },
-  {
-   "t": "Festival Internacional Teatro de Humor Santa-Fé",
-   "desde": "2026-10-08",
-   "hasta": "2026-10-28",
-   "lugar": "Santa Fe",
-   "fuente": "turgranada",
-   "tipo": "teatro",
-   "lat": 37.1887,
-   "lon": -3.7178
-  },
-  {
-   "t": "50 años de dibujos. JL Martín",
-   "desde": "2026-10-08",
-   "hasta": "2026-10-29",
-   "lugar": "Granada",
-   "fuente": "turgranada",
-   "tipo": "expo",
-   "lat": 37.1773,
-   "lon": -3.5986
-  },
-  {
-   "t": "Fiestas de La Peza",
-   "desde": "2026-10-08",
-   "hasta": "2026-10-12",
-   "lugar": "La Peza",
-   "fuente": "turgranada",
-   "tipo": "fiesta",
-   "lat": 37.2728,
-   "lon": -3.2885
+   "hora": "19:00 horas",
+   "desc": "VI Ciclo de Conferencias El valor de las fuentes, perspectivas de investigación en los archivos “ARCHIVOS FAMILIARES Y EMPRESARIALES EN EL PATRIMONIO DOCUMENTAL ANDALUZ”…",
+   "fuente": "junta",
+   "tipo": "ninos",
+   "lat": null,
+   "lon": null
   },
   {
    "t": "Los vínculos que sostienen los ecosistemas",
    "desde": "2026-10-17",
    "hasta": "2026-10-17",
    "lugar": "Aldeire",
+   "hora": "08.45 h a 16:15 h",
+   "precio": "Actividad gratuita",
+   "desc": "Actividad de voluntariado para conocer las relaciones intrínsecas dentro de losecosistemas. Taller sobre aves migratorias y acción de voluntariado de colocación .de…",
    "fuente": "junta",
    "tipo": "naturaleza",
-   "lat": 37.1595,
-   "lon": -3.0716
+   "lat": null,
+   "lon": null
   },
   {
    "t": "Jornada: \"Los bosques y el cambio climático\"",
    "desde": "2026-10-17",
    "hasta": "2026-10-17",
    "lugar": "Caniles",
+   "hora": "De 80:00 a 14:30 horas",
+   "precio": "Actividad gratuita",
+   "desc": "Bienvenidas y bienvenidos a esta jornada de sensibilización ambiental, enmarcada en el Programa de Sensibilización y Participación de la Red Natura 2000 , que se…",
    "fuente": "junta",
    "tipo": "naturaleza",
-   "lat": 37.4337,
-   "lon": -2.724
+   "lat": null,
+   "lon": null
   },
   {
    "t": "Acción de voluntariado: 21º Día del Bosque en el Parque Natural Sierra de Baza",
@@ -291,11 +112,24 @@
    "lugar": "Baza",
    "hora": "10:30",
    "precio": "Actividad gratuita",
-   "desc": "Jornada de voluntariado ambiental en el Parque Natural Sierra de Baza.",
+   "desc": "Programa 21º Día del Bosque en el PN Sierra de Baza Domingo 18 de octubre de 2026. 10:30 H Cortijo de los Corvos La actividad incluye seguro, y picnic para las personas…",
    "fuente": "junta",
    "tipo": "naturaleza",
-   "lat": 37.4904,
-   "lon": -2.7731
+   "lat": null,
+   "lon": null
+  },
+  {
+   "t": "Acción de voluntariado: IV Jornada de recuperación de setos y lindes en antiguos campos de cultivo de la…",
+   "desde": "2026-10-25",
+   "hasta": "2026-10-25",
+   "lugar": "Baza",
+   "hora": "10:30",
+   "precio": "Actividad gratuita",
+   "desc": "Programa 21º Día del Bosque en el PN Sierra de Baza Domingo 18 de octubre de 2026. 10:30 H Cortijo de los Corvos La actividad incluye seguro, y picnic para las personas…",
+   "fuente": "junta",
+   "tipo": "naturaleza",
+   "lat": null,
+   "lon": null
   }
  ]
 }
