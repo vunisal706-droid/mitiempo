@@ -250,6 +250,11 @@ h1 span{color:var(--color-primary)}
 .mini.warn{border-color:#fcd34d}.mini.warn .mv{color:#b45309}
 .mini.bad{border-color:#fca5a5}.mini.bad .mv{color:#b91c1c}
 .uv{display:inline-block;border-radius:8px;padding:1px 7px;font-weight:900;font-size:.8rem;margin-top:6px}
+#wz{width:100%;height:min(62vh,520px);border:0;border-radius:16px;display:block}
+.trf-b{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.trf-b a{display:block;text-align:center;padding:12px 8px;border-radius:14px;background:#e0f2fe;color:#075985;font-weight:800;text-decoration:none;font-size:.92rem}
+.trf-b a.w{grid-column:1/-1;background:#f1f5f9;color:#334155}
+.trf-n{font-size:.8rem;opacity:.75;margin-top:8px;font-weight:600}
 #map{height:min(62vh,480px);border-radius:16px;z-index:0}
 .rbar{display:flex;align-items:center;gap:10px;margin-top:10px}
 .rbar input{flex:1;accent-color:var(--color-primary)}
@@ -313,11 +318,11 @@ function savePlaces(){ try{ localStorage.setItem('mt-places', JSON.stringify(PLA
 let PLACES = loadPlaces();
 const byId = id => PLACES.find(p=>p.id===id);
 const TZ = 'Europe/Madrid';
-const VERSION = 'v23';
+const VERSION = 'v24';
 const DAYS = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
 const cache = {};
 let current = localStorage.getItem('mt-place') || PLACES[0].id;
-if (current==='viaje' || (current!=='radar' && !byId(current))) current = PLACES[0].id;
+if (current==='viaje' || (current!=='radar' && current!=='trafico' && !byId(current))) current = PLACES[0].id;
 
 function wmo(c, night){
   const m = {0:['Despejado',night?'🌙':'☀️'],1:['Casi despejado',night?'🌙':'🌤️'],2:['Intervalos nubosos',night?'☁️':'⛅'],3:['Nublado','☁️'],
@@ -363,7 +368,7 @@ async function load(p, force){
 
 function renderTabs(){
   const t = document.getElementById('tabs');
-  const TABS = [...PLACES, {id:'radar', name:'Radar', sub:'Lluvia'}];
+  const TABS = [...PLACES, {id:'radar', name:'Radar', sub:'Lluvia'}, {id:'trafico', name:'Tráfico', sub:'En directo'}];
   t.innerHTML = TABS.map(p=>`<button class="tab" role="tab" aria-selected="${p.id===current}" data-id="${p.id}">${p.sea?'🌊 ':''}${p.name}<small>${p.sub||''}</small></button>`).join('')
     + `<button class="tab tab-add" id="addTab" aria-label="Gestionar localidades">＋<small>Lugares</small></button>`;
   document.getElementById('addTab').onclick = openSettings;
@@ -384,6 +389,7 @@ setInterval(paintFoot, 30000);
 async function show(force){
   stopRadar();
   if (current === 'radar') return showRadar();
+  if (current === 'trafico') return showTrafico();
   if (current === 'viaje') return showTrip(force);
   const p = PLACES.find(x=>x.id===current);
   const main = document.getElementById('main');
@@ -774,6 +780,7 @@ function eventosHtml(list, tomorrow){
 
 // ===== Novedades (se muestran una sola vez por dispositivo) =====
 const NEWS = [
+  {v:'v24', items:['🚗 Pestaña «Tráfico»: mapa de atascos y accidentes en directo y botones para ver cuánto se tarda ahora mismo al cole y de vuelta a casa.','🗺️ Arreglado el mapa del radar, que mostraba «API key required».']},
   {v:'v23', items:['🟤 Calima y calidad del aire: cuando hay polvo del Sáhara o el aire no está bien, sale una ficha con la escala europea (de buena a extrema) para cada localidad. Si el aire está bien, no aparece.']},
   {v:'v22', items:['🫨 Terremotos: si ha habido alguno cerca de tus localidades en las últimas 24 horas, aparece una ficha con la magnitud, la distancia y si se sintió. Si no ha habido ninguno, no sale nada.']},
   {v:'v21', items:['📅 Mi Tiempo ya conoce el calendario del cole: festivos, puentes, vacaciones y los días sin cole del Consejo Escolar Municipal. Esos días no hay recreo ni cancelas y sale el modo descanso con planes.','🗓️ Casilla nueva «Sin cole» cuando se acerca un festivo o unas vacaciones.']},
@@ -1149,6 +1156,22 @@ async function showMinis(force){
     if (wkNow){ const a=atardecer(mar.w, hr>=21?addDays(today,1):today); if(a) tiles.unshift(['Atardecer '+(hr>=21?'mañana':'hoy'), a]); }
     box.innerHTML = av + sis + aire + (cn ? cancelasHtml(cn, today) : '') + tiles.map(([title,x])=>`<div class="mini ${x.c}"><div class="mt">${title}</div><div class="mv">${x.v}</div><div class="ms">${x.s}</div>${x.uv||''}</div>`).join('');
   }catch(e){ box.innerHTML=''; }
+}
+
+// ===== Tráfico en directo (mapa de Waze + rutas en Google Maps) =====
+function showTrafico(){
+  const cfg=getCfg(), ca=byId(cfg.casa)||PLACES[0], tr=byId(cfg.trabajo)||PLACES[0];
+  const cLat=((ca.lat+tr.lat)/2).toFixed(4), cLon=((ca.lon+tr.lon)/2).toFixed(4);
+  const cole='CEIP Capitulaciones, Santa Fe, Granada';
+  const ida=`https://www.google.com/maps/dir/?api=1&origin=${ca.lat},${ca.lon}&destination=${encodeURIComponent(cole)}&travelmode=driving`;
+  const vuelta=`https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(cole)}&destination=${ca.lat},${ca.lon}&travelmode=driving`;
+  document.getElementById('main').innerHTML=`<section class="card"><h2>Tráfico en directo</h2>
+    <iframe id="wz" src="https://embed.waze.com/es/iframe?zoom=12&lat=${cLat}&lon=${cLon}&ct=livemap&pin=0" title="Mapa de tráfico de Waze" allowfullscreen loading="lazy"></iframe>
+    <div class="trf-n">Atascos, accidentes y obras en tiempo real según los conductores de Waze. Los colores marcan la lentitud: amarillo, naranja y rojo.</div>
+    <div class="trf-b"><a href="${ida}" target="_blank" rel="noopener">🚗 Ir al cole<br><small>tiempo ahora</small></a>
+      <a href="${vuelta}" target="_blank" rel="noopener">🏠 Volver a casa<br><small>tiempo ahora</small></a>
+      <a class="w" href="https://infocar.dgt.es/etraffic/" target="_blank" rel="noopener">🚧 Incidencias oficiales de la DGT</a></div></section>`;
+  document.getElementById('foot').innerHTML=`Tráfico: Waze · Rutas: Google Maps · ${VERSION}`;
 }
 
 // ===== Radar de lluvia (RainViewer) =====
@@ -1556,7 +1579,7 @@ showAdvice();
 document.addEventListener('calendario-cole', ()=>{ showAdvice(); showMinis(); });
 showNews();
 renderTabs(); show();
-setInterval(()=>{ if(current!=='radar' && current!=='viaje') show(true); showAdvice(); showMinis(); }, 15*60*1000);
+setInterval(()=>{ if(current!=='radar' && current!=='viaje' && current!=='trafico') show(true); showAdvice(); showMinis(); }, 15*60*1000);
 if ('serviceWorker' in navigator){
   navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{});
   let reloaded=false; navigator.serviceWorker.addEventListener('controllerchange',()=>{ if(!reloaded){reloaded=true; location.reload();} });
