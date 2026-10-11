@@ -144,6 +144,13 @@ h1 span{color:var(--color-primary)}
 .ok-b{width:100%;margin-top:16px;background:var(--color-primary);color:#fff;box-shadow:0 4px 0 var(--color-primary-dark)}
 .more{margin-top:10px}
 .more summary{cursor:pointer;font-weight:800;color:var(--color-text-muted);padding:8px 4px;min-height:44px}
+.aire{grid-column:1/-1;border-radius:20px;padding:14px 16px;border:2px solid var(--ac);background:#fafaf9;color:#292524}
+.aire-h{display:flex;gap:10px;align-items:center}.aire-i{font-size:2rem;line-height:1}
+.aire-t{font-weight:900;font-size:1.1rem}.aire-s{font-weight:700;font-size:.85rem;opacity:.85}
+.aire-bar{display:grid;grid-template-columns:repeat(6,1fr);gap:3px;margin:10px 0 4px}
+.aire-bar span{height:10px;border-radius:5px;opacity:.35}.aire-bar span.on{opacity:1;outline:2px solid #292524;outline-offset:1px}
+.aire-lb{display:grid;grid-template-columns:repeat(6,1fr);gap:3px;font-size:.62rem;font-weight:700;text-align:center;opacity:.75}
+.aire ul{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:4px;font-weight:700;font-size:.88rem}
 .sis{grid-column:1/-1;border-radius:20px;padding:14px 16px;border:2px solid #a8a29e;background:#f5f5f4;color:#292524}
 .sis.f{border-color:#f97316;background:#fff7ed;color:#7c2d12}
 .sis.s{border-color:#dc2626;background:#fee2e2;color:#7f1d1d;border-width:3px}
@@ -306,7 +313,7 @@ function savePlaces(){ try{ localStorage.setItem('mt-places', JSON.stringify(PLA
 let PLACES = loadPlaces();
 const byId = id => PLACES.find(p=>p.id===id);
 const TZ = 'Europe/Madrid';
-const VERSION = 'v22';
+const VERSION = 'v23';
 const DAYS = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
 const cache = {};
 let current = localStorage.getItem('mt-place') || PLACES[0].id;
@@ -767,6 +774,7 @@ function eventosHtml(list, tomorrow){
 
 // ===== Novedades (se muestran una sola vez por dispositivo) =====
 const NEWS = [
+  {v:'v23', items:['🟤 Calima y calidad del aire: cuando hay polvo del Sáhara o el aire no está bien, sale una ficha con la escala europea (de buena a extrema) para cada localidad. Si el aire está bien, no aparece.']},
   {v:'v22', items:['🫨 Terremotos: si ha habido alguno cerca de tus localidades en las últimas 24 horas, aparece una ficha con la magnitud, la distancia y si se sintió. Si no ha habido ninguno, no sale nada.']},
   {v:'v21', items:['📅 Mi Tiempo ya conoce el calendario del cole: festivos, puentes, vacaciones y los días sin cole del Consejo Escolar Municipal. Esos días no hay recreo ni cancelas y sale el modo descanso con planes.','🗓️ Casilla nueva «Sin cole» cuando se acerca un festivo o unas vacaciones.']},
   {v:'v20', items:['🎉 Los fines de semana, planes y eventos de Granada y su provincia: fiestas, conciertos, exposiciones, teatro, rutas…, elegidos según el tiempo y lo cerca que estén.','🔔 Este aviso de novedades, que sale una sola vez después de cada actualización.']},
@@ -1010,6 +1018,33 @@ async function alertsTile(force){
 }
 
 
+// ===== Calima y calidad del aire (solo aparece si no es buena) =====
+const AQ=[{n:'Buena',c:'#22c55e'},{n:'Razonable',c:'#a3e635'},{n:'Regular',c:'#facc15'},{n:'Mala',c:'#f97316'},{n:'Muy mala',c:'#dc2626'},{n:'Extrema',c:'#7e22ce'}];
+const aqLvl=v=>v<20?0:v<40?1:v<60?2:v<80?3:v<100?4:5;
+const DU=[[0,'sin calima'],[25,'calima ligera'],[60,'calima moderada'],[150,'calima intensa'],[400,'calima muy intensa']];
+const duTxt=v=>DU.filter(x=>v>=x[0]).pop()[1];
+async function aireTile(){
+  const pl=PLACES.slice(0,3);
+  const r=await Promise.all(pl.map(p=>fetch(`https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${p.lat}&longitude=${p.lon}&current=european_aqi,dust,pm10&hourly=european_aqi,dust&forecast_days=2&timezone=auto`).then(x=>x.json()).catch(()=>null)));
+  const d=r.map((j,i)=>{ if(!j||!j.current) return null;
+    const now=j.current.time, k=Math.max(0,j.hourly.time.indexOf(now.slice(0,13)+':00'));
+    const pk=(a)=>Math.max(...a.slice(k,k+24).filter(v=>v!=null));
+    return {n:pl[i].name, aqi:j.current.european_aqi, du:j.current.dust||0, pm:j.current.pm10, aqiMax:pk(j.hourly.european_aqi), duMax:pk(j.hourly.dust)}; }).filter(Boolean);
+  if(!d.length) return '';
+  const w=d.reduce((a,b)=>b.aqi>a.aqi?b:a);
+  const duNow=Math.max(...d.map(x=>x.du)), duMax=Math.max(...d.map(x=>x.duMax)), aqMax=Math.max(...d.map(x=>x.aqiMax));
+  if (aqLvl(w.aqi)<2 && duNow<25 && aqLvl(aqMax)<2 && duMax<60) return '';
+  const L=aqLvl(w.aqi), ic=duNow>=25||duMax>=60?'🟤':'🌫️';
+  const rows=d.map(x=>`<li>${esc(x.n)}: ${AQ[aqLvl(x.aqi)].n.toLowerCase()} (${Math.round(x.aqi)}) · ${duTxt(x.du)}${x.du>=25?` (${Math.round(x.du)} µg/m³ de polvo)`:''}</li>`).join('');
+  const prox = aqLvl(aqMax)>L ? `<li>Próximas 24 h: puede llegar a ${AQ[aqLvl(aqMax)].n.toLowerCase()}${duMax>=25?` · ${duTxt(duMax)}`:''}</li>`
+    : duMax>=25 && duMax>duNow*1.3 ? `<li>Próximas 24 h: ${duTxt(duMax)}</li>` : '';
+  return `<div class="aire" style="--ac:${AQ[L].c}" role="status"><div class="aire-h"><span class="aire-i" aria-hidden="true">${ic}</span><div>
+    <div class="aire-t">Calidad del aire: ${AQ[L].n.toLowerCase()}</div><div class="aire-s">${duNow>=25?'Hay '+duTxt(duNow):'Índice europeo de calidad del aire'}</div></div></div>
+    <div class="aire-bar">${AQ.map((x,i)=>`<span style="background:${x.c}" class="${i===L?'on':''}"></span>`).join('')}</div>
+    <div class="aire-lb">${AQ.map(x=>`<div>${x.n}</div>`).join('')}</div>
+    <ul>${rows}${prox}</ul><div class="avi-n">Fuente: Copernicus (CAMS) vía Open-Meteo.</div></div>`;
+}
+
 // ===== Terremotos (solo aparece si ha habido alguno cerca en las últimas 24 h) =====
 function kmEntre(a1,o1,a2,o2){ const R=6371,r=Math.PI/180,dA=(a2-a1)*r,dO=(o2-o1)*r;
   const h=Math.sin(dA/2)**2+Math.cos(a1*r)*Math.cos(a2*r)*Math.sin(dO/2)**2; return 2*R*Math.asin(Math.sqrt(h)); }
@@ -1102,7 +1137,7 @@ async function showMinis(force){
     const r=recreo(sf.w, dRec, rH); if(r) tiles.push(['Recreo '+(dRec===today?'hoy':'mañana')+' · '+cfg.recreo, r]);
     const t=tender(mar.w, dTen); if(t) tiles.push(['Tender '+(dTen===today?'hoy':'mañana'), t]);
     const c=coche(mar.w, today); if(c) tiles.push(['Lavar el coche', c]);
-    const [av, sis] = await Promise.all([alertsTile(force), sismosTile().catch(()=>'')]);
+    const [av, sis, aire] = await Promise.all([alertsTile(force), sismosTile().catch(()=>''), aireTile().catch(()=>'')]);
     const wkNow = isWk(today), dCan = cancelasDay(sf.w, cfg);
     // Día sin cole: sin cancelas (salvo la tarde antes de volver, que avisa del día siguiente) y con atardecer
     const showCan = !wkNow || (hr>=17 && !isWk(addDays(today,1)));
@@ -1112,7 +1147,7 @@ async function showMinis(force){
         if (k<=7) tiles.unshift([`Sin cole ${k===1?'mañana':`en ${k} días`}`, {c:'ok', v:`${p.emoji} ${DAYS[new Date(p.fecha+'T12:00').getDay()]} ${+p.fecha.slice(8)}`, s:p.hasta&&p.hasta!==p.fecha?`${p.nombre} · vuelta el ${DAYS[new Date(p.vuelta+'T12:00').getDay()].toLowerCase()} ${+p.vuelta.slice(8)}`:p.nombre}]); } }
     const cn = showCan ? cancelas(sf.w, dCan, cfg) : null;
     if (wkNow){ const a=atardecer(mar.w, hr>=21?addDays(today,1):today); if(a) tiles.unshift(['Atardecer '+(hr>=21?'mañana':'hoy'), a]); }
-    box.innerHTML = av + sis + (cn ? cancelasHtml(cn, today) : '') + tiles.map(([title,x])=>`<div class="mini ${x.c}"><div class="mt">${title}</div><div class="mv">${x.v}</div><div class="ms">${x.s}</div>${x.uv||''}</div>`).join('');
+    box.innerHTML = av + sis + aire + (cn ? cancelasHtml(cn, today) : '') + tiles.map(([title,x])=>`<div class="mini ${x.c}"><div class="mt">${title}</div><div class="mv">${x.v}</div><div class="ms">${x.s}</div>${x.uv||''}</div>`).join('');
   }catch(e){ box.innerHTML=''; }
 }
 
