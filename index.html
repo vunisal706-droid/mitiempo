@@ -592,7 +592,7 @@ async function showAdvice(force){
     const [mar, sf] = await Promise.all([load(casa, force), load(trab, force)]);
     const nowS = sf.w.current.time, today = nowS.slice(0,10);
     const hr = parseInt(nowS.slice(11,13));
-    const after = isWk(today) ? hr >= 21 : hr >= parseInt(cfg.vuelta);
+    const after = isWk(today) ? hr >= (isWk(addDays(today,1)) ? 21 : 17) : hr >= parseInt(cfg.vuelta);   // sin cole y mañana hay cole → a las 17:00 ya muestra mañana
     const date = after ? addDays(today, 1) : today;
     if (isWk(date)) return showWeekend(box, mar.w, casa, date, after);
     const x = windowData(mar.w, sf.w, date, cfg), y = windowData(mar.w, sf.w, addDays(date,-1), cfg);
@@ -726,7 +726,7 @@ function showWeekend(box, w, casa, date, tomorrow){
     <div class="alerts">${r.al.length ? r.al.map(a=>`<div class="al ${a[0]}">${a[1]}</div>`).join('') : '<div class="al info">👍 Finde sin sorpresas de tiempo.</div>'}</div>`;
   document.getElementById('gear').onclick = openSettings;
   paintTripBtn();
-  loadEventos().then(evs=>{ const b=document.getElementById('evBox'); if(b) b.innerHTML=eventosHtml(pickEventos(evs, date, x, casa), tomorrow); });
+  loadEventos().then(evs=>{ const b=document.getElementById('evBox'); if(b) b.innerHTML=eventosHtml(pickEventos(evs, date, x, casa), tomorrow, sc.tipo!=='finde'); });
 }
 
 
@@ -768,9 +768,9 @@ function pickEventos(evs, date, x, casa){
   for (const e of list){ if ((n[e.tipo]||0)>=2) continue; n[e.tipo]=(n[e.tipo]||0)+1; out.push(e); if (out.length>=5) break; }
   return out;
 }
-function eventosHtml(list, tomorrow){
+function eventosHtml(list, tomorrow, diaSuelto){
   if (!list.length) return '';
-  return `<div class="blk ev-blk"><div class="blk-t">🎉 Planes ${tomorrow?'del finde':'este finde'} en Granada y provincia</div>
+  return `<div class="blk ev-blk"><div class="blk-t">🎉 Planes ${diaSuelto?(tomorrow?'para mañana':'para hoy'):(tomorrow?'del finde':'este finde')} en Granada y provincia</div>
     <div class="evs">${list.map(e=>`<div class="ev"><span class="ie" aria-hidden="true">${(EV_T[e.tipo]||EV_T.cultura)[0]}</span><div>
       <b>${esc(e.t)}</b>
       <div class="em"><span>📍 ${esc(e.lugar)}${e.km>=3?` · ${Math.round(e.km)} km`:''}</span><span>📅 ${e.when}</span>${e.hora?`<span>🕒 ${esc(e.hora)}</span>`:''}${e.precio?`<span>🎟️ ${esc(e.precio)}</span>`:''}</div>
