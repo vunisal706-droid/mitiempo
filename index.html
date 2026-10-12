@@ -318,7 +318,7 @@ function savePlaces(){ try{ localStorage.setItem('mt-places', JSON.stringify(PLA
 let PLACES = loadPlaces();
 const byId = id => PLACES.find(p=>p.id===id);
 const TZ = 'Europe/Madrid';
-const VERSION = 'v24';
+const VERSION = 'v25';
 const DAYS = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
 const cache = {};
 let current = localStorage.getItem('mt-place') || PLACES[0].id;
@@ -780,6 +780,7 @@ function eventosHtml(list, tomorrow, diaSuelto){
 
 // ===== Novedades (se muestran una sola vez por dispositivo) =====
 const NEWS = [
+  {v:'v25', items:['📅 Los días sin cole en que al día siguiente hay cole (domingos, festivos…), a partir de las 17:00 ya sale la ropa de mañana, el recreo y las cancelas. Los viernes por la tarde siguen saliendo los planes del finde.']},
   {v:'v24', items:['🚗 Pestaña «Tráfico»: mapa de atascos y accidentes en directo y botones para ver cuánto se tarda ahora mismo al cole y de vuelta a casa.','🗺️ Arreglado el mapa del radar, que mostraba «API key required».']},
   {v:'v23', items:['🟤 Calima y calidad del aire: cuando hay polvo del Sáhara o el aire no está bien, sale una ficha con la escala europea (de buena a extrema) para cada localidad. Si el aire está bien, no aparece.']},
   {v:'v22', items:['🫨 Terremotos: si ha habido alguno cerca de tus localidades en las últimas 24 horas, aparece una ficha con la magnitud, la distancia y si se sintió. Si no ha habido ninguno, no sale nada.']},
