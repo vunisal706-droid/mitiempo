@@ -1,0 +1,81 @@
+/* Tarjeta de avisos oficiales de AEMET para la web del CEIP Capitulaciones (Santa Fe).
+   Uso en la web:  <div id="avisoAemet"></div>
+                   <script src="https://vunisal706-droid.github.io/mitiempo/aviso-web.js" defer></script>
+   Lee avisos.json (lo actualiza GitHub Actions cada media hora desde AEMET) y muestra solo
+   los avisos que afectan a Santa Fe. Si no hay ninguno, enseña una línea verde discreta. */
+(function(){
+  var URL = 'https://vunisal706-droid.github.io/mitiempo/avisos.json';
+  var LUGAR = {nombre:'Santa Fe', lat:37.1886, lon:-3.7185};
+  var NIV = {1:'Amarillo', 2:'Naranja', 3:'Rojo'};
+  var COL = {1:{b:'#eab308', f:'#fefce8', t:'#713f12', s:'#fde68a'}, 2:{b:'#f97316', f:'#fff7ed', t:'#7c2d12', s:'#fed7aa'}, 3:{b:'#dc2626', f:'#fef2f2', t:'#7f1d1d', s:'#fecaca'}};
+  var DIAS = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+
+  function esc(t){ return String(t||'').replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function dentro(lat, lon, p){ var ins = false;
+    for (var i=0, j=p.length-1; i<p.length; j=i++){ var yi=p[i][0], xi=p[i][1], yj=p[j][0], xj=p[j][1];
+      if (((yi>lat)!==(yj>lat)) && (lon < (xj-xi)*(lat-yi)/(yj-yi)+xi)) ins = !ins; }
+    return ins; }
+  function icono(f){ f = (f||'').toLowerCase();
+    return /máx|max|calor/.test(f)?'🌡️': /mín|min|frío|frio/.test(f)?'🥶': /torment/.test(f)?'⛈️': /lluv|precip/.test(f)?'🌧️':
+      /niev|nev/.test(f)?'❄️': /vient/.test(f)?'💨': /niebla/.test(f)?'🌫️': /polvo|calima/.test(f)?'🟤':'⚠️'; }
+  // Consejo práctico para las familias según el fenómeno
+  function consejo(f){ f = (f||'').toLowerCase();
+    if (/lluv|precip|torment/.test(f)) return 'Traed chubasquero o paraguas. Los días de lluvia abrimos las cancelas 5 minutos antes; Infantil y el aula TEA entran por el patio de Infantil y Primaria sube directamente a clase.';
+    if (/máx|max|calor/.test(f)) return 'Agua, gorra y ropa fresca. En el recreo buscamos la sombra.';
+    if (/mín|min|frío|frio|niev|nev/.test(f)) return 'Abrigad bien al alumnado: chaquetón, gorro y guantes.';
+    if (/vient/.test(f)) return 'Precaución en la entrada y la salida por el viento.';
+    return 'Seguid las indicaciones de AEMET y del centro.'; }
+  function cuando(ini, fin){
+    if (!ini) return '';
+    var d = new Date(ini), h = new Date(); h.setHours(0,0,0,0);
+    var k = Math.round((new Date(d).setHours(0,0,0,0) - h)/864e5);
+    var dia = k<=0 ? 'Hoy' : k===1 ? 'Mañana' : DIAS[d.getDay()].replace(/^./, function(c){ return c.toUpperCase(); });
+    var hh = function(x){ return x.toLocaleTimeString('es-ES', {hour:'2-digit', minute:'2-digit'}); };
+    var txt = dia + ', de ' + hh(d);
+    if (fin){ var e = new Date(fin); txt += ' a ' + (e.toDateString()===d.toDateString() ? hh(e) : DIAS[e.getDay()] + ' ' + hh(e)); }
+    return txt; }
+
+  function estilos(){
+    if (document.getElementById('avisoAemetCss')) return;
+    var s = document.createElement('style'); s.id = 'avisoAemetCss';
+    s.textContent = '.aem{font-family:inherit;border-radius:16px;border:1.5px solid var(--s);border-left:7px solid var(--b);background:var(--f);color:var(--t);padding:14px 16px;margin:12px 0;box-shadow:0 6px 18px rgba(0,0,0,.06);text-align:left}'+
+      '.aem-h{display:flex;gap:12px;align-items:center}.aem-i{font-size:2rem;line-height:1}.aem-t{font-weight:800;font-size:1.1rem}'+
+      '.aem-s{font-size:.82rem;opacity:.85;margin-top:2px}.aem-b{display:inline-block;background:var(--b);color:#fff;border-radius:999px;padding:1px 9px;font-weight:800;font-size:.75rem;margin-right:6px}'+
+      '.aem ul{list-style:none;margin:10px 0 0;padding:0}.aem li{background:rgba(255,255,255,.7);border-radius:10px;padding:8px 10px;margin-top:6px;line-height:1.4;font-size:.93rem}'+
+      '.aem li b{display:block}.aem li span{font-size:.85rem;opacity:.85}.aem-c{margin-top:10px;font-size:.88rem;background:rgba(255,255,255,.55);border-radius:10px;padding:8px 10px}'+
+      '.aem-n{margin-top:8px;font-size:.75rem;opacity:.75}.aem-n a{color:inherit}'+
+      '.aem-ok{display:flex;gap:8px;align-items:center;border-radius:12px;background:#f0fdf4;border:1px solid #bbf7d0;color:#166534;padding:8px 12px;margin:12px 0;font-size:.9rem;font-family:inherit;text-align:left}';
+    document.head.appendChild(s); }
+
+  function pintar(caja, avisos){
+    estilos();
+    if (!avisos.length){
+      caja.innerHTML = '<div class="aem-ok" role="status">✅ <span>Sin avisos meteorológicos de AEMET para Santa Fe.</span></div>';
+      return; }
+    var top = Math.max.apply(null, avisos.map(function(a){ return a.nivel; })), c = COL[top];
+    var fens = []; avisos.forEach(function(a){ if (fens.indexOf(a.fenomeno) < 0) fens.push(a.fenomeno); });
+    caja.innerHTML = '<div class="aem" role="alert" style="--b:'+c.b+';--f:'+c.f+';--t:'+c.t+';--s:'+c.s+'">'+
+      '<div class="aem-h"><span class="aem-i" aria-hidden="true">'+icono(avisos[0].fenomeno)+'</span><div>'+
+      '<div class="aem-t">Aviso '+NIV[top].toLowerCase()+' en Santa Fe</div>'+
+      '<div class="aem-s"><span class="aem-b">AEMET · oficial</span>'+(avisos.length===1?'1 aviso activo':avisos.length+' avisos activos')+'</div></div></div>'+
+      '<ul>'+avisos.slice(0,4).map(function(a){
+        return '<li><b>'+icono(a.fenomeno)+' '+esc(a.fenomeno.replace(/^aviso de /i,'').replace(/^./, function(x){ return x.toUpperCase(); }))+'</b>'+
+          '<span>'+esc(cuando(a.inicio, a.fin))+(a.texto?' · '+esc(a.texto):'')+'</span></li>'; }).join('')+'</ul>'+
+      '<div class="aem-c">💡 '+esc(consejo(fens.join(' ')))+'</div>'+
+      '<div class="aem-n">Fuente: <a href="https://www.aemet.es/es/eltiempo/prediccion/avisos" target="_blank" rel="noopener">AEMET</a> · zona '+esc(avisos[0].zona)+'</div></div>';
+  }
+
+  function cargar(){
+    var caja = document.getElementById('avisoAemet'); if (!caja) return;
+    fetch(URL + '?_=' + Date.now(), {cache:'no-store'}).then(function(r){ if (!r.ok) throw 0; return r.json(); }).then(function(j){
+      var ahora = Date.now();
+      var av = (j.avisos||[]).filter(function(a){
+        if (a.fin && new Date(a.fin).getTime() < ahora) return false;
+        return (a.poligonos||[]).some(function(p){ return dentro(LUGAR.lat, LUGAR.lon, p); });
+      }).sort(function(a,b){ return b.nivel-a.nivel || String(a.inicio).localeCompare(String(b.inicio)); });
+      pintar(caja, av);
+    }).catch(function(){ caja.innerHTML = ''; });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', cargar); else cargar();
+  setInterval(cargar, 30*60*1000);
+})();
