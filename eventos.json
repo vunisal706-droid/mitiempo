@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-10-14T09:31",
+ "actualizado": "2026-10-15T09:09",
  "eventos": [
   {
    "t": "IX HelpMePlease",
@@ -360,19 +360,6 @@
    "lon": -3.072
   },
   {
-   "t": "Jornada: \"Los bosques y el cambio climático\"",
-   "desde": "2026-10-17",
-   "hasta": "2026-10-17",
-   "lugar": "Caniles",
-   "hora": "De 80:00 a 14:30 horas",
-   "precio": "Actividad gratuita",
-   "desc": "Bienvenidas y bienvenidos a esta jornada de sensibilización ambiental, enmarcada en el Programa de Sensibilización y Participación de la Red Natura 2000 , que se…",
-   "fuente": "junta",
-   "tipo": "naturaleza",
-   "lat": 37.4367,
-   "lon": -2.7248
-  },
-  {
    "t": "Acción de voluntariado: 21º Día del Bosque en el Parque Natural Sierra de Baza",
    "desde": "2026-10-18",
    "hasta": "2026-10-18",
@@ -386,6 +373,19 @@
    "lon": -2.7726
   },
   {
+   "t": "Los bosques de ribera",
+   "desde": "2026-10-24",
+   "hasta": "2026-10-24",
+   "lugar": "Guadix",
+   "hora": "De 08:30h a 14:15h",
+   "precio": "Actividad gratuita",
+   "desc": "El objetivo principal de esta actividad es la sensibilización y concienciación ambiental sobre los bosques de ribera en el espacio protegido de Sierra Nevada, combinando…",
+   "fuente": "junta",
+   "tipo": "naturaleza",
+   "lat": 37.2993,
+   "lon": -3.1392
+  },
+  {
    "t": "Acción de voluntariado: IV Jornada de recuperación de setos y lindes en antiguos campos de cultivo de la…",
    "desde": "2026-10-25",
    "hasta": "2026-10-25",
@@ -397,6 +397,19 @@
    "tipo": "naturaleza",
    "lat": 37.4907,
    "lon": -2.7726
+  },
+  {
+   "t": "Jornada: \"Los bosques y el cambio climático\"",
+   "desde": "2026-10-25",
+   "hasta": "2026-10-25",
+   "lugar": "Caniles",
+   "hora": "De 80:00 a 14:30 horas",
+   "precio": "Actividad gratuita",
+   "desc": "Bienvenidas y bienvenidos a esta jornada de sensibilización ambiental, enmarcada en el Programa de Sensibilización y Participación de la Red Natura 2000 , que se…",
+   "fuente": "junta",
+   "tipo": "naturaleza",
+   "lat": 37.4367,
+   "lon": -2.7248
   }
  ]
 }
