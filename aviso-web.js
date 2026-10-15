@@ -11,16 +11,16 @@
   var TR = {
     es:{dias:['domingo','lunes','martes','miércoles','jueves','viernes','sábado'], hoy:'Hoy', man:'Mañana', de:'de', a:'a', niv:{1:'amarillo',2:'naranja',3:'rojo'}, tit:'Aviso {n} en Santa Fe', of:'AEMET · oficial', uno:'1 aviso activo', var:'{k} avisos activos', ok:'Sin avisos meteorológicos de AEMET para Santa Fe.', fu:'Fuente', zo:'zona', loc:'es-ES',
       fen:{lluv:'Lluvias',torm:'Tormentas',max:'Temperaturas máximas',min:'Temperaturas mínimas',vien:'Viento',niev:'Nieve',nieb:'Niebla',polv:'Polvo en suspensión',cost:'Fenómenos costeros'}, nivel:'nivel',
-      c:{lluv:'Mejor chubasquero o impermeable: el paraguas no puede entrar en el colegio, se lo lleva la familia. Los días de lluvia, Infantil y el aula TEA entran por el patio de Infantil y Primaria sube directamente a clase.', calor:'Agua, gorra y ropa fresca. En el recreo buscamos la sombra.', frio:'Abrigad bien al alumnado: chaquetón, gorro y guantes.', vien:'Precaución en la entrada y la salida por el viento.', otro:'Seguid las indicaciones de AEMET y del centro.'}},
+      sc:{lluv:'Ese día no hay cole. Si salís, llevad paraguas o chubasquero, evitad pasar por zonas encharcadas y mejor planes a cubierto: leer juntos, juegos de mesa o manualidades en casa.', calor:'Ese día no hay cole. Evitad salir en las horas de más calor; agua, sombra y ropa fresca.', frio:'Ese día no hay cole. Si salís, abrigaos bien: chaquetón, gorro y guantes.', vien:'Ese día no hay cole. Cuidado en la calle y en los parques con árboles por el viento.', otro:'Ese día no hay cole. Seguid las indicaciones de AEMET.'}, c:{lluv:'Mejor chubasquero o impermeable: el paraguas no puede entrar en el colegio, se lo lleva la familia. Los días de lluvia, Infantil y el aula TEA entran por el patio de Infantil y Primaria sube directamente a clase.', calor:'Agua, gorra y ropa fresca. En el recreo buscamos la sombra.', frio:'Abrigad bien al alumnado: chaquetón, gorro y guantes.', vien:'Precaución en la entrada y la salida por el viento.', otro:'Seguid las indicaciones de AEMET y del centro.'}},
     en:{dias:['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'], hoy:'Today', man:'Tomorrow', de:'from', a:'to', niv:{1:'yellow',2:'orange',3:'red'}, tit:'{N} weather warning in Santa Fe', of:'AEMET · official', uno:'1 active warning', var:'{k} active warnings', ok:'No AEMET weather warnings for Santa Fe.', fu:'Source', zo:'area', loc:'en-GB',
       fen:{lluv:'Rain',torm:'Thunderstorms',max:'High temperatures',min:'Low temperatures',vien:'Wind',niev:'Snow',nieb:'Fog',polv:'Dust',cost:'Coastal events'}, nivel:'level',
-      c:{lluv:'A raincoat is better: umbrellas are not allowed inside the school, the family takes it home. On rainy days, Infant and ASD classroom pupils go in through the Infant playground and Primary pupils go straight up to class.', calor:'Water, a cap and light clothes. At break time we look for shade.', frio:'Dress pupils warmly: coat, hat and gloves.', vien:'Take care at drop-off and pick-up because of the wind.', otro:'Follow AEMET and school instructions.'}},
+      sc:{lluv:'There is no school that day. If you go out, take an umbrella or raincoat, avoid flooded areas and choose indoor plans: reading together, board games or crafts at home.', calor:'There is no school that day. Avoid going out in the hottest hours; water, shade and light clothes.', frio:'There is no school that day. If you go out, wrap up warm: coat, hat and gloves.', vien:'There is no school that day. Take care in the street and in parks with trees because of the wind.', otro:'There is no school that day. Follow AEMET instructions.'}, c:{lluv:'A raincoat is better: umbrellas are not allowed inside the school, the family takes it home. On rainy days, Infant and ASD classroom pupils go in through the Infant playground and Primary pupils go straight up to class.', calor:'Water, a cap and light clothes. At break time we look for shade.', frio:'Dress pupils warmly: coat, hat and gloves.', vien:'Take care at drop-off and pick-up because of the wind.', otro:'Follow AEMET and school instructions.'}},
     ar:{dias:['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'], hoy:'اليوم', man:'غدًا', de:'من', a:'إلى', niv:{1:'أصفر',2:'برتقالي',3:'أحمر'}, tit:'تنبيه {n} في سانتا في', of:'AEMET · رسمي', uno:'تنبيه واحد نشط', var:'{k} تنبيهات نشطة', ok:'لا توجد تنبيهات جوية من AEMET لسانتا في.', fu:'المصدر', zo:'المنطقة', loc:'ar',
       fen:{lluv:'أمطار',torm:'عواصف رعدية',max:'درجات حرارة مرتفعة',min:'درجات حرارة منخفضة',vien:'رياح',niev:'ثلوج',nieb:'ضباب',polv:'غبار',cost:'ظواهر ساحلية'}, nivel:'مستوى',
-      c:{lluv:'الأفضل معطف واقٍ من المطر: لا يُسمح بإدخال المظلة إلى المدرسة، تأخذها العائلة. في أيام المطر يدخل تلاميذ رياض الأطفال وقسم التوحد من ساحة رياض الأطفال ويصعد تلاميذ الابتدائي مباشرة إلى القسم.', calor:'ماء وقبعة وملابس خفيفة. في الاستراحة نبحث عن الظل.', frio:'ألبسوا التلاميذ ملابس دافئة: معطف وقبعة وقفازات.', vien:'انتبهوا عند الدخول والخروج بسبب الرياح.', otro:'اتبعوا تعليمات AEMET والمدرسة.'}},
+      sc:{lluv:'لا توجد مدرسة في ذلك اليوم. إذا خرجتم، خذوا مظلة أو معطفًا واقيًا من المطر وتجنبوا الأماكن المغمورة بالمياه، والأفضل أنشطة داخل البيت: القراءة معًا أو الألعاب أو الأشغال اليدوية.', calor:'لا توجد مدرسة في ذلك اليوم. تجنبوا الخروج في ساعات الحر الشديد؛ ماء وظل وملابس خفيفة.', frio:'لا توجد مدرسة في ذلك اليوم. إذا خرجتم، البسوا ملابس دافئة: معطف وقبعة وقفازات.', vien:'لا توجد مدرسة في ذلك اليوم. انتبهوا في الشارع وفي الحدائق ذات الأشجار بسبب الرياح.', otro:'لا توجد مدرسة في ذلك اليوم. اتبعوا تعليمات AEMET.'}, c:{lluv:'الأفضل معطف واقٍ من المطر: لا يُسمح بإدخال المظلة إلى المدرسة، تأخذها العائلة. في أيام المطر يدخل تلاميذ رياض الأطفال وقسم التوحد من ساحة رياض الأطفال ويصعد تلاميذ الابتدائي مباشرة إلى القسم.', calor:'ماء وقبعة وملابس خفيفة. في الاستراحة نبحث عن الظل.', frio:'ألبسوا التلاميذ ملابس دافئة: معطف وقبعة وقفازات.', vien:'انتبهوا عند الدخول والخروج بسبب الرياح.', otro:'اتبعوا تعليمات AEMET والمدرسة.'}},
     ro:{dias:['duminică','luni','marți','miercuri','joi','vineri','sâmbătă'], hoy:'Azi', man:'Mâine', de:'de la', a:'la', niv:{1:'galben',2:'portocaliu',3:'roșu'}, tit:'Avertizare {n} în Santa Fe', of:'AEMET · oficial', uno:'1 avertizare activă', var:'{k} avertizări active', ok:'Fără avertizări meteo AEMET pentru Santa Fe.', fu:'Sursa', zo:'zona', loc:'ro-RO',
       fen:{lluv:'Ploi',torm:'Furtuni',max:'Temperaturi maxime',min:'Temperaturi minime',vien:'Vânt',niev:'Ninsoare',nieb:'Ceață',polv:'Praf',cost:'Fenomene costiere'}, nivel:'nivel',
-      c:{lluv:'Mai bine pelerină de ploaie: umbrela nu are voie în școală, o ia familia. În zilele ploioase, grădinița și clasa TEA intră prin curtea grădiniței, iar elevii de la primar urcă direct în clasă.', calor:'Apă, șapcă și haine răcoroase. În pauză căutăm umbra.', frio:'Îmbrăcați copiii gros: geacă, căciulă și mănuși.', vien:'Atenție la intrare și la ieșire din cauza vântului.', otro:'Urmați indicațiile AEMET și ale școlii.'}}};
+      sc:{lluv:'În ziua aceea nu este școală. Dacă ieșiți, luați umbrelă sau pelerină, evitați zonele inundate și alegeți activități în casă: citit împreună, jocuri de masă sau lucru manual.', calor:'În ziua aceea nu este școală. Evitați să ieșiți în orele cele mai călduroase; apă, umbră și haine răcoroase.', frio:'În ziua aceea nu este școală. Dacă ieșiți, îmbrăcați-vă gros: geacă, căciulă și mănuși.', vien:'În ziua aceea nu este școală. Atenție pe stradă și în parcurile cu copaci din cauza vântului.', otro:'În ziua aceea nu este școală. Urmați indicațiile AEMET.'}, c:{lluv:'Mai bine pelerină de ploaie: umbrela nu are voie în școală, o ia familia. În zilele ploioase, grădinița și clasa TEA intră prin curtea grădiniței, iar elevii de la primar urcă direct în clasă.', calor:'Apă, șapcă și haine răcoroase. În pauză căutăm umbra.', frio:'Îmbrăcați copiii gros: geacă, căciulă și mănuși.', vien:'Atenție la intrare și la ieșire din cauza vântului.', otro:'Urmați indicațiile AEMET și ale școlii.'}}};
   function lang(){ var l = 'es'; try { l = (window.capiLang ? window.capiLang() : document.documentElement.lang) || 'es'; } catch(e){} l = String(l).slice(0,2); return TR[l] ? l : 'es'; }
   function tipo(f){ f = (f||'').toLowerCase();
     return /torment/.test(f)?'torm': /lluv|precip/.test(f)?'lluv': /máx|max/.test(f)?'max': /mín|min/.test(f)?'min': /niev|nev/.test(f)?'niev': /vient/.test(f)?'vien': /niebla/.test(f)?'nieb': /polvo|calima/.test(f)?'polv': /coster/.test(f)?'cost':''; }
@@ -34,12 +34,26 @@
     return /máx|max|calor/.test(f)?'🌡️': /mín|min|frío|frio/.test(f)?'🥶': /torment/.test(f)?'⛈️': /lluv|precip/.test(f)?'🌧️':
       /niev|nev/.test(f)?'❄️': /vient/.test(f)?'💨': /niebla/.test(f)?'🌫️': /polvo|calima/.test(f)?'🟤':'⚠️'; }
   // Consejo práctico para las familias según el fenómeno
-  function consejo(tipos, X){
-    if (tipos.indexOf('lluv')>=0 || tipos.indexOf('torm')>=0) return X.c.lluv;
-    if (tipos.indexOf('max')>=0) return X.c.calor;
-    if (tipos.indexOf('min')>=0 || tipos.indexOf('niev')>=0) return X.c.frio;
-    if (tipos.indexOf('vien')>=0) return X.c.vien;
-    return X.c.otro; }
+  // ¿Hay cole ese día? Usa el calendario común del centro si la web lo tiene; si no, solo descarta sábados y domingos
+  function diaMadrid(d){ try { return new Intl.DateTimeFormat('en-CA', {timeZone:'Europe/Madrid', year:'numeric', month:'2-digit', day:'2-digit'}).format(d); } catch(e){ return d.toISOString().slice(0,10); } }
+  function hayCole(ds){
+    try { if (window.CalendarioCole && CalendarioCole.sinCole) return !CalendarioCole.sinCole(ds); } catch(e){}
+    var w = new Date(ds+'T12:00').getDay(); return w !== 0 && w !== 6; }
+  function diasConCole(avisos){
+    var hoy = diaMadrid(new Date());
+    return avisos.some(function(a){
+      var ini = a.inicio ? new Date(a.inicio) : new Date(), fin = a.fin ? new Date(a.fin) : ini;
+      for (var d = new Date(ini), k = 0; d <= fin && k < 7; d.setDate(d.getDate()+1), k++){
+        var ds = diaMadrid(d); if (ds >= hoy && hayCole(ds)) return true; }
+      return hayCole(diaMadrid(fin)) && diaMadrid(fin) >= hoy; }); }
+  // Consejo práctico para las familias según el fenómeno (distinto si esos días no hay cole)
+  function consejo(tipos, X, cole){
+    var C = cole ? X.c : X.sc;
+    if (tipos.indexOf('lluv')>=0 || tipos.indexOf('torm')>=0) return C.lluv;
+    if (tipos.indexOf('max')>=0) return C.calor;
+    if (tipos.indexOf('min')>=0 || tipos.indexOf('niev')>=0) return C.frio;
+    if (tipos.indexOf('vien')>=0) return C.vien;
+    return C.otro; }
   function cuando(ini, fin, X){
     if (!ini) return '';
     var d = new Date(ini), h = new Date(); h.setHours(0,0,0,0);
@@ -79,7 +93,7 @@
         var t = tipo(a.fenomeno), nom = t ? X.fen[t] + ' · ' + X.nivel + ' ' + X.niv[a.nivel] : a.fenomeno;
         return '<li><b>'+icono(a.fenomeno)+' '+esc(nom)+'</b>'+
           '<span>'+esc(cuando(a.inicio, a.fin, X))+(a.texto && L==='es'?' · '+esc(a.texto):'')+'</span></li>'; }).join('')+'</ul>'+
-      '<div class="aem-c">💡 '+esc(consejo(tipos, X))+'</div>'+
+      '<div class="aem-c">💡 '+esc(consejo(tipos, X, diasConCole(avisos)))+'</div>'+
       '<div class="aem-n">'+esc(X.fu)+': <a href="https://www.aemet.es/es/eltiempo/prediccion/avisos" target="_blank" rel="noopener">AEMET</a> · '+esc(X.zo)+' '+esc(avisos[0].zona)+'</div></div>';
   }
 
