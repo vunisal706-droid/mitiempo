@@ -20,7 +20,7 @@
       /niev|nev/.test(f)?'❄️': /vient/.test(f)?'💨': /niebla/.test(f)?'🌫️': /polvo|calima/.test(f)?'🟤':'⚠️'; }
   // Consejo práctico para las familias según el fenómeno
   function consejo(f){ f = (f||'').toLowerCase();
-    if (/lluv|precip|torment/.test(f)) return 'Traed chubasquero o paraguas. Los días de lluvia abrimos las cancelas 5 minutos antes; Infantil y el aula TEA entran por el patio de Infantil y Primaria sube directamente a clase.';
+    if (/lluv|precip|torment/.test(f)) return 'Mejor chubasquero o impermeable: el paraguas no puede entrar en el colegio, se lo lleva la familia. Los días de lluvia, Infantil y el aula TEA entran por el patio de Infantil y Primaria sube directamente a clase.';
     if (/máx|max|calor/.test(f)) return 'Agua, gorra y ropa fresca. En el recreo buscamos la sombra.';
     if (/mín|min|frío|frio|niev|nev/.test(f)) return 'Abrigad bien al alumnado: chaquetón, gorro y guantes.';
     if (/vient/.test(f)) return 'Precaución en la entrada y la salida por el viento.';
