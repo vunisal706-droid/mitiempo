@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-10-15T09:09",
+ "actualizado": "2026-10-16T09:02",
  "eventos": [
   {
    "t": "IX HelpMePlease",
@@ -333,6 +333,28 @@
    "tipo": "fiesta",
    "lat": 37.2374,
    "lon": -3.5681
+  },
+  {
+   "t": "Réquiem por Lorca",
+   "desde": "2026-10-15",
+   "hasta": "2026-10-18",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-09-1.2e16d0ba.fill-275x202-c100_Giaqvju.png",
+   "fuente": "turgranada",
+   "tipo": "cultura",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
+   "t": "Granada 2031 Festival Fusión",
+   "desde": "2026-10-15",
+   "hasta": "2026-10-31",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/fusions.2e16d0ba.fill-275x202-c100.jpg",
+   "fuente": "turgranada",
+   "tipo": "musica",
+   "lat": 37.1882,
+   "lon": -3.6067
   },
   {
    "t": "VI Ciclo de Conferencias El valor de las fuentes, perspectivas de investigación. Archivos familiares y…",
