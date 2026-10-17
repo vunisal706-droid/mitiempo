@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-10-16T09:02",
+ "actualizado": "2026-10-17T08:34",
  "eventos": [
   {
    "t": "IX HelpMePlease",
@@ -46,17 +46,6 @@
    "lon": -3.6067
   },
   {
-   "t": "La casa de la ciencia. Patrimonio cultural árabe e islámico",
-   "desde": "2026-05-19",
-   "hasta": "2026-10-16",
-   "lugar": "Granada",
-   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-09-2.2e16d0ba.fill-275x202-c100_pz1Nu4p.png",
-   "fuente": "turgranada",
-   "tipo": "expo",
-   "lat": 37.1882,
-   "lon": -3.6067
-  },
-  {
    "t": "Exposición. Ritmo y Resonancia – R&R",
    "desde": "2026-05-22",
    "hasta": "2027-05-15",
@@ -64,17 +53,6 @@
    "img": "https://cdn.dipgra.es/my-media-files-bucket/images/eventoa-ritmo-resonancia.2e16d0ba.fill-275x202-c100.jpg",
    "fuente": "turgranada",
    "tipo": "expo",
-   "lat": 37.1882,
-   "lon": -3.6067
-  },
-  {
-   "t": "Lo Fresco",
-   "desde": "2026-06-10",
-   "hasta": "2026-10-16",
-   "lugar": "Granada",
-   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-09-2.2e16d0ba.fill-275x202-c100_FlKU9Mm.png",
-   "fuente": "turgranada",
-   "tipo": "cultura",
    "lat": 37.1882,
    "lon": -3.6067
   },
@@ -357,6 +335,17 @@
    "lon": -3.6067
   },
   {
+   "t": "Lateral Abierto",
+   "desde": "2026-10-15",
+   "hasta": "2026-10-18",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-10-1.2e16d0ba.fill-275x202-c100_nUFrZY1.png",
+   "fuente": "turgranada",
+   "tipo": "cultura",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
    "t": "VI Ciclo de Conferencias El valor de las fuentes, perspectivas de investigación. Archivos familiares y…",
    "desde": "2026-10-15",
    "hasta": "2026-11-19",
@@ -365,6 +354,17 @@
    "desc": "VI Ciclo de Conferencias El valor de las fuentes, perspectivas de investigación en los archivos “ARCHIVOS FAMILIARES Y EMPRESARIALES EN EL PATRIMONIO DOCUMENTAL ANDALUZ”…",
    "fuente": "junta",
    "tipo": "expo",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
+   "t": "Tres noches en Ítaca",
+   "desde": "2026-10-16",
+   "hasta": "2026-10-17",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/itaca.2e16d0ba.fill-275x202-c100.png",
+   "fuente": "turgranada",
+   "tipo": "cultura",
    "lat": 37.1882,
    "lon": -3.6067
   },
@@ -382,19 +382,6 @@
    "lon": -3.072
   },
   {
-   "t": "Acción de voluntariado: 21º Día del Bosque en el Parque Natural Sierra de Baza",
-   "desde": "2026-10-18",
-   "hasta": "2026-10-18",
-   "lugar": "Baza",
-   "hora": "10:30",
-   "precio": "Actividad gratuita",
-   "desc": "Programa 21º Día del Bosque en el PN Sierra de Baza Domingo 18 de octubre de 2026. 10:30 H Cortijo de los Corvos La actividad incluye seguro, y picnic para las personas…",
-   "fuente": "junta",
-   "tipo": "naturaleza",
-   "lat": 37.4907,
-   "lon": -2.7726
-  },
-  {
    "t": "Los bosques de ribera",
    "desde": "2026-10-24",
    "hasta": "2026-10-24",
@@ -408,13 +395,13 @@
    "lon": -3.1392
   },
   {
-   "t": "Acción de voluntariado: IV Jornada de recuperación de setos y lindes en antiguos campos de cultivo de la…",
-   "desde": "2026-10-25",
-   "hasta": "2026-10-25",
+   "t": "Acción de voluntariado: 21º Día del Bosque en el Parque Natural Sierra de Baza",
+   "desde": "2026-10-24",
+   "hasta": "2026-10-24",
    "lugar": "Baza",
    "hora": "10:30",
    "precio": "Actividad gratuita",
-   "desc": "Programa 21º Día del Bosque en el PN Sierra de Baza Domingo 18 de octubre de 2026. 10:30 H Cortijo de los Corvos La actividad incluye seguro, y picnic para las personas…",
+   "desc": "Programa 21º Día del Bosque en el PN Sierra de Baza Domingo 24 de octubre de 2026. 10:30 H Cortijo de los Corvos La actividad incluye seguro, y picnic para las personas…",
    "fuente": "junta",
    "tipo": "naturaleza",
    "lat": 37.4907,
@@ -432,6 +419,19 @@
    "tipo": "naturaleza",
    "lat": 37.4367,
    "lon": -2.7248
+  },
+  {
+   "t": "Acción de voluntariado: IV Jornada de recuperación de setos y lindes en antiguos campos de cultivo de la…",
+   "desde": "2026-10-25",
+   "hasta": "2026-10-25",
+   "lugar": "Baza",
+   "hora": "10:30",
+   "precio": "Actividad gratuita",
+   "desc": "Programa 21º Día del Bosque en el PN Sierra de Baza Domingo 24 de octubre de 2026. 10:30 H Cortijo de los Corvos La actividad incluye seguro, y picnic para las personas…",
+   "fuente": "junta",
+   "tipo": "naturaleza",
+   "lat": 37.4907,
+   "lon": -2.7726
   }
  ]
 }
