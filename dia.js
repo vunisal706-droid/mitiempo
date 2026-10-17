@@ -98,16 +98,16 @@
   }
   function chart(o){
     // o: {labels[], series:[{n,c,v[],t:'line'|'bar'|'area'}], unit, dec, zero, max, min, colorsBar(v)}
-    const id = 'dch'+(++NID), W = 640, Hh = o.h || 190, L = 40, R = 10, T = 12, B = 26, n = o.labels.length;
+    const id = 'dch'+(++NID), W = 520, Hh = o.h || 200, L = 40, R = 10, T = 12, B = 26, n = o.labels.length;
     const vals = o.series.flatMap(s=>s.v.filter(v=>v!=null));
     if (!vals.length) return '';
     let {lo, hi, step} = niceRange(o.min!=null ? Math.min(o.min, ...vals) : Math.min(...vals), o.max!=null ? Math.max(o.max, ...vals) : Math.max(...vals), o.zero);
     const sw = (W-L-R)/n, X = i => L + (i+.5)*sw, Y = v => T + (hi - v)/(hi - lo)*(Hh-T-B);
     let g = '';
     for (let v = lo; v <= hi + 1e-9; v += step){ const y = Y(v);
-      g += `<line x1="${L}" x2="${W-R}" y1="${y}" y2="${y}" stroke="${GRID}" stroke-width="1"/><text x="${L-6}" y="${y+4}" text-anchor="end" font-size="11" fill="${INK}" font-weight="700">${(Math.round(v*100)/100).toLocaleString('es-ES')}</text>`; }
-    for (let i = 0; i < n; i += 3) g += `<text x="${X(i)}" y="${Hh-8}" text-anchor="middle" font-size="11" fill="${INK}" font-weight="700">${o.labels[i]}</text>`;
-    if (o.ahora != null) g += `<line x1="${X(o.ahora)}" x2="${X(o.ahora)}" y1="${T}" y2="${Hh-B}" stroke="#94a3b8" stroke-dasharray="3 3"/><text x="${X(o.ahora)+4}" y="${T+10}" font-size="10" fill="#64748b" font-weight="800">ahora</text>`;
+      g += `<line x1="${L}" x2="${W-R}" y1="${y}" y2="${y}" stroke="${GRID}" stroke-width="1"/><text x="${L-6}" y="${y+4}" text-anchor="end" font-size="13" fill="${INK}" font-weight="700">${(Math.round(v*100)/100).toLocaleString('es-ES')}</text>`; }
+    for (let i = 0; i < n; i += 3) g += `<text x="${X(i)}" y="${Hh-7}" text-anchor="middle" font-size="13" fill="${INK}" font-weight="700">${o.labels[i]}</text>`;
+    if (o.ahora != null) g += `<line x1="${X(o.ahora)}" x2="${X(o.ahora)}" y1="${T}" y2="${Hh-B}" stroke="#94a3b8" stroke-dasharray="3 3"/><text x="${X(o.ahora)+4}" y="${T+10}" font-size="12" fill="#64748b" font-weight="800">ahora</text>`;
     const bars = o.series.filter(s=>s.t==='bar'), nb = bars.length;
     o.series.forEach((s, k) => {
       if (s.t === 'bar'){
@@ -127,8 +127,8 @@
     const s0 = o.series.find(s=>s.t!=='bar');
     if (s0 && o.marcas !== false){ const v = s0.v; let iM = -1, im = -1;
       v.forEach((x,i)=>{ if (x==null) return; if (iM<0||x>v[iM]) iM=i; if (im<0||x<v[im]) im=i; });
-      if (iM>=0) g += `<circle cx="${X(iM)}" cy="${Y(v[iM])}" r="4" fill="${s0.c}" stroke="#fff" stroke-width="2"/><text x="${X(iM)}" y="${Y(v[iM])-8}" text-anchor="middle" font-size="11" font-weight="900" fill="#0f172a">${fmt(v[iM], o.dec)}${o.unit}</text>`;
-      if (im>=0 && im!==iM && o.min0lab!==false) g += `<circle cx="${X(im)}" cy="${Y(v[im])}" r="4" fill="${s0.c}" stroke="#fff" stroke-width="2"/><text x="${X(im)}" y="${Y(v[im])+16}" text-anchor="middle" font-size="11" font-weight="900" fill="#0f172a">${fmt(v[im], o.dec)}${o.unit}</text>`;
+      if (iM>=0) g += `<circle cx="${X(iM)}" cy="${Y(v[iM])}" r="4" fill="${s0.c}" stroke="#fff" stroke-width="2"/><text x="${X(iM)}" y="${Y(v[iM])-8}" text-anchor="middle" font-size="13" font-weight="900" fill="#0f172a">${fmt(v[iM], o.dec)}${o.unit}</text>`;
+      if (im>=0 && im!==iM && o.min0lab!==false) g += `<circle cx="${X(im)}" cy="${Y(v[im])}" r="4" fill="${s0.c}" stroke="#fff" stroke-width="2"/><text x="${X(im)}" y="${Y(v[im])+16}" text-anchor="middle" font-size="13" font-weight="900" fill="#0f172a">${fmt(v[im], o.dec)}${o.unit}</text>`;
     }
     g += `<line class="cx" x1="0" x2="0" y1="${T}" y2="${Hh-B}" stroke="#0f172a" stroke-width="1" opacity="0"/>`;
     g += `<rect x="${L}" y="${T}" width="${W-L-R}" height="${Hh-T-B}" fill="transparent" class="hit"/>`;
@@ -175,7 +175,7 @@
         sol = `<circle cx="${x}" cy="${y}" r="9" fill="#facc15" stroke="#f59e0b" stroke-width="2"/>`; } }
     return `<svg viewBox="0 0 160 96" width="160" height="96" aria-hidden="true"><path d="M14 78 A66 62 0 0 1 146 78" fill="none" stroke="#fcd34d" stroke-width="3" stroke-dasharray="4 5"/>
       <line x1="4" y1="78" x2="156" y2="78" stroke="#94a3b8" stroke-width="2"/>${sol}
-      <text x="14" y="93" font-size="11" font-weight="800" fill="#475569" text-anchor="middle">${hm(sr)}</text><text x="146" y="93" font-size="11" font-weight="800" fill="#475569" text-anchor="middle">${hm(ss)}</text></svg>`;
+      <text x="14" y="93" font-size="13" font-weight="800" fill="#475569" text-anchor="middle">${hm(sr)}</text><text x="146" y="93" font-size="13" font-weight="800" fill="#475569" text-anchor="middle">${hm(ss)}</text></svg>`;
   }
   const POL = {grass_pollen:'Gramíneas', olive_pollen:'Olivo', birch_pollen:'Abedul', alder_pollen:'Aliso', mugwort_pollen:'Artemisa', ragweed_pollen:'Ambrosía'};
   const polNiv = (k, v) => { const t = k==='grass_pollen' ? [5,20,50] : k==='olive_pollen' ? [20,100,400] : [10,50,200];
