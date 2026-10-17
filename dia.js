@@ -49,7 +49,7 @@
   .dia-pol span.lv{border-radius:999px;padding:1px 9px;font-size:.78rem;font-weight:900}
   .dia-back{margin-bottom:12px}
   .dia-sun{display:flex;align-items:center;gap:12px}
-  .dia-sun svg{flex:0 0 160px}
+  .dia-sun svg{flex:0 0 auto;width:180px;height:auto}
   @media(max-width:520px){.dia-grid{grid-template-columns:repeat(2,1fr)}.dia-mom{grid-template-columns:repeat(2,1fr)}.dia-sun{flex-direction:column}}
   `;
   document.head.appendChild(css);
@@ -173,7 +173,7 @@
     if (ds === hoyISO()){ const n = new Date(), m = n.getHours()*60+n.getMinutes();
       if (m > a && m < b){ const f = (m-a)/(b-a), ang = Math.PI*(1-f), x = 80 + 66*Math.cos(ang), y = 78 - 62*Math.sin(ang);
         sol = `<circle cx="${x}" cy="${y}" r="9" fill="#facc15" stroke="#f59e0b" stroke-width="2"/>`; } }
-    return `<svg viewBox="0 0 160 96" width="160" height="96" aria-hidden="true"><path d="M14 78 A66 62 0 0 1 146 78" fill="none" stroke="#fcd34d" stroke-width="3" stroke-dasharray="4 5"/>
+    return `<svg viewBox="-14 0 188 98" width="180" height="94" aria-hidden="true"><path d="M14 78 A66 62 0 0 1 146 78" fill="none" stroke="#fcd34d" stroke-width="3" stroke-dasharray="4 5"/>
       <line x1="4" y1="78" x2="156" y2="78" stroke="#94a3b8" stroke-width="2"/>${sol}
       <text x="14" y="93" font-size="13" font-weight="800" fill="#475569" text-anchor="middle">${hm(sr)}</text><text x="146" y="93" font-size="13" font-weight="800" fill="#475569" text-anchor="middle">${hm(ss)}</text></svg>`;
   }
