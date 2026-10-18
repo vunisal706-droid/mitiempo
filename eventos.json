@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-10-17T08:34",
+ "actualizado": "2026-10-18T08:51",
  "eventos": [
   {
    "t": "IX HelpMePlease",
@@ -358,28 +358,15 @@
    "lon": -3.6067
   },
   {
-   "t": "Tres noches en Ítaca",
+   "t": "Geofolk Festival",
    "desde": "2026-10-16",
-   "hasta": "2026-10-17",
-   "lugar": "Granada",
-   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/itaca.2e16d0ba.fill-275x202-c100.png",
+   "hasta": "2026-10-18",
+   "lugar": "Huéscar",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-10-0.2e16d0ba.fill-275x202-c100_xGB7sWp.png",
    "fuente": "turgranada",
-   "tipo": "cultura",
-   "lat": 37.1882,
-   "lon": -3.6067
-  },
-  {
-   "t": "Los vínculos que sostienen los ecosistemas",
-   "desde": "2026-10-17",
-   "hasta": "2026-10-17",
-   "lugar": "Aldeire",
-   "hora": "08.45 h a 16:15 h",
-   "precio": "Actividad gratuita",
-   "desc": "Actividad de voluntariado para conocer las relaciones intrínsecas dentro de losecosistemas. Taller sobre aves migratorias y acción de voluntariado de colocación .de…",
-   "fuente": "junta",
-   "tipo": "naturaleza",
-   "lat": 37.1601,
-   "lon": -3.072
+   "tipo": "musica",
+   "lat": 37.811,
+   "lon": -2.5412
   },
   {
    "t": "Los bosques de ribera",
