@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-10-18T08:51",
+ "actualizado": "2026-10-19T09:54",
  "eventos": [
   {
    "t": "IX HelpMePlease",
@@ -20,17 +20,6 @@
    "img": "https://cdn.dipgra.es/my-media-files-bucket/images/2026-02-Expo-LaEdadDeLaIlusio.2e16d0ba.fill-275x202-c100.jpg",
    "fuente": "turgranada",
    "tipo": "cultura",
-   "lat": 37.1882,
-   "lon": -3.6067
-  },
-  {
-   "t": "Exposición. Ríos (Cruzar el archivo Lorca)",
-   "desde": "2026-04-24",
-   "hasta": "2026-10-18",
-   "lugar": "Granada",
-   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/cSTEvbUhOgMFqMOExeunqUuMxuVsF.2e16d0ba.fill-275x202-c100.jpg",
-   "fuente": "turgranada",
-   "tipo": "expo",
    "lat": 37.1882,
    "lon": -3.6067
   },
@@ -64,17 +53,6 @@
    "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-09-0.2e16d0ba.fill-275x202-c100_ha3jRlE.png",
    "fuente": "turgranada",
    "tipo": "expo",
-   "lat": 37.1882,
-   "lon": -3.6067
-  },
-  {
-   "t": "Parque hinchable Funbox",
-   "desde": "2026-09-04",
-   "hasta": "2026-10-18",
-   "lugar": "Granada",
-   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/funbox.2e16d0ba.fill-275x202-c100.png",
-   "fuente": "turgranada",
-   "tipo": "ninos",
    "lat": 37.1882,
    "lon": -3.6067
   },
@@ -167,6 +145,29 @@
    "lon": -3.6067
   },
   {
+   "t": "Jornadas Europeas de Patrimonio",
+   "desde": "2026-10-01",
+   "hasta": "2026-11-30",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/JORNADASPATRIMONIO26.2e16d0ba.fill-275x202-c100.jpg",
+   "fuente": "turgranada",
+   "tipo": "expo",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
+   "t": "Agenda cultural Almuñécar 2026",
+   "desde": "2026-10-01",
+   "hasta": "2026-10-31",
+   "lugar": "Almuñécar",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/agenda_almunecar.2e16d0ba.fill-275x202-c100.jpg",
+   "generico": true,
+   "fuente": "turgranada",
+   "tipo": "cultura",
+   "lat": 36.7325,
+   "lon": -3.6917
+  },
+  {
    "t": "Agenda octubre Salobreña 2026",
    "desde": "2026-10-01",
    "hasta": "2026-10-31",
@@ -200,29 +201,6 @@
    "tipo": "musica",
    "lat": 37.1882,
    "lon": -3.6067
-  },
-  {
-   "t": "Jornadas Europeas de Patrimonio",
-   "desde": "2026-10-01",
-   "hasta": "2026-11-30",
-   "lugar": "Granada",
-   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/JORNADASPATRIMONIO26.2e16d0ba.fill-275x202-c100.jpg",
-   "fuente": "turgranada",
-   "tipo": "expo",
-   "lat": 37.1882,
-   "lon": -3.6067
-  },
-  {
-   "t": "Agenda cultural Almuñécar 2026",
-   "desde": "2026-10-01",
-   "hasta": "2026-10-31",
-   "lugar": "Almuñécar",
-   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/agenda_almunecar.2e16d0ba.fill-275x202-c100.jpg",
-   "generico": true,
-   "fuente": "turgranada",
-   "tipo": "cultura",
-   "lat": 36.7325,
-   "lon": -3.6917
   },
   {
    "t": "El arte de emocionar. Banda Sinfónica Ciudad de Guadix",
@@ -269,17 +247,6 @@
    "lon": -3.6067
   },
   {
-   "t": "IX Feria de Oficios Artesanos de Granada",
-   "desde": "2026-10-09",
-   "hasta": "2026-10-18",
-   "lugar": "Granada",
-   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-10-0.2e16d0ba.fill-275x202-c100_DO6kKam.png",
-   "fuente": "turgranada",
-   "tipo": "fiesta",
-   "lat": 37.1882,
-   "lon": -3.6067
-  },
-  {
    "t": "Granada. Capital imperial",
    "desde": "2026-10-09",
    "hasta": "2027-01-17",
@@ -302,28 +269,6 @@
    "lon": -3.6067
   },
   {
-   "t": "Feria del Pan. Alfacar",
-   "desde": "2026-10-14",
-   "hasta": "2026-10-18",
-   "lugar": "Alfacar",
-   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-10-0.2e16d0ba.fill-275x202-c100_KQTWEdD.png",
-   "fuente": "turgranada",
-   "tipo": "fiesta",
-   "lat": 37.2374,
-   "lon": -3.5681
-  },
-  {
-   "t": "Réquiem por Lorca",
-   "desde": "2026-10-15",
-   "hasta": "2026-10-18",
-   "lugar": "Granada",
-   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-09-1.2e16d0ba.fill-275x202-c100_Giaqvju.png",
-   "fuente": "turgranada",
-   "tipo": "cultura",
-   "lat": 37.1882,
-   "lon": -3.6067
-  },
-  {
    "t": "Granada 2031 Festival Fusión",
    "desde": "2026-10-15",
    "hasta": "2026-10-31",
@@ -331,17 +276,6 @@
    "img": "https://cdn.dipgra.es/my-media-files-bucket/images/fusions.2e16d0ba.fill-275x202-c100.jpg",
    "fuente": "turgranada",
    "tipo": "musica",
-   "lat": 37.1882,
-   "lon": -3.6067
-  },
-  {
-   "t": "Lateral Abierto",
-   "desde": "2026-10-15",
-   "hasta": "2026-10-18",
-   "lugar": "Granada",
-   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-10-1.2e16d0ba.fill-275x202-c100_nUFrZY1.png",
-   "fuente": "turgranada",
-   "tipo": "cultura",
    "lat": 37.1882,
    "lon": -3.6067
   },
@@ -358,28 +292,59 @@
    "lon": -3.6067
   },
   {
-   "t": "Geofolk Festival",
-   "desde": "2026-10-16",
-   "hasta": "2026-10-18",
-   "lugar": "Huéscar",
-   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-10-0.2e16d0ba.fill-275x202-c100_xGB7sWp.png",
+   "t": "Los Especiales del Falla",
+   "desde": "2026-10-17",
+   "hasta": "2027-05-08",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Auditorio_Manuel_de_Falla_CKf.2e16d0ba.fill-275x202-c100.jpg",
    "fuente": "turgranada",
-   "tipo": "musica",
-   "lat": 37.811,
-   "lon": -2.5412
+   "tipo": "cultura",
+   "lat": 37.1882,
+   "lon": -3.6067
   },
   {
-   "t": "Los bosques de ribera",
-   "desde": "2026-10-24",
+   "t": "Equinoccio",
+   "desde": "2026-10-17",
+   "hasta": "2026-10-30",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-10-1.2e16d0ba.fill-275x202-c100_eUvUTh8.png",
+   "fuente": "turgranada",
+   "tipo": "cultura",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
+   "t": "Granada Film Fest: 32 años de Jóvenes Realizadores",
+   "desde": "2026-10-18",
    "hasta": "2026-10-24",
-   "lugar": "Guadix",
-   "hora": "De 08:30h a 14:15h",
-   "precio": "Actividad gratuita",
-   "desc": "El objetivo principal de esta actividad es la sensibilización y concienciación ambiental sobre los bosques de ribera en el espacio protegido de Sierra Nevada, combinando…",
-   "fuente": "junta",
-   "tipo": "naturaleza",
-   "lat": 37.2993,
-   "lon": -3.1392
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-09-1.2e16d0ba.fill-275x202-c100_UlpmHuS.png",
+   "fuente": "turgranada",
+   "tipo": "cultura",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
+   "t": "Una hora de cámara",
+   "desde": "2026-10-18",
+   "hasta": "2027-05-16",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/HORADECAMARA.2e16d0ba.fill-275x202-c100.jpg",
+   "fuente": "turgranada",
+   "tipo": "cultura",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
+   "t": "44 Feria del Libro Antiguo y de Ocasión",
+   "desde": "2026-10-22",
+   "hasta": "2026-11-08",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-10-1.2e16d0ba.fill-275x202-c100_TQsY8I4.png",
+   "fuente": "turgranada",
+   "tipo": "fiesta",
+   "lat": 37.1882,
+   "lon": -3.6067
   },
   {
    "t": "Acción de voluntariado: 21º Día del Bosque en el Parque Natural Sierra de Baza",
@@ -393,6 +358,19 @@
    "tipo": "naturaleza",
    "lat": 37.4907,
    "lon": -2.7726
+  },
+  {
+   "t": "Los bosques de ribera",
+   "desde": "2026-10-24",
+   "hasta": "2026-10-24",
+   "lugar": "Guadix",
+   "hora": "De 08:30h a 14:15h",
+   "precio": "Actividad gratuita",
+   "desc": "El objetivo principal de esta actividad es la sensibilización y concienciación ambiental sobre los bosques de ribera en el espacio protegido de Sierra Nevada, combinando…",
+   "fuente": "junta",
+   "tipo": "naturaleza",
+   "lat": 37.2993,
+   "lon": -3.1392
   },
   {
    "t": "Jornada: \"Los bosques y el cambio climático\"",
