@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-10-19T09:54",
+ "actualizado": "2026-10-20T09:26",
  "eventos": [
   {
    "t": "IX HelpMePlease",
@@ -145,29 +145,6 @@
    "lon": -3.6067
   },
   {
-   "t": "Jornadas Europeas de Patrimonio",
-   "desde": "2026-10-01",
-   "hasta": "2026-11-30",
-   "lugar": "Granada",
-   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/JORNADASPATRIMONIO26.2e16d0ba.fill-275x202-c100.jpg",
-   "fuente": "turgranada",
-   "tipo": "expo",
-   "lat": 37.1882,
-   "lon": -3.6067
-  },
-  {
-   "t": "Agenda cultural Almuñécar 2026",
-   "desde": "2026-10-01",
-   "hasta": "2026-10-31",
-   "lugar": "Almuñécar",
-   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/agenda_almunecar.2e16d0ba.fill-275x202-c100.jpg",
-   "generico": true,
-   "fuente": "turgranada",
-   "tipo": "cultura",
-   "lat": 36.7325,
-   "lon": -3.6917
-  },
-  {
    "t": "Agenda octubre Salobreña 2026",
    "desde": "2026-10-01",
    "hasta": "2026-10-31",
@@ -201,6 +178,29 @@
    "tipo": "musica",
    "lat": 37.1882,
    "lon": -3.6067
+  },
+  {
+   "t": "Jornadas Europeas de Patrimonio",
+   "desde": "2026-10-01",
+   "hasta": "2026-11-30",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/JORNADASPATRIMONIO26.2e16d0ba.fill-275x202-c100.jpg",
+   "fuente": "turgranada",
+   "tipo": "expo",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
+   "t": "Agenda cultural Almuñécar 2026",
+   "desde": "2026-10-01",
+   "hasta": "2026-10-31",
+   "lugar": "Almuñécar",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/agenda_almunecar.2e16d0ba.fill-275x202-c100.jpg",
+   "generico": true,
+   "fuente": "turgranada",
+   "tipo": "cultura",
+   "lat": 36.7325,
+   "lon": -3.6917
   },
   {
    "t": "El arte de emocionar. Banda Sinfónica Ciudad de Guadix",
@@ -243,6 +243,17 @@
    "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-10-0.2e16d0ba.fill-275x202-c100_b5KZb2a.png",
    "fuente": "turgranada",
    "tipo": "expo",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
+   "t": "40 Años del Cómic Americano",
+   "desde": "2026-10-08",
+   "hasta": "2026-10-24",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-10-1.2e16d0ba.fill-275x202-c100_KhlGgV8.png",
+   "fuente": "turgranada",
+   "tipo": "cultura",
    "lat": 37.1882,
    "lon": -3.6067
   },
@@ -332,17 +343,6 @@
    "img": "https://cdn.dipgra.es/my-media-files-bucket/images/HORADECAMARA.2e16d0ba.fill-275x202-c100.jpg",
    "fuente": "turgranada",
    "tipo": "cultura",
-   "lat": 37.1882,
-   "lon": -3.6067
-  },
-  {
-   "t": "44 Feria del Libro Antiguo y de Ocasión",
-   "desde": "2026-10-22",
-   "hasta": "2026-11-08",
-   "lugar": "Granada",
-   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-10-1.2e16d0ba.fill-275x202-c100_TQsY8I4.png",
-   "fuente": "turgranada",
-   "tipo": "fiesta",
    "lat": 37.1882,
    "lon": -3.6067
   },
