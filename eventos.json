@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-10-20T09:26",
+ "actualizado": "2026-10-21T09:22",
  "eventos": [
   {
    "t": "IX HelpMePlease",
@@ -345,6 +345,29 @@
    "tipo": "cultura",
    "lat": 37.1882,
    "lon": -3.6067
+  },
+  {
+   "t": "El sueño de una princesa del Renacimiento: María de Hungría",
+   "desde": "2026-10-20",
+   "hasta": "2026-11-20",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/maria_de_hungria_1fl3v9d.4529ce4f.fill-275x202-c100.jpg",
+   "fuente": "turgranada",
+   "tipo": "cultura",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
+   "t": "XVII Real Feria de Ganado 2026",
+   "desde": "2026-10-23",
+   "hasta": "2026-10-25",
+   "lugar": "Loja",
+   "precio": "Actividad gratuita",
+   "desc": "CICLO DE CONFERENCIAS Viernes 23 de octubre: \"Distintivo de Calidad Marca Parque Natural de Andalucía\" a cargo de Luz García Rojas, Agencia de Medio Ambiente y Agua de…",
+   "fuente": "junta",
+   "tipo": "fiesta",
+   "lat": 37.1689,
+   "lon": -4.1513
   },
   {
    "t": "Acción de voluntariado: 21º Día del Bosque en el Parque Natural Sierra de Baza",
