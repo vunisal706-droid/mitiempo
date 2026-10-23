@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-10-22T09:25",
+ "actualizado": "2026-10-23T09:21",
  "eventos": [
   {
    "t": "IX HelpMePlease",
@@ -145,29 +145,6 @@
    "lon": -3.6067
   },
   {
-   "t": "Jornadas Europeas de Patrimonio",
-   "desde": "2026-10-01",
-   "hasta": "2026-11-30",
-   "lugar": "Granada",
-   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/JORNADASPATRIMONIO26.2e16d0ba.fill-275x202-c100.jpg",
-   "fuente": "turgranada",
-   "tipo": "expo",
-   "lat": 37.1882,
-   "lon": -3.6067
-  },
-  {
-   "t": "Agenda cultural Almuñécar 2026",
-   "desde": "2026-10-01",
-   "hasta": "2026-10-31",
-   "lugar": "Almuñécar",
-   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/agenda_almunecar.2e16d0ba.fill-275x202-c100.jpg",
-   "generico": true,
-   "fuente": "turgranada",
-   "tipo": "cultura",
-   "lat": 36.7325,
-   "lon": -3.6917
-  },
-  {
    "t": "Agenda octubre Salobreña 2026",
    "desde": "2026-10-01",
    "hasta": "2026-10-31",
@@ -201,6 +178,29 @@
    "tipo": "musica",
    "lat": 37.1882,
    "lon": -3.6067
+  },
+  {
+   "t": "Jornadas Europeas de Patrimonio",
+   "desde": "2026-10-01",
+   "hasta": "2026-11-30",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/JORNADASPATRIMONIO26.2e16d0ba.fill-275x202-c100.jpg",
+   "fuente": "turgranada",
+   "tipo": "expo",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
+   "t": "Agenda cultural Almuñécar 2026",
+   "desde": "2026-10-01",
+   "hasta": "2026-10-31",
+   "lugar": "Almuñécar",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/agenda_almunecar.2e16d0ba.fill-275x202-c100.jpg",
+   "generico": true,
+   "fuente": "turgranada",
+   "tipo": "cultura",
+   "lat": 36.7325,
+   "lon": -3.6917
   },
   {
    "t": "El arte de emocionar. Banda Sinfónica Ciudad de Guadix",
