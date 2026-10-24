@@ -1,17 +1,6 @@
 {
- "actualizado": "2026-10-23T09:21",
+ "actualizado": "2026-10-24T08:53",
  "eventos": [
-  {
-   "t": "IX HelpMePlease",
-   "desde": "2025-08-31",
-   "hasta": "2026-11-20",
-   "lugar": "Granada",
-   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/helpmeplease-ix-edicion-749x1.2e16d0ba.fill-275x202-c100.jpg",
-   "fuente": "turgranada",
-   "tipo": "cultura",
-   "lat": 37.1882,
-   "lon": -3.6067
-  },
   {
    "t": "La edad de la ilusión",
    "desde": "2026-02-18",
@@ -167,17 +156,6 @@
    "tipo": "cultura",
    "lat": 36.7507,
    "lon": -3.5179
-  },
-  {
-   "t": "Festival Música Sacra Granada MUSAG",
-   "desde": "2026-10-01",
-   "hasta": "2026-10-23",
-   "lugar": "Granada",
-   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-09-3.2e16d0ba.fill-275x202-c100_YwAZ2wz.png",
-   "fuente": "turgranada",
-   "tipo": "musica",
-   "lat": 37.1882,
-   "lon": -3.6067
   },
   {
    "t": "Jornadas Europeas de Patrimonio",
@@ -369,6 +347,28 @@
    "lon": -3.6067
   },
   {
+   "t": "44 Feria del Libro Antiguo y de Ocasión",
+   "desde": "2026-10-22",
+   "hasta": "2026-11-08",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-10-1.2e16d0ba.fill-275x202-c100_TQsY8I4.png",
+   "fuente": "turgranada",
+   "tipo": "fiesta",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
+   "t": "4º Festival La Nariz Roja",
+   "desde": "2026-10-23",
+   "hasta": "2026-10-25",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-10-0.2e16d0ba.fill-275x202-c100_z05ma3F.png",
+   "fuente": "turgranada",
+   "tipo": "musica",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
    "t": "XVII Real Feria de Ganado 2026",
    "desde": "2026-10-23",
    "hasta": "2026-10-25",
@@ -431,6 +431,19 @@
    "tipo": "naturaleza",
    "lat": 37.4907,
    "lon": -2.7726
+  },
+  {
+   "t": "Las acequias del río Fardes",
+   "desde": "2026-11-07",
+   "hasta": "2026-11-07",
+   "lugar": "Huétor Santillán",
+   "hora": "De 08:30h a 14:30h",
+   "precio": "Actividad gratuíta",
+   "desc": "El objetivo es sensibilizar y promover la participación ambiental mediante el voluntariado en el Parque Natural Sierra de Huétor, realizando acciones prácticas para la…",
+   "fuente": "junta",
+   "tipo": "naturaleza",
+   "lat": 37.2209,
+   "lon": -3.5163
   }
  ]
 }
