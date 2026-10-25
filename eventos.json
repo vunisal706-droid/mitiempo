@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-10-24T08:53",
+ "actualizado": "2026-10-25T09:09",
  "eventos": [
   {
    "t": "La edad de la ilusión",
@@ -225,17 +225,6 @@
    "lon": -3.6067
   },
   {
-   "t": "40 Años del Cómic Americano",
-   "desde": "2026-10-08",
-   "hasta": "2026-10-24",
-   "lugar": "Granada",
-   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-10-1.2e16d0ba.fill-275x202-c100_KhlGgV8.png",
-   "fuente": "turgranada",
-   "tipo": "cultura",
-   "lat": 37.1882,
-   "lon": -3.6067
-  },
-  {
    "t": "Granada. Capital imperial",
    "desde": "2026-10-09",
    "hasta": "2027-01-17",
@@ -314,17 +303,6 @@
    "lon": -3.6067
   },
   {
-   "t": "Granada Film Fest: 32 años de Jóvenes Realizadores",
-   "desde": "2026-10-18",
-   "hasta": "2026-10-24",
-   "lugar": "Granada",
-   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-09-1.2e16d0ba.fill-275x202-c100_UlpmHuS.png",
-   "fuente": "turgranada",
-   "tipo": "cultura",
-   "lat": 37.1882,
-   "lon": -3.6067
-  },
-  {
    "t": "Una hora de cámara",
    "desde": "2026-10-18",
    "hasta": "2027-05-16",
@@ -369,6 +347,28 @@
    "lon": -3.6067
   },
   {
+   "t": "Muestra de artesanía El Suk",
+   "desde": "2026-10-23",
+   "hasta": "2026-10-25",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-09-2.2e16d0ba.fill-275x202-c100_j2BSfE5.png",
+   "fuente": "turgranada",
+   "tipo": "mercado",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
+   "t": "Encuentros Soundbox",
+   "desde": "2026-10-23",
+   "hasta": "2026-11-27",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-09-2.2e16d0ba.fill-275x202-c100_LOAvH98.png",
+   "fuente": "turgranada",
+   "tipo": "cultura",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
    "t": "XVII Real Feria de Ganado 2026",
    "desde": "2026-10-23",
    "hasta": "2026-10-25",
@@ -379,32 +379,6 @@
    "tipo": "fiesta",
    "lat": 37.1689,
    "lon": -4.1513
-  },
-  {
-   "t": "Acción de voluntariado: 21º Día del Bosque en el Parque Natural Sierra de Baza",
-   "desde": "2026-10-24",
-   "hasta": "2026-10-24",
-   "lugar": "Baza",
-   "hora": "10:30",
-   "precio": "Actividad gratuita",
-   "desc": "Programa 21º Día del Bosque en el PN Sierra de Baza Domingo 24 de octubre de 2026. 10:30 H Cortijo de los Corvos La actividad incluye seguro, y picnic para las personas…",
-   "fuente": "junta",
-   "tipo": "naturaleza",
-   "lat": 37.4907,
-   "lon": -2.7726
-  },
-  {
-   "t": "Los bosques de ribera",
-   "desde": "2026-10-24",
-   "hasta": "2026-10-24",
-   "lugar": "Guadix",
-   "hora": "De 08:30h a 14:15h",
-   "precio": "Actividad gratuita",
-   "desc": "El objetivo principal de esta actividad es la sensibilización y concienciación ambiental sobre los bosques de ribera en el espacio protegido de Sierra Nevada, combinando…",
-   "fuente": "junta",
-   "tipo": "naturaleza",
-   "lat": 37.2993,
-   "lon": -3.1392
   },
   {
    "t": "Jornada: \"Los bosques y el cambio climático\"",
