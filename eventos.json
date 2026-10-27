@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-10-26T10:07",
+ "actualizado": "2026-10-27T09:49",
  "eventos": [
   {
    "t": "Kerygma",
@@ -170,17 +170,6 @@
    "lon": -3.1392
   },
   {
-   "t": "Música en los barrios",
-   "desde": "2026-10-08",
-   "hasta": "2027-06-22",
-   "lugar": "Granada",
-   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-09-2.2e16d0ba.fill-275x202-c100_wChknyP.png",
-   "fuente": "turgranada",
-   "tipo": "musica",
-   "lat": 37.1882,
-   "lon": -3.6067
-  },
-  {
    "t": "Festival Internacional Teatro de Humor Santa-Fé",
    "desde": "2026-10-08",
    "hasta": "2026-10-28",
@@ -199,6 +188,17 @@
    "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-10-0.2e16d0ba.fill-275x202-c100_b5KZb2a.png",
    "fuente": "turgranada",
    "tipo": "expo",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
+   "t": "Música en los barrios",
+   "desde": "2026-10-08",
+   "hasta": "2027-06-22",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-09-2.2e16d0ba.fill-275x202-c100_wChknyP.png",
+   "fuente": "turgranada",
+   "tipo": "musica",
    "lat": 37.1882,
    "lon": -3.6067
   },
