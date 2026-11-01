@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-10-31T10:24",
+ "actualizado": "2026-11-01T11:16",
  "eventos": [
   {
    "t": "Kerygma",
@@ -112,30 +112,6 @@
    "lon": -3.6067
   },
   {
-   "t": "Agenda octubre Salobreña 2026",
-   "desde": "2026-10-01",
-   "hasta": "2026-10-31",
-   "lugar": "Salobreña",
-   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/agenda_salobrena.dcd759c7.fill-275x202-c100.jpg",
-   "generico": true,
-   "fuente": "turgranada",
-   "tipo": "cultura",
-   "lat": 36.7428,
-   "lon": -3.5872
-  },
-  {
-   "t": "Agenda Octubre Motril 2026",
-   "desde": "2026-10-01",
-   "hasta": "2026-10-31",
-   "lugar": "Motril",
-   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Agenda_Motril.2e16d0ba.fill-275x202-c100.jpg",
-   "generico": true,
-   "fuente": "turgranada",
-   "tipo": "cultura",
-   "lat": 36.7507,
-   "lon": -3.5179
-  },
-  {
    "t": "Jornadas Europeas de Patrimonio",
    "desde": "2026-10-01",
    "hasta": "2026-11-01",
@@ -145,18 +121,6 @@
    "tipo": "expo",
    "lat": 37.1882,
    "lon": -3.6067
-  },
-  {
-   "t": "Agenda cultural Almuñécar 2026",
-   "desde": "2026-10-01",
-   "hasta": "2026-10-31",
-   "lugar": "Almuñécar",
-   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/agenda_almunecar.2e16d0ba.fill-275x202-c100.jpg",
-   "generico": true,
-   "fuente": "turgranada",
-   "tipo": "cultura",
-   "lat": 36.7325,
-   "lon": -3.6917
   },
   {
    "t": "El arte de emocionar. Banda Sinfónica Ciudad de Guadix",
@@ -208,17 +172,6 @@
    "hasta": "2026-12-03",
    "lugar": "Granada",
    "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-10-2.2e16d0ba.fill-275x202-c100_piSxquS.png",
-   "fuente": "turgranada",
-   "tipo": "musica",
-   "lat": 37.1882,
-   "lon": -3.6067
-  },
-  {
-   "t": "Granada 2031 Festival Fusión",
-   "desde": "2026-10-15",
-   "hasta": "2026-10-31",
-   "lugar": "Granada",
-   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/fusions.2e16d0ba.fill-275x202-c100.jpg",
    "fuente": "turgranada",
    "tipo": "musica",
    "lat": 37.1882,
@@ -347,26 +300,48 @@
    "lon": -3.6013
   },
   {
-   "t": "Festival Plectro Ciudad de Granada",
-   "desde": "2026-10-28",
-   "hasta": "2026-10-31",
+   "t": "Juan Dávila - El Palacio del Pecado",
+   "desde": "2026-10-30",
+   "hasta": "2026-11-01",
    "lugar": "Granada",
-   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/plectro2.2e16d0ba.fill-275x202-c100.jpg",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/davila.2e16d0ba.fill-275x202-c100.jpg",
    "fuente": "turgranada",
-   "tipo": "musica",
+   "tipo": "cultura",
    "lat": 37.1882,
    "lon": -3.6067
   },
   {
-   "t": "Halloween en Motril",
-   "desde": "2026-10-28",
-   "hasta": "2026-10-31",
-   "lugar": "Motril",
-   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/mot.2e16d0ba.fill-275x202-c100.jpg",
+   "t": "Fiesta de la Castaña 2026",
+   "desde": "2026-10-31",
+   "hasta": "2026-11-02",
+   "lugar": "Mecina Bombarón",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/castanyada.2e16d0ba.fill-275x202-c100.jpg",
+   "fuente": "turgranada",
+   "tipo": "fiesta",
+   "lat": 36.9807,
+   "lon": -3.1556
+  },
+  {
+   "t": "15ª Semana de la cultura japonesa en Granada",
+   "desde": "2026-10-31",
+   "hasta": "2026-11-08",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/semanajaponnueva.2e16d0ba.fill-275x202-c100.png",
    "fuente": "turgranada",
    "tipo": "cultura",
-   "lat": 36.7507,
-   "lon": -3.5179
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
+   "t": "Mercado de quesos andaluces",
+   "desde": "2026-10-31",
+   "hasta": "2026-11-02",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Cartel_mercado_Granada_1200_x.2e16d0ba.fill-275x202-c100.jpg",
+   "fuente": "turgranada",
+   "tipo": "mercado",
+   "lat": 37.1882,
+   "lon": -3.6067
   },
   {
    "t": "Las acequias del río Fardes",
