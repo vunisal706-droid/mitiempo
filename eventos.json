@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-11-03T11:55",
+ "actualizado": "2026-11-04T12:07",
  "eventos": [
   {
    "t": "Kerygma",
@@ -278,6 +278,18 @@
    "lon": -3.6067
   },
   {
+   "t": "Agenda cultural noviembre Salobreña 2026",
+   "desde": "2026-11-01",
+   "hasta": "2026-11-30",
+   "lugar": "Salobreña",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/agenda_salobrena.dcd759c7.fill-275x202-c100.jpg",
+   "generico": true,
+   "fuente": "turgranada",
+   "tipo": "cultura",
+   "lat": 36.7428,
+   "lon": -3.5872
+  },
+  {
    "t": "Agenda cultural Almuñécar noviembre 2026",
    "desde": "2026-11-01",
    "hasta": "2026-11-30",
@@ -302,15 +314,15 @@
    "lon": -3.5179
   },
   {
-   "t": "Halloween Almuñécar",
-   "desde": "2026-11-02",
-   "hasta": "2026-11-03",
-   "lugar": "Almuñécar",
-   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-10-2.2e16d0ba.fill-275x202-c100_U8sKUpL.png",
+   "t": "200 años de fotografía",
+   "desde": "2026-11-03",
+   "hasta": "2027-05-31",
+   "lugar": "Moclín",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-11-0.2e16d0ba.fill-275x202-c100_umpO97U.png",
    "fuente": "turgranada",
-   "tipo": "cultura",
-   "lat": 36.7325,
-   "lon": -3.6917
+   "tipo": "expo",
+   "lat": 37.3396,
+   "lon": -3.7865
   },
   {
    "t": "Patrimonio Flamenco. La Chumbera - El Sacromonte",
@@ -322,17 +334,6 @@
    "tipo": "musica",
    "lat": 37.1882,
    "lon": -3.6067
-  },
-  {
-   "t": "Halloween Güejar Sierra",
-   "desde": "2026-11-06",
-   "hasta": "2026-11-07",
-   "lugar": "Güéjar Sierra",
-   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/859359389_18641673028027469_1.2e16d0ba.fill-275x202-c100_RQAU3Ut.jpg",
-   "fuente": "turgranada",
-   "tipo": "cultura",
-   "lat": 37.1599,
-   "lon": -3.4386
   },
   {
    "t": "Las acequias del río Fardes",
