@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-11-04T12:07",
+ "actualizado": "2026-11-05T12:20",
  "eventos": [
   {
    "t": "Kerygma",
@@ -325,6 +325,17 @@
    "lon": -3.7865
   },
   {
+   "t": "A tres voces",
+   "desde": "2026-11-03",
+   "hasta": "2026-12-02",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-11-0.2e16d0ba.fill-275x202-c100_jEXEIOa.png",
+   "fuente": "turgranada",
+   "tipo": "cultura",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
    "t": "Patrimonio Flamenco. La Chumbera - El Sacromonte",
    "desde": "2026-11-06",
    "hasta": "2026-12-12",
@@ -334,6 +345,17 @@
    "tipo": "musica",
    "lat": 37.1882,
    "lon": -3.6067
+  },
+  {
+   "t": "Halloween Güejar Sierra",
+   "desde": "2026-11-06",
+   "hasta": "2026-11-07",
+   "lugar": "Güéjar Sierra",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/859359389_18641673028027469_1.2e16d0ba.fill-275x202-c100_RQAU3Ut.jpg",
+   "fuente": "turgranada",
+   "tipo": "cultura",
+   "lat": 37.1599,
+   "lon": -3.4386
   },
   {
    "t": "Las acequias del río Fardes",
