@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-11-07T11:05",
+ "actualizado": "2026-11-08T11:18",
  "eventos": [
   {
    "t": "VI Ciclo de Conferencias El valor de las fuentes, perspectivas de investigación. Archivos familiares y…",
@@ -12,19 +12,6 @@
    "tipo": "expo",
    "lat": 37.1882,
    "lon": -3.6067
-  },
-  {
-   "t": "Las acequias del río Fardes",
-   "desde": "2026-11-07",
-   "hasta": "2026-11-07",
-   "lugar": "Huétor Santillán",
-   "hora": "De 08:30h a 14:30h",
-   "precio": "Actividad gratuíta",
-   "desc": "El objetivo es sensibilizar y promover la participación ambiental mediante el voluntariado en el Parque Natural Sierra de Huétor, realizando acciones prácticas para la…",
-   "fuente": "junta",
-   "tipo": "naturaleza",
-   "lat": 37.2209,
-   "lon": -3.5163
   },
   {
    "t": "Valores del Parque Nacional en la cuenca alta del río Trevélez",
