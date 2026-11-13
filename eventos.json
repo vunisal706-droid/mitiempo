@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-11-12T12:42",
+ "actualizado": "2026-11-13T12:13",
  "eventos": [
   {
    "t": "Kerygma",
@@ -369,19 +369,6 @@
    "lon": null
   },
   {
-   "t": "Valores del Parque Nacional en la cuenca alta del río Trevélez",
-   "desde": "2026-11-14",
-   "hasta": "2026-11-14",
-   "lugar": "Trevélez",
-   "hora": "De 8:00 a 15:00",
-   "precio": "gratuita",
-   "desc": "Programa de Jornadas Temáticas de Sensibilización Ambiental en la Red Natura 2000. Parque Nacional y Parque Natural Sierra Nevada, ZEC, ZEPA Bienvenidas y bienvenidos a…",
-   "fuente": "junta",
-   "tipo": "naturaleza",
-   "lat": 37.0004,
-   "lon": -3.2654
-  },
-  {
    "t": "Los bosques, gestión sostenible y cambio climático",
    "desde": "2026-11-15",
    "hasta": "2026-11-15",
@@ -406,6 +393,19 @@
    "tipo": "cultura",
    "lat": 37.1882,
    "lon": -3.6067
+  },
+  {
+   "t": "Valores del Parque Nacional en la cuenca alta del río Trevélez",
+   "desde": "2026-11-28",
+   "hasta": "2026-11-28",
+   "lugar": "Trevélez",
+   "hora": "De 8:00 a 15:00",
+   "precio": "gratuita",
+   "desc": "Programa de Jornadas Temáticas de Sensibilización Ambiental en la Red Natura 2000. Parque Nacional y Parque Natural Sierra Nevada, ZEC, ZEPA Bienvenidas y bienvenidos a…",
+   "fuente": "junta",
+   "tipo": "naturaleza",
+   "lat": 37.0004,
+   "lon": -3.2654
   }
  ]
 }
