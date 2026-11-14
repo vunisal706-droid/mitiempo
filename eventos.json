@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-11-13T12:13",
+ "actualizado": "2026-11-14T11:28",
  "eventos": [
   {
    "t": "Kerygma",
@@ -325,6 +325,17 @@
    "lon": -3.7497
   },
   {
+   "t": "Día del flamenco en Andalucía 2026. Provincia de Granada",
+   "desde": "2026-11-07",
+   "hasta": "2026-12-05",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-11-1.2e16d0ba.fill-275x202-c100_71pOlcc.png",
+   "fuente": "turgranada",
+   "tipo": "musica",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
    "t": "Granada Noir 12",
    "desde": "2026-11-09",
    "hasta": "2026-11-15",
@@ -358,17 +369,6 @@
    "lon": -3.6067
   },
   {
-   "t": "Teatro isabel la catolica 53 domingos",
-   "desde": "2026-11-12",
-   "hasta": "2026-11-13",
-   "lugar": "\"53 domingos\"",
-   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/53-domingos.2e16d0ba.fill-275x202-c100.jpg",
-   "fuente": "turgranada",
-   "tipo": "teatro",
-   "lat": null,
-   "lon": null
-  },
-  {
    "t": "Los bosques, gestión sostenible y cambio climático",
    "desde": "2026-11-15",
    "hasta": "2026-11-15",
@@ -378,19 +378,6 @@
    "desc": "Programa de Jornadas Temáticas de Sensibilización Ambiental en la Red Natura 2000 de Andalucía. Parque Natural Sierras de Tejeda, Almijara y Alhama (ZEC, LIC, ZEPA) El…",
    "fuente": "junta",
    "tipo": "naturaleza",
-   "lat": 37.1882,
-   "lon": -3.6067
-  },
-  {
-   "t": "Agricultura Ecológica en Sierra Nevada",
-   "desde": "2026-11-28",
-   "hasta": "2026-11-28",
-   "lugar": "Granada",
-   "hora": "De 08:15h a 16:45h",
-   "precio": "Actividad gratuíta",
-   "desc": "Programa de Sensibilización y Participación Ambiental en Espacios Naturales de la Red Natura 2000. ZEC, Espacio Natural Sierra Nevada. El objetivo es sensibilizar y…",
-   "fuente": "junta",
-   "tipo": "cultura",
    "lat": 37.1882,
    "lon": -3.6067
   },
@@ -406,6 +393,19 @@
    "tipo": "naturaleza",
    "lat": 37.0004,
    "lon": -3.2654
+  },
+  {
+   "t": "Agricultura Ecológica en Sierra Nevada",
+   "desde": "2026-11-28",
+   "hasta": "2026-11-28",
+   "lugar": "Granada",
+   "hora": "De 08:15h a 16:45h",
+   "precio": "Actividad gratuíta",
+   "desc": "Programa de Sensibilización y Participación Ambiental en Espacios Naturales de la Red Natura 2000. ZEC, Espacio Natural Sierra Nevada. El objetivo es sensibilizar y…",
+   "fuente": "junta",
+   "tipo": "cultura",
+   "lat": 37.1882,
+   "lon": -3.6067
   }
  ]
 }
