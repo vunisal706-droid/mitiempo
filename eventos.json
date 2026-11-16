@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-11-15T11:57",
+ "actualizado": "2026-11-16T12:45",
  "eventos": [
   {
    "t": "Kerygma",
@@ -29,28 +29,6 @@
    "hasta": "2027-02-28",
    "lugar": "Granada",
    "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-09-0.2e16d0ba.fill-275x202-c100_ha3jRlE.png",
-   "fuente": "turgranada",
-   "tipo": "expo",
-   "lat": 37.1882,
-   "lon": -3.6067
-  },
-  {
-   "t": "Un lugar dentro de otro lugar - Pablo Castilla",
-   "desde": "2026-09-10",
-   "hasta": "2026-11-15",
-   "lugar": "Granada",
-   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-09-0.2e16d0ba.fill-275x202-c100_jPtas0B.png",
-   "fuente": "turgranada",
-   "tipo": "cultura",
-   "lat": 37.1882,
-   "lon": -3.6067
-  },
-  {
-   "t": "Carboneras: arte y vanguardia en la nueva Áqaba",
-   "desde": "2026-09-17",
-   "hasta": "2026-11-15",
-   "lugar": "Granada",
-   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-09-1.2e16d0ba.fill-275x202-c100.png",
    "fuente": "turgranada",
    "tipo": "expo",
    "lat": 37.1882,
@@ -336,17 +314,6 @@
    "lon": -3.6067
   },
   {
-   "t": "Granada Noir 12",
-   "desde": "2026-11-09",
-   "hasta": "2026-11-15",
-   "lugar": "Granada",
-   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-11-0.2e16d0ba.fill-275x202-c100_nU5OIvl.png",
-   "fuente": "turgranada",
-   "tipo": "cultura",
-   "lat": 37.1882,
-   "lon": -3.6067
-  },
-  {
    "t": "Micromecenazgo AFOGRA",
    "desde": "2026-11-09",
    "hasta": "2026-12-08",
@@ -369,15 +336,35 @@
    "lon": -3.6067
   },
   {
-   "t": "Los bosques, gestión sostenible y cambio climático",
-   "desde": "2026-11-15",
-   "hasta": "2026-11-15",
+   "t": "Mercado Tradicional Belenes",
+   "desde": "2026-11-14",
+   "hasta": "2027-01-06",
    "lugar": "Granada",
-   "hora": "De 09:00h a 14:30h",
-   "precio": "Actividad gratuita",
-   "desc": "Programa de Jornadas Temáticas de Sensibilización Ambiental en la Red Natura 2000 de Andalucía. Parque Natural Sierras de Tejeda, Almijara y Alhama (ZEC, LIC, ZEPA) El…",
-   "fuente": "junta",
-   "tipo": "naturaleza",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/mercado_navidad.2e16d0ba.fill-275x202-c100.jpg",
+   "fuente": "turgranada",
+   "tipo": "mercado",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
+   "t": "Temporada Lírica de Granada",
+   "desde": "2026-11-15",
+   "hasta": "2027-06-05",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/LIRICA.2e16d0ba.fill-275x202-c100.jpg",
+   "fuente": "turgranada",
+   "tipo": "cultura",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
+   "t": "Día Internacional del Patrimonio Mundial",
+   "desde": "2026-11-16",
+   "hasta": "2026-11-22",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/el-barrio-del-albaicin.2e16d0ba.fill-275x202-c100.jpg",
+   "fuente": "turgranada",
+   "tipo": "expo",
    "lat": 37.1882,
    "lon": -3.6067
   },
