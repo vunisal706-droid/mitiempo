@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-11-18T13:02",
+ "actualizado": "2026-11-19T13:04",
  "eventos": [
   {
    "t": "Kerygma",
@@ -130,6 +130,18 @@
    "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-10-2.2e16d0ba.fill-275x202-c100_piSxquS.png",
    "fuente": "turgranada",
    "tipo": "musica",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
+   "t": "VI Ciclo de Conferencias El valor de las fuentes, perspectivas de investigación. Archivos familiares y…",
+   "desde": "2026-10-15",
+   "hasta": "2026-11-19",
+   "lugar": "Granada",
+   "hora": "19:00 horas",
+   "desc": "VI Ciclo de Conferencias El valor de las fuentes, perspectivas de investigación en los archivos “ARCHIVOS FAMILIARES Y EMPRESARIALES EN EL PATRIMONIO DOCUMENTAL ANDALUZ”…",
+   "fuente": "junta",
+   "tipo": "expo",
    "lat": 37.1882,
    "lon": -3.6067
   },
@@ -353,6 +365,32 @@
    "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Libro-Temporada-2026_27.2e16d0ba.fill-275x202-c100.jpg",
    "fuente": "turgranada",
    "tipo": "musica",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
+   "t": "Valores del Parque Nacional en la cuenca alta del río Trevélez",
+   "desde": "2026-11-28",
+   "hasta": "2026-11-28",
+   "lugar": "Trevélez",
+   "hora": "De 8:00 a 15:00",
+   "precio": "gratuita",
+   "desc": "Programa de Jornadas Temáticas de Sensibilización Ambiental en la Red Natura 2000. Parque Nacional y Parque Natural Sierra Nevada, ZEC, ZEPA Bienvenidas y bienvenidos a…",
+   "fuente": "junta",
+   "tipo": "naturaleza",
+   "lat": 37.0004,
+   "lon": -3.2654
+  },
+  {
+   "t": "Agricultura Ecológica en Sierra Nevada",
+   "desde": "2026-11-28",
+   "hasta": "2026-11-28",
+   "lugar": "Granada",
+   "hora": "De 08:15h a 16:45h",
+   "precio": "Actividad gratuíta",
+   "desc": "Programa de Sensibilización y Participación Ambiental en Espacios Naturales de la Red Natura 2000. ZEC, Espacio Natural Sierra Nevada. El objetivo es sensibilizar y…",
+   "fuente": "junta",
+   "tipo": "cultura",
    "lat": 37.1882,
    "lon": -3.6067
   }
