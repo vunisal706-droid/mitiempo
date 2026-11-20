@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-11-19T13:04",
+ "actualizado": "2026-11-20T12:59",
  "eventos": [
   {
    "t": "Kerygma",
@@ -130,18 +130,6 @@
    "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-10-2.2e16d0ba.fill-275x202-c100_piSxquS.png",
    "fuente": "turgranada",
    "tipo": "musica",
-   "lat": 37.1882,
-   "lon": -3.6067
-  },
-  {
-   "t": "VI Ciclo de Conferencias El valor de las fuentes, perspectivas de investigación. Archivos familiares y…",
-   "desde": "2026-10-15",
-   "hasta": "2026-11-19",
-   "lugar": "Granada",
-   "hora": "19:00 horas",
-   "desc": "VI Ciclo de Conferencias El valor de las fuentes, perspectivas de investigación en los archivos “ARCHIVOS FAMILIARES Y EMPRESARIALES EN EL PATRIMONIO DOCUMENTAL ANDALUZ”…",
-   "fuente": "junta",
-   "tipo": "expo",
    "lat": 37.1882,
    "lon": -3.6067
   },
