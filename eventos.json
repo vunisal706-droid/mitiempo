@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-11-20T12:59",
+ "actualizado": "2026-11-21T12:39",
  "eventos": [
   {
    "t": "Kerygma",
@@ -150,17 +150,6 @@
    "hasta": "2027-05-16",
    "lugar": "Granada",
    "img": "https://cdn.dipgra.es/my-media-files-bucket/images/HORADECAMARA.2e16d0ba.fill-275x202-c100.jpg",
-   "fuente": "turgranada",
-   "tipo": "cultura",
-   "lat": 37.1882,
-   "lon": -3.6067
-  },
-  {
-   "t": "El sueño de una princesa del Renacimiento: María de Hungría",
-   "desde": "2026-10-20",
-   "hasta": "2026-11-20",
-   "lugar": "Granada",
-   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/maria_de_hungria_1fl3v9d.4529ce4f.fill-275x202-c100.jpg",
    "fuente": "turgranada",
    "tipo": "cultura",
    "lat": 37.1882,
@@ -351,6 +340,17 @@
    "hasta": "2026-11-21",
    "lugar": "Granada",
    "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Libro-Temporada-2026_27.2e16d0ba.fill-275x202-c100.jpg",
+   "fuente": "turgranada",
+   "tipo": "musica",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
+   "t": "XV Festival Hocus Pocus",
+   "desde": "2026-11-20",
+   "hasta": "2026-11-29",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/hoc_4VVNDz3.2e16d0ba.fill-275x202-c100.png",
    "fuente": "turgranada",
    "tipo": "musica",
    "lat": 37.1882,
