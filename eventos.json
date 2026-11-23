@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-11-22T12:35",
+ "actualizado": "2026-11-23T14:43",
  "eventos": [
   {
    "t": "Kerygma",
@@ -324,17 +324,6 @@
    "lon": -3.6067
   },
   {
-   "t": "Día Internacional del Patrimonio Mundial",
-   "desde": "2026-11-16",
-   "hasta": "2026-11-22",
-   "lugar": "Granada",
-   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/el-barrio-del-albaicin.2e16d0ba.fill-275x202-c100.jpg",
-   "fuente": "turgranada",
-   "tipo": "expo",
-   "lat": 37.1882,
-   "lon": -3.6067
-  },
-  {
    "t": "XV Festival Hocus Pocus",
    "desde": "2026-11-20",
    "hasta": "2026-11-29",
@@ -353,6 +342,17 @@
    "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-11-2.2e16d0ba.fill-275x202-c100.png",
    "fuente": "turgranada",
    "tipo": "cultura",
+   "lat": 37.1882,
+   "lon": -3.6067
+  },
+  {
+   "t": "Festival Internacional de Cine - Premios Lorca",
+   "desde": "2026-11-20",
+   "hasta": "2026-11-28",
+   "lugar": "Granada",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-11-2.2e16d0ba.fill-275x202-c100_z3gERuA.png",
+   "fuente": "turgranada",
+   "tipo": "teatro",
    "lat": 37.1882,
    "lon": -3.6067
   },
