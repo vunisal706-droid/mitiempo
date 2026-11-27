@@ -1,5 +1,5 @@
 {
- "actualizado": "2026-11-26T13:54",
+ "actualizado": "2026-11-27T13:51",
  "eventos": [
   {
    "t": "Kerygma",
@@ -291,17 +291,6 @@
    "lon": -3.6067
   },
   {
-   "t": "Flamenco y Cultura 17 Edición",
-   "desde": "2026-11-10",
-   "hasta": "2026-11-26",
-   "lugar": "Granada",
-   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/C_zTSQuby.2e16d0ba.fill-275x202-c100.jpg",
-   "fuente": "turgranada",
-   "tipo": "musica",
-   "lat": 37.1882,
-   "lon": -3.6067
-  },
-  {
    "t": "Mercado Tradicional Belenes",
    "desde": "2026-11-14",
    "hasta": "2027-01-06",
@@ -355,6 +344,17 @@
    "tipo": "teatro",
    "lat": 37.1882,
    "lon": -3.6067
+  },
+  {
+   "t": "VII Jornadas del Guiso y la Cuchara",
+   "desde": "2026-11-23",
+   "hasta": "2026-11-29",
+   "lugar": "Güéjar Sierra",
+   "img": "https://cdn.dipgra.es/my-media-files-bucket/images/Captura_de_pantalla_2026-11-1.2e16d0ba.fill-275x202-c100_MPfoUl4.png",
+   "fuente": "turgranada",
+   "tipo": "cultura",
+   "lat": 37.1599,
+   "lon": -3.4386
   },
   {
    "t": "Valores del Parque Nacional en la cuenca alta del río Trevélez",
